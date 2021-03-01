@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ver Documentos{% endblock %}
+
+{% block body %}
+{{parent()}}
+<table class="table table-borderless">
+    <thead>
+            <tr style = "background-color: #0F9FA8;">
+            <th>Nro</th>
+            <th>Tipo de documentos</th>
+            <th style="text-align: center;">Editar</th>
+            <th style="text-align: center;">Eliminar</th>
+        </tr>
+    </thead>
+    <tbody id="myTable">
+        {% for documento in documentos %}
+        <tr>
+            <th>{{ loop.index }}</th>
+            <td>{{documento.tipoDocumento}}</td>
+            <td style="text-align: center;"><a class ="btn" href="{{path('modificarDocumentos', {'id': documento.id})}}" ><i class="far fa-edit text-success" style = "font-size: 20px;"></i></a></td>
+            <td style="text-align: center;"><a class = "btn" onclick="DeleteFunction({{documento.id}})"><i class=" fas fa-trash text-danger"   style = "font-size: 20px"></i></a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table> 
+<div class = "text-center container mt-5">
+    <a class = "btn btn-outline-secondary" href = "{{path('datosAcademicos')}}">Volver</a> 
+    <a class = "btn btn-outline-secondary" href = "{{path('altaDocumentos')}}">Crear Otro</a> 
+<div>
+
+
+<script src = "{{asset('js/deleteDocumentos.js')}}"></script>
+{% endblock %}

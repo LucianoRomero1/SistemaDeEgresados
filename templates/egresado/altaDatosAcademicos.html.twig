@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Alta Datos Académicos {% endblock %}
+
+{% block body %}
+{{parent()}}
+<div class ="container mt-5" id = "divFormulario">
+    <h1 class = "text-center">Alta Datos Académicos</h1> 
+    {{ form_start(formulario, {'enctype':'multipart/form-data'})}}
+    <div class = "row mt-5 justify-content-center">
+        <div class = "col-sm-5">
+            <h6 class = "text-secondary text-center ">Denominación de la carrera</h6>
+            {{ form_widget(formulario.denominacionCarrera, {attr: {class: 'form-control camposEstandar', placeholder: 'Carrera'}})}}
+        </div>
+        <div class = "col-sm-1"></div>
+        <div class = "col-sm-5">
+            <h6 class = "text-secondary text-center ">Tipo de documento emitido</h6>
+            {{ form_widget(formulario.documentoEmitido, {attr: {class: 'form-control camposEstandar', placeholder: 'Documento Emitido'}})}}
+        </div>
+    </div>
+    <div class = "row mt-5 justify-content-center">
+        <div class = "col-sm-7">
+            <h6 class = "text-secondary text-center ">Título otorgado</h6>
+            {{ form_widget(formulario.tituloOtorgado, {attr: {class: 'form-control camposEstandar', placeholder: 'Titulo Otorgado'}})}}
+        </div>
+        <div class = "col-sm-2"></div>
+        <div class = "col-sm-2"></div>
+    </div>
+    <div class = "row mt-5 justify-content-center">
+        <div class = "col-sm-3">
+            <h6 class = "textsecondary text-center "> Fecha de egreso </h6>
+            {{ form_widget(formulario.fechaEgreso, {attr: {class: 'form-control camposEstandar'}})}}
+        </div>
+        <div class = "col-sm-8"></div>
+        <div class = "col-sm-8"></div>
+    </div>
+    <div class = "container mt-5 ">
+        
+    </div>
+    <div class = "container mt-5 text-center">
+        {{ form_widget(formulario.Aceptar, {attr: {class: 'btn btn-outline-info btn-lg'}})}}
+    </div>
+    {{ form_end(formulario) }}
+</div>
+<br>
+<br>
+{% endblock %}

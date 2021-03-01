@@ -1,0 +1,40 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Ver Egresados{% endblock %}
+
+{% block body %}
+{{parent()}}
+
+<table class="table table-borderless">
+    <thead>
+            <tr style = "background-color: #0F9FA8;">
+            <th>Nro</th>
+            <th>Apellido</th>
+            <th>Nombre</th>
+            <th style="text-align: center;">Datos Personales</th>
+            <th style="text-align: center;">Datos Académicos</th>
+            <th style="text-align: center;">Datos Administrativos</th>
+            <th style="text-align: center;">Archivos</th>
+            <th style="text-align: center;">Eliminar</th>
+        </tr>
+    </thead>
+    <tbody id="myTable">
+        {% for egresado in egresados %}
+        <tr>
+            <th>{{ loop.index }}</th>
+            <td>{{egresado.apellido}}</td>
+            <td>{{egresado.nombre}}</td>
+            <td style="text-align: center;"><a class ="btn" href="{{path('modificarDatosPersonales', {'id': egresado.id})}}"><i class="fas fa-user-edit text-warning" style = "font-size: 20px;"></i></a></td>
+            <td style="text-align: center;"><a class ="btn" href="{{path('modificarDatosAcademicos', {'id': egresado.id})}}"><i class="fas fa-user-graduate text-warning"   style = "font-size: 20px"></i></a></td>
+            <td style="text-align: center;"><a class ="btn" href="{{path('modificarDatosAdministrativos', {'id': egresado.id})}}"><i class="fas fa-user-graduate text-warning"   style = "font-size: 20px"></i></a></td>
+            <td style="text-align: center;"><a class ="btn" href="{{path('modificarArchivos', {'id': egresado.id})}}"><i class="fas fa-file-alt text-warning" style = "font-size: 20px; "></i></a></td>
+            <td style="text-align: center;"><a class ="btn" onclick="DeleteFunction({{egresado.id}})"><i class=" fas fa-trash text-danger"   style = "font-size: 20px"></i></a></td>
+        </tr>
+       
+        {% endfor %}
+    </tbody>
+
+</table> 
+<script src= "{{asset('js/deleteEgresado.js')}}"></script> 
+{% endblock %}

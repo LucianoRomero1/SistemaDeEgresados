@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modificar Archivos{% endblock %}
+
+{% block body %}
+{{parent()}}
+<div class = "container mt-5" id= "divFormulario">
+    <h1 class = "text-center">Modificar archivos cargados de: {{egresado.nombre}} {{egresado.apellido}}</h1> 
+    {{ form_start(formulario, {'enctype':'multipart/form-data'})}}
+    <div class = "row mt-5 justify-content-center">
+        <div class = "col-sm-4 text-center">
+            {% if pdf != null %}
+                <h6 class = "text-secondary"> Certificado Analítico<h6>
+                <a class="btn btn-light" href="#"><img src="{{asset('svg/pdf2.png')}}" width="40" alt="PDF"></a>
+            {% else %}
+                <h6 class = "text-center" style = "font-size: 15px;">*No hay pdf cargado</h6>
+                {{form_widget (formulario.pdfAnalitico , { attr : { accept : ' application / .pdf' }})}}
+            {% endif %}
+        </div>
+        <div class = "col-sm-3"></div>
+        <div class = "col-sm-5">
+            <h6 class = "text-secondary text-center"> Imagenes - Máx. 5<h6>
+            
+            {% if imagenes|length < 5 %}
+                {{form_widget ( formulario.archivosArray , { attr : { accept : 'application / .jpg , .png, .pdf, .jpeg'  }})}}    
+            {% endif %}
+            {% for imagen in imagenes %}    
+                <a class="btn btn-light" href="#"><img src="{{asset('public/uploads/imagenesDigitales/' ~ imagen.nombreArchivo )}}" width="55" alt="PNG"></a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class = "container mt-5">
+      
+        
+    </div>
+     <div class = "container mt-5 text-center">
+        {{ form_widget(formulario.Aceptar, {attr: {class: 'btn btn-outline-info btn-lg'}})}}
+    </div>
+</div>
+{% endblock %}

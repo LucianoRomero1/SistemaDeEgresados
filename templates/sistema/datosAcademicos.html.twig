@@ -1,0 +1,35 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Datos Academicos{% endblock %}
+
+{% block body %}
+{{parent()}}
+<h1 class = "text-center mt-5">¿Que datos académicos desea modificar?</h1>
+<div class = "container list-group mt-5">
+    <div class = "container">
+        <input type = "button" value = "Denominación de las carreras" id = "idCarreras" class="list-group-item list-group-item-action">
+        <div id = "modificacionesCarrera" class = "container ">
+            <a href="{{path('altaCarreras')}}" class="list-group-item list-group-item-action" id = "acciones">Alta Carreras</a>
+            <a href="{{path('verCarreras')}}" class="list-group-item list-group-item-action mt-1" id = "acciones">Ver/Modificar Carreras</a>
+        </div>
+    </div>
+    
+    <div class = "container mt-2">
+         <input type = "button" value = "Título otorgado" id = "idTitulos" class="list-group-item list-group-item-action">
+        <div id = "modificacionesTitulos" class = "container ">
+            <a href="{{path('altaTitulos')}}" class="list-group-item list-group-item-action" id = "acciones">Alta Titulos</a>
+            <a href="{{path('verTitulos')}}" class="list-group-item list-group-item-action mt-1" id = "acciones">Ver/Modificar Titulos</a>
+        </div>
+    </div>
+   
+    <div class = "container mt-2">
+        <input type = "button" value = "Tipo de documento emitido" id = "idDocumentos" class="list-group-item list-group-item-action">
+        <div id = "modificacionesDocumentos" class = "container ">
+            <a href="{{path('altaDocumentos')}}" class="list-group-item list-group-item-action" id = "acciones">Alta Documentos</a>
+            <a href="{{path('verDocumentos')}}" class="list-group-item list-group-item-action mt-1" id = "acciones">Ver/Modificar Documentos</a>
+        </div>
+    </div>
+   
+</div>
+{% endblock %}

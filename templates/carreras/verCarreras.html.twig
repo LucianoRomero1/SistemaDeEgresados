@@ -1,0 +1,36 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Ver Carreras{% endblock %}
+
+{% block body %}
+{{parent()}}
+ 
+<table class="table table-borderless">
+    <thead>
+            <tr style = "background-color: #0F9FA8;">
+            <th>Nro</th>
+            <th>Nombre Carrera</th>
+            <th style="text-align: center;">Editar</th>
+            <th style="text-align: center;">Eliminar</th>
+        </tr>
+    </thead>
+    <tbody id="myTable">
+        {% for carrera in carreras %}
+        <tr>
+            <th>{{ loop.index }}</th>
+            <td>{{carrera.nombreCarrera}}</td>
+            <td style="text-align: center;"><a class ="btn" href="{{path('modificarCarreras', {'id': carrera.id})}}" ><i class="far fa-edit text-success" style = "font-size: 20px;"></i></a></td>
+            <td style="text-align: center;"><a class = "btn" onclick="DeleteFunction({{carrera.id}})"><i class=" fas fa-trash text-danger"   style = "font-size: 20px"></i></a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table> 
+<div class = "text-center container mt-5">
+    <a class = "btn btn-outline-secondary" href = "{{path('datosAcademicos')}}">Volver</a>
+    <a class = "btn btn-outline-secondary" href = "{{path('altaCarreras')}}">Crear Otra</a> 
+<div>
+
+
+<script src = "{{asset('js/deleteCarreras.js')}}"></script>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modificar Titulos{% endblock %}
+
+{% block body %}
+{{parent()}}
+<div class ="container mt-5">
+    <a class = "text-secondary"href = "{{path('datosAcademicos')}}"><i class="fas fa-arrow-left" style = "font-size:30px;"></i></a>
+    <h1 class = "text-center">Modificar Títulos</h1> 
+    {{ form_start(formulario, {'enctype':'multipart/form-data'})}}
+    <div class = "container mt-5">
+        {{ form_widget(formulario.nombreTitulo, {attr: {class: 'form-control camposEstandar', placeholder: 'Titulo'}})}}
+    </div>
+    <div class = "container mt-5 text-center">
+        {{ form_widget(formulario.Aceptar, {attr: {class: 'btn btn-outline-info btn-lg'}})}}
+    </div>
+    {{ form_end(formulario) }}
+</div>
+{% endblock %}
