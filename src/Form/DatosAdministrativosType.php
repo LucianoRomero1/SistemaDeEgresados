@@ -15,12 +15,12 @@ class DatosAdministrativosType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nroResolucionME')
-            ->add('nroExpediente')
-            ->add('nroResolucionRectoral')
-            ->add('nroDiploma')
-            ->add('nroAnalitico')
-            ->add('nroRevalida')
+            ->add('nroResolucionME', null,['required' => true])
+            ->add('nroExpediente', null,['required' => true])
+            ->add('nroResolucionRectoral', null,['required' => true])
+            ->add('nroDiploma', null,['required' => true])
+            ->add('nroAnalitico', null,['required' => true])
+            ->add('nroRevalida', null,['required' => true])
             ->add('fechaEntrega', DateType::class, [
                 'widget' => 'single_text'
             ])

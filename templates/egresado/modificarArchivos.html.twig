@@ -11,7 +11,7 @@
         <div class = "col-sm-4 text-center">
             {% if pdf != null %}
                 <h6 class = "text-secondary"> Certificado Analítico<h6>
-                <a class="btn btn-light" href="#"><img src="{{asset('svg/pdf2.png')}}" width="40" alt="PDF"></a>
+                <a class="btn btn-light" href="{{ path('verPDF', {'id': egresado.id}) }}"><img src="{{asset('svg/pdf2.png')}}" width="40" alt="PDF"></a>
             {% else %}
                 <h6 class = "text-center" style = "font-size: 15px;">*No hay pdf cargado</h6>
                 {{form_widget (formulario.pdfAnalitico , { attr : { accept : ' application / .pdf' }})}}
@@ -25,7 +25,7 @@
                 {{form_widget ( formulario.archivosArray , { attr : { accept : 'application / .jpg , .png, .pdf, .jpeg'  }})}}    
             {% endif %}
             {% for imagen in imagenes %}    
-                <a class="btn btn-light" href="#"><img src="{{asset('public/uploads/imagenesDigitales/' ~ imagen.nombreArchivo )}}" width="55" alt="PNG"></a>
+                <a class="btn btn-light" href="{{ path('verImagen', {'nombreImagen': imagen.nombreArchivo}) }}"><img src="{{asset('uploads/imagenesDigitales/' ~ imagen.nombreArchivo )}}" width="55" alt="PNG"></a>
             {% endfor %}
         </div>
     </div>

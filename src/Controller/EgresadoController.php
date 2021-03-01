@@ -80,7 +80,7 @@ class EgresadoController extends AbstractController
         $formulario = $this -> createForm(DatosAdministrativosType::class, $egresado);
         $formulario -> handleRequest($request);
 
-        if($formulario -> isSubmitted() && $formulario -> isValid() && $this -> validarDatosAdministrativos($egresado)){
+        if($formulario -> isSubmitted() && $formulario -> isValid() ){
             $em = $this -> getDoctrine() -> getManager();
             $em -> persist($egresado);
             $em -> flush();
@@ -120,7 +120,7 @@ class EgresadoController extends AbstractController
 
                     $nombreArchivo= time().".".$extensionArchivo;
                         
-                    $pdfAnalitico->move("public/uploads/pdfsAnalitico/",$nombreArchivo);
+                    $pdfAnalitico->move("uploads/pdfsAnalitico/",$nombreArchivo);
 
                     $egresado->setPdfAnalitico($nombreArchivo);    
 
@@ -147,7 +147,7 @@ class EgresadoController extends AbstractController
 
                         $nombreArchivo= time() . $contador .".".$extensionArchivo;
                         $contador++;
-                        //$archivo -> move("public/uploads/imagenesDigitales/", $nombreArchivo);
+                        //$archivo -> move("uploads/imagenesDigitales/", $nombreArchivo);
 
                         $documento -> setNombreArchivo($nombreArchivo);
                         $egresado -> addArchivo($documento);
@@ -303,7 +303,7 @@ class EgresadoController extends AbstractController
                 if ($extensionArchivo == 'pdf'){
                     $nombreArchivo= time().".".$extensionArchivo;
                         
-                    $pdfAnalitico->move("public/uploads/pdfsAnalitico/",$nombreArchivo);
+                    $pdfAnalitico->move("uploads/pdfsAnalitico/",$nombreArchivo);
 
                     $egresado->setPdfAnalitico($nombreArchivo);
                     
@@ -332,7 +332,7 @@ class EgresadoController extends AbstractController
 
                         $nombreArchivo= time() . $contador .".".$extensionArchivo;
                         $contador++;
-                        $archivo -> move("public/uploads/imagenesDigitales/", $nombreArchivo);
+                        $archivo -> move("uploads/imagenesDigitales/", $nombreArchivo);
 
                         $documento -> setNombreArchivo($nombreArchivo);
                         $egresado -> addArchivo($documento);
@@ -436,8 +436,8 @@ class EgresadoController extends AbstractController
         $fecha = $egresado -> getFechaNacimiento();
         if($fecha != null){
             $anio = $fecha->format('Y');
-            if($anio < 2010 || $anio >= 2060){
-                $this -> addFlash('error', 'No se permiten años menores a 2010 o superiores a 2060');
+            if($anio < 1900 || $anio >= 2060){
+                $this -> addFlash('error', 'No se permiten años menores a 1900 o superiores a 2060');
                 return false;
             }
         }
@@ -507,7 +507,7 @@ class EgresadoController extends AbstractController
     }
 
     public function validarFechaEgreso($egresado){
-        $fecha = $egresado -> getFechaNacimiento();
+        $fecha = $egresado -> getFechaEgreso();
         if($fecha != null){
             $anio = $fecha->format('Y');
             if($anio < 2010 || $anio >= 2060){
@@ -515,6 +515,7 @@ class EgresadoController extends AbstractController
                 return false;
             }
         }
+        return true;
     }
 
     public function validarDatosAdministrativos($egresado){
@@ -538,6 +539,32 @@ class EgresadoController extends AbstractController
                 return false;
             }
         }
+    }
+
+
+    
+    /**
+     * @Route("verPDF/{id}", name="verPDF")
+     */
+    public function verPDF($id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $egresado= $entityManager->getRepository(Egresado::class)->find($id);
+
+        return $this->redirect("http://localhost/SistemaRegistroDigital/public/uploads/pdfsAnalitico/" . $egresado->getPdfAnalitico());
+    }
+
+    /**
+     * @Route("verImagen/{nombreImagen}", name="verImagen")
+     */
+    public function verImagen($nombreImagen)
+    {
+        //$entityManager = $this->getDoctrine()->getManager();
+
+        // $egresado= $entityManager->getRepository(Egresado::class)->find($id);
+
+        return $this->redirect("http://localhost/SistemaRegistroDigital/public/uploads/imagenesDigitales/" . $nombreImagen);
     }
 
     //Copiar a Pata la entidad PORQUE NO ME DEJA DE OTRA FORMA SINO
@@ -590,7 +617,7 @@ class EgresadoController extends AbstractController
 
                     $nombreArchivo= time() . $contador .".".$extensionArchivo;
                     $contador++;
-                    $archivo -> move("public/uploads/imagenesDigitales/", $nombreArchivo);
+                    $archivo -> move("uploads/imagenesDigitales/", $nombreArchivo);
 
                     $documento -> setNombreArchivo($nombreArchivo);
                     $egresadoOriginal -> addArchivo($documento);
