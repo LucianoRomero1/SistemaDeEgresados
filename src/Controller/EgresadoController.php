@@ -552,7 +552,7 @@ class EgresadoController extends AbstractController
 
         $egresado= $entityManager->getRepository(Egresado::class)->find($id);
 
-        return $this->redirect("http://localhost/SistemaRegistroDigital/public/uploads/pdfsAnalitico/" . $egresado->getPdfAnalitico());
+        return $this->redirect("https://intranet.unraf.edu.ar/RegistroDigital/uploads/pdfsAnalitico/" . $egresado->getPdfAnalitico());
     }
 
     /**
@@ -564,7 +564,7 @@ class EgresadoController extends AbstractController
 
         // $egresado= $entityManager->getRepository(Egresado::class)->find($id);
 
-        return $this->redirect("http://localhost/SistemaRegistroDigital/public/uploads/imagenesDigitales/" . $nombreImagen);
+        return $this->redirect("https://intranet.unraf.edu.ar/RegistroDigital/uploads/imagenesDigitales/" . $nombreImagen);
     }
 
     //Copiar a Pata la entidad PORQUE NO ME DEJA DE OTRA FORMA SINO
