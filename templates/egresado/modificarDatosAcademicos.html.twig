@@ -1,41 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Modificar Datos Académicos {% endblock %}
+{% block title %}Registro Digital - Modificar Datos Académicos {% endblock %}
 
 {% block body %}
 {{parent()}}
-<div class ="container mt-5" id = "divFormulario">
-    <a class = "text-secondary"href = "{{path('verEgresados')}}"><i class="fas fa-arrow-left" style = "font-size:30px;"></i></a>
-    <h1 class = "text-center">Modificar Datos Académicos</h1> 
+<h1 class = "text-center">Modificar datos académicos de: {{egresado.nombre}} {{egresado.apellido}}</h1> 
+<div class ="container" id = "divFormulario">
+    <a href = "{{path('verEgresados')}}"><i class="fas fa-arrow-left grow" style = "font-size:30px; color: #0F9FA8;"></i></a>
+    
     {{ form_start(formulario, {'enctype':'multipart/form-data'})}}
-    <div class = "row mt-5 justify-content-center">
-        <div class = "col-sm-5">
-            <h6 class = "text-secondary text-center ">Denominación de la carrera</h6>
-            {{ form_widget(formulario.denominacionCarrera, {attr: {class: 'form-control camposEstandar', placeholder: 'Carrera'}})}}
+    <div class = "row mt-4 justify-content-center">
+        <div class = "col-sm-6">
+            <h6 class = "text-secondary text-left ml-1 ">Denominación de la carrera</h6>
+            {{ form_widget(formulario.denominacionCarrera, {attr: {class: 'form-control camposEstandar carrera'}})}}
         </div>
         <div class = "col-sm-1"></div>
-        <div class = "col-sm-5">
-            <h6 class = "text-secondary text-center ">Tipo de documento emitido</h6>
-            {{ form_widget(formulario.documentoEmitido, {attr: {class: 'form-control camposEstandar', placeholder: 'Documento Emitido'}})}}
+        <div class = "col-sm-4">
+            <h6 class = "text-secondary text-left ml-1 ">Tipo de documento emitido</h6>
+            {{ form_widget(formulario.documentoEmitido, {attr: {class: 'form-control camposEstandar'}})}}
         </div>
     </div>
-    <div class = "row mt-5 justify-content-center">
-        <div class = "col-sm-7">
-            <h6 class = "text-secondary text-center ">Título otorgado</h6>
-            {{ form_widget(formulario.tituloOtorgado, {attr: {class: 'form-control camposEstandar', placeholder: 'Titulo Otorgado'}})}}
+    <div class = "row mt-4 justify-content-center">
+        <div class = "col-sm-6">
+            <h6 class = "text-secondary text-left ml-1 ">Título otorgado</h6>
+            {{ form_widget(formulario.tituloOtorgado, {attr: {class: 'form-control camposEstandar '}})}}
         </div>
-        <div class = "col-sm-2"></div>
-        <div class = "col-sm-2"></div>
+        <div class = "col-sm-1"></div>
+        <div class = "col-sm-4">
+             <h6 class = "text-secondary text-left ml-1 ">Seleccionar</h6>
+            {{ form_widget(formulario.originalDuplicado, {attr: {class: 'form-control camposEstandar ', placeholder: 'Titulo Otorgado'}})}}
+        </div>
     </div>
-    <div class = "row mt-5 justify-content-center">
+    <div class = "row mt-4 justify-content-center">
         <div class = "col-sm-3">
-            <h6 class = "textsecondary text-center "> Fecha de egreso </h6>
-            {{ form_widget(formulario.fechaEgreso, {attr: {class: 'form-control camposEstandar'}})}}
+            <h6 class = "text-secondary text-left ml-1 "> Fecha de egreso </h6>
+            {{ form_widget(formulario.fechaEgreso, {attr: {class: 'form-control camposEstandar', style: 'cursor: text;'}})}}
         </div>
         <div class = "col-sm-8"></div>
         <div class = "col-sm-8"></div>
     </div>
-    <div class = "container mt-5 ">
+    <div class = "container mt-4 ">
         
     </div>
     <div class = "container mt-5 text-center">

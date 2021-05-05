@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registro Digital - Imagen TED Graduado/a{% endblock %}
+
+{% block body %}
+{{parent()}}
+<h1 class ="text-center">Imagen TED 1c emitida por SIU GUARANI</h1>
+<div class = "container mt-4"  id = "divFormulario"> 
+    {{ form_start(formulario, {'enctype':'multipart/form-data'})}}
+    <div class = "container text-center">
+        {{form_widget ( formulario.imagenTED , { attr : {accept : 'application / .jpg, .png, .pdf, .docx, .doc, .jpeg'}})}}
+    </div>
+    <div class = "container mt-5 text-center">
+        {{ form_widget(formulario.Siguiente, {attr: {class: 'btn btn-outline-info btn-lg'}})}}
+    </div>
+    {{ form_end(formulario) }}
+    
+</div>
+{% endblock %}

@@ -1,82 +1,98 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Modificar Datos Personales {% endblock %}
+{% block title %}Registro Digital - Modificar Datos Personales {% endblock %}
 
 {% block body %}
 {{parent()}}
-<div class = "container mt-5" id = "divFormulario">
-    <a class = "text-secondary"href = "{{path('verEgresados')}}"><i class="fas fa-arrow-left" style = "font-size:30px;"></i></a>
-    <h1 class = "text-center" style = "font-size: 50px;">Modificar Datos Personales</h1>
+<h1 class = "text-center">Modificar datos personales de: {{egresado.nombre}} {{egresado.apellido}}</h1>
+<div class = "container" id = "divFormulario">
+    <a href = "{{path('verEgresados')}}"><i class="fas fa-arrow-left grow" style = "font-size:30px; color: #0F9FA8"></i></a>
+    
     {{ form_start(formulario, {'enctype':'multipart/form-data'})}}
-        <div class = "row mt-5 justify-content-center">
+        <div class = "row mt-3 justify-content-center">
             <div class = "col-sm-3">
-                {{ form_widget(formulario.apellido, {attr: {class: 'form-control camposEstandar', placeholder: 'Apellido'}})}}
+                <h6 class = "text-secondary  mt-2 ml-1 text-left" style = "font-size: 14px;">Nombre<h6>
+                {{ form_widget(formulario.nombre, {attr: {class: 'form-control camposEstandar'}})}}
+                
             </div>
             <div class = "col-sm-2"></div>
             <div class = "col-sm-3">
-                {{ form_widget(formulario.nombre, {attr: {class: 'form-control camposEstandar', placeholder: 'Nombre'}})}}
+                <h6 class = "text-secondary  mt-2 text-left" style = "font-size: 14px;">Apellido<h6>
+                {{ form_widget(formulario.apellido, {attr: {class: 'form-control camposEstandar'}})}}   
+                
             </div>
         </div>
-        <div class = "row mt-5 justify-content-center">
-            <div class = "col-sm-3">
-                {{ form_widget(formulario.dni, {attr: {class: 'form-control camposEstandar', placeholder: 'DNI'}})}}
-                <h6 class = "text-secondary  mt-2 text-center" style = "font-size: 14px;">DNI sin puntos<h6>
+        <div class = "row mt-3 justify-content-center ">
+            <div class = "col-sm-3" >
+                {{ form_widget(formulario.tipoDocumentoIdentidad, {attr: {class: 'form-control camposEstandar'}})}}
             </div>
             <div class ="col-sm-2"></div>
-               <div class = "col-sm-3">
-                {{ form_widget(formulario.fechaNacimiento, {attr: {class: 'form-control camposEstandar'}})}}
-                <h6 class = "text-secondary  mt-2 text-center" style = "font-size: 14px;">Fecha de nacimiento<h6>
+            <div class = "col-sm-3">
+                {{ form_widget(formulario.dni, {attr: {class: 'form-control camposEstandar', placeholder: 'Doc de identidad'}})}}
             </div>
         </div>
-        <div class = "row mt-5 justify-content-center">
+        <div class = "row mt-3 justify-content-center">
+            <div class = "col-sm-2"></div>
+            <div class ="col-sm-3">
+                <h6 class = "text-secondary  mt-2 ml-1 text-left" style = "font-size: 14px;">Fecha de nacimiento<h6>
+                {{ form_widget(formulario.fechaNacimiento, {attr: {class: 'form-control camposEstandar', style: 'cursor: text;'}})}}
+                
+            </div>
+            <div class = "col-sm-2"></div>
+        </div>
+        <div class = "row mt-3 justify-content-center">
             <div class = "col-sm-3">
-                {{ form_widget(formulario.telefono, {attr: {class: 'form-control camposEstandar', placeholder: 'Teléfono'}})}}
-                <h6 class = "text-secondary mt-2 text-center" style = "font-size: 14px;">Anteponer código de área y sin 15<h6>
+                <h6 class = "text-secondary mt-2 text-left ml-1" style = "font-size: 14px;">Anteponer código de área, sin 15 ni espacios<h6>
+                {{ form_widget(formulario.telefono, {attr: {class: 'form-control camposEstandar'}})}}
             </div>
             <div class = "col-sm-1"></div>
-            <div class = "col-sm-4">
-                {{ form_widget(formulario.email, {attr: {class: 'form-control camposEstandar', placeholder: 'Email'}})}}
+            <div class = "col-sm-4 mt-3">
+                <h6 class = "text-secondary  mt-2 text-center" style = "font-size: 14px;">Email<h6>
+                {{ form_widget(formulario.email, {attr: {class: 'form-control camposEstandar'}})}}     
             </div>
         </div>
         <hr>
-        <div class = "row mt-5 justify-content-center">
+        <h6 class = "text-info ml-5" style = "font-size: 14px;">*Apartado domicilio egresado/a<h6>
+        <div class = "row mt-3 justify-content-center">
             <div class = "col-sm-2"></div>
             <div class = "col-sm-3">
-                {{ form_widget(formulario.nacionalidad, {attr: {class: 'form-control camposEstandar', placeholder: 'Nacionalidad'}})}}
+                <h6 class = "text-secondary  mt-2 ml-1 text-left" style = "font-size: 14px;">Nacionalidad<h6>
+                {{ form_widget(formulario.nacionalidad, {attr: {class: 'form-control camposEstandar'}})}}
+                
             </div>
             <div class = "col-sm-2"></div>
         </div>
-        <div class = "row mt-5 justify-content-center">
+        <div class = "row mt-3 justify-content-center">
             <div class = "col-sm-3">
-                {{ form_widget(formulario.ciudad, {attr: {class: 'form-control camposEstandar', placeholder: 'Ciudad'}})}}
+                <h6 class = "text-secondary  mt-2 ml-1 text-left" style = "font-size: 14px;">Provincia<h6>
+                {{ form_widget(formulario.provincia, {attr: {class: 'form-control camposEstandar'}})}}
             </div>
             <div class = "col-sm-2"></div>
             <div class = "col-sm-3">
-                {{ form_widget(formulario.provincia, {attr: {class: 'form-control camposEstandar', placeholder: 'Provincia'}})}}
+                <h6 class = "text-secondary  mt-2 ml-1 text-left" style = "font-size: 14px;">Ciudad<h6>
+                {{ form_widget(formulario.ciudad, {attr: {class: 'form-control camposEstandar'}})}} 
             </div>
         </div>
-        <div class = "row mt-5 justify-content-center">
+        <div class = "row mt-3 justify-content-center">
             <div class = "col-sm-3">
+                <h6 class = "text-secondary mt-2 ml-1 text-left" style = "font-size: 14px;">Calle<h6>
                 {{ form_widget(formulario.calle, {attr: {class: 'form-control camposEstandar', placeholder: 'Calle'}})}}
             </div>
+            <div class = "col-sm-1"></div>
             <div class = "col-sm-2">
-            </div>
-            <div class = "col-sm-1">
+                <h6 class = "text-secondary mt-2 ml-1 text-left" style = "font-size: 14px;">Nro de domicilio<h6>
                 {{ form_widget(formulario.nroDomicilio, {attr: {class: 'form-control camposEstandar'}})}}
-                <h6 class = "text-secondary mt-2 text-center" style = "font-size: 14px;">Nro de domicilio<h6>
-                <h6 class = "text-danger text-center mt-2" id = "textAlert">Ingrese un domicilio válido<h6>
             </div>
               <div class = "col-sm-1">
-                {{ form_widget(formulario.piso, {attr: {class: 'form-control camposEstandar'}})}}
-                <h6 class = "text-secondary mt-2 text-center" style = "font-size: 14px;">Piso<h6>
+                <h6 class = "text-secondary mt-2 ml-1 text-left" style = "font-size: 14px;">Piso<h6>
+                {{ form_widget(formulario.piso, {attr: {class: 'form-control camposEstandar'}})}} 
             </div>
             <div class = "col-sm-1">
-                {{ form_widget(formulario.depto, {attr: {class: 'form-control camposEstandar'}})}}
-                <h6 class = "text-secondary mt-2 text-center" style = "font-size: 14px;">Depto<h6>
+                <h6 class = "text-secondary mt-2 ml-1 text-left" style = "font-size: 14px;">Depto<h6>
+                {{ form_widget(formulario.depto, {attr: {class: 'form-control camposEstandar'}})}} 
             </div>
         </div>
-
-        <div class = "container mt-5 text-center">
+        <div class = "container mt-4 text-center">
             {{ form_widget(formulario.Aceptar, {attr: {class: 'btn btn-outline-info btn-lg'}})}}
         </div>
     {{ form_end(formulario) }}

@@ -8,26 +8,34 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Titulos;
 use App\Form\TitulosType;
 use Symfony\Component\HttpFoundation\Request;
+use App\Entity\UserBusqueda;
+use App\Form\UserBusquedaType;
+use App\Services\ConsultaBD;
+use App\Services\ValidacionesAcademicas;
 
 class TituloController extends AbstractController
 {
     /**
-     * @Route("/altaTitulos", name="altaTitulos")
+     * @Route("admin/altaTitulos", name="altaTitulos")
      */
     public function altaTitulos(Request $request)
     {
-        $titulos = new Titulos();
+        $titulo = new Titulos();
+        $validacionesAcademicas = new ValidacionesAcademicas();
 
-        $formulario = $this -> createForm(TitulosType::class, $titulos);
+        $formulario = $this -> createForm(TitulosType::class, $titulo);
         $formulario -> handleRequest($request);
 
-        if($formulario -> isSubmitted() && $formulario -> isValid()){
+        if($formulario -> isSubmitted() && $formulario -> isValid() && $validacionesAcademicas -> validarTitulo($titulo)){
             $em = $this -> getDoctrine() -> getManager();
-            $em -> persist($titulos);
+            $em -> persist($titulo);
             $em -> flush();
 
-            $this -> addFlash('info', '¡El título se cargó correctamente!');
+            $this -> addFlash('correcto', '¡El título se cargó correctamente!');
             return $this -> redirectToRoute('verTitulos');
+        }
+        else if($validacionesAcademicas -> validarTitulo($titulo) == false){
+            $this -> addFlash('error', 'Ingrese un nombre de título válido');
         }
 
         return $this -> render('titulos/altaTitulos.html.twig', [
@@ -36,31 +44,51 @@ class TituloController extends AbstractController
     }
 
      /**
-     * @Route("/verTitulos", name="verTitulos")
+     * @Route("admin/verTitulos", name="verTitulos")
      */
-    public function verTitulos(){
+    public function verTitulos(Request $request){
         $em = $this -> getDoctrine() -> getManager();
-        $titulos = $em -> getRepository(Titulos::class) -> findAll();
+        $consultaBD = new ConsultaBD();
 
-        return $this -> render('titulos/verTitulos.html.twig',[
-            'titulos' => $titulos
-        ]);
+        $form = $this -> createForm(UserBusquedaType::class, new UserBusqueda());
+        $form -> handleRequest($request);
+        $busqueda = $form ->getData();
+
+        $titulos = $em -> getRepository(Titulos::class)->findBy(array(), array('nombreTitulo' => 'ASC'));
+
+
+        if($form -> isSubmitted()){
+            return $this -> render('titulos/verTitulos.html.twig', [
+                'titulos' => $consultaBD -> buscarTitulos($busqueda, $em), 'formulario' => $form -> createView()
+            ]);
+        }
+        else{
+            return $this -> render('titulos/verTitulos.html.twig',[
+                'titulos' => $titulos,
+                'formulario' => $form -> createView()
+            ]);
+        }
+     
     }
 
     /**
-     * @Route("/modificarTitulos/{id}", name="modificarTitulos")
+     * @Route("admin/modificarTitulos/{id}", name="modificarTitulos")
      */
     public function modificarTitulos(Request $request, $id){
         $em =  $this -> getDoctrine() -> getManager();
-        $titulos = $em -> getRepository(Titulos::class) -> find($id);
+        $validacionesAcademicas = new ValidacionesAcademicas();
+        $titulo = $em -> getRepository(Titulos::class) -> find($id);
 
-        $formulario = $this -> createForm(TitulosType::class, $titulos);
+        $formulario = $this -> createForm(TitulosType::class, $titulo);
         $formulario -> handleRequest($request);
 
-        if($formulario -> isSubmitted() && $formulario -> isValid()){
+        if($formulario -> isSubmitted() && $formulario -> isValid() && $validacionesAcademicas -> validarTitulo($titulo)){
             $em -> flush();
-            $this -> addFlash('info', '¡El título se modificó correctamente!');
+            $this -> addFlash('correcto', '¡El título ' . $titulo->getNombreTitulo() . ' se modificó correctamente!');
             return $this -> redirectToRoute('verTitulos');
+        }
+        else if($validacionesAcademicas -> validarTitulo($titulo) == false){
+            $this -> addFlash('error', 'Ingrese un nombre de título válido');
         }
 
         return $this -> render('titulos/modificarTitulos.html.twig',[
@@ -70,7 +98,7 @@ class TituloController extends AbstractController
 
     
     /**
-     * @Route("/eliminarTitulos/{id}", name="eliminarTitulos")
+     * @Route("admin/eliminarTitulos/{id}", name="eliminarTitulos")
      */
     public function eliminarTitulos($id){
         $em = $this -> getDoctrine() -> getManager();
@@ -79,8 +107,12 @@ class TituloController extends AbstractController
         $em->remove($titulos);
         $em -> flush();
 
-        $this -> addFlash('info', '¡El título se eliminó correctamente!');
+        $this -> addFlash('correcto', '¡El título se eliminó correctamente!');
         return $this -> redirectToRoute('verTitulos');
         
     }
+
+
+
+
 }

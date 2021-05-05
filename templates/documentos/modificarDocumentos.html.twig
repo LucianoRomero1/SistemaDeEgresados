@@ -1,15 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modificar Documentos{% endblock %}
+{% block title %}Registro Digital - Modificar Documento{% endblock %}
 
 {% block body %}
 {{parent()}}
-<div class ="container mt-5">
-    <a class = "text-secondary"href = "{{path('datosAcademicos')}}"><i class="fas fa-arrow-left" style = "font-size:30px;"></i></a>
-    <h1 class = "text-center">Modificar Documentos</h1> 
+<h1 class = "text-center">Modificar Documento</h1> 
+<div class ="container " id = "divFormulario">
+    <a class = ""href = "{{path('datosAcademicos')}}"><i class="fas fa-arrow-left grow" title ="Volver a ver todos los documentos" style = "font-size:30px;color: #0F9FA8;"></i></a>
+    
     {{ form_start(formulario, {'enctype':'multipart/form-data'})}}
-    <div class = "container mt-5">
-        {{ form_widget(formulario.tipoDocumento, {attr: {class: 'form-control camposEstandar', placeholder: 'Tipo de Documento'}})}}
+    <div class = "row mt-4 justify-content-center">
+        <div class = "col-sm-3"></div>
+        <div class = "col-sm-6">
+            {{ form_widget(formulario.tipoDocumento, {attr: {class: 'form-control camposEstandar academicos', placeholder: 'Tipo de Documento'}})}}
+        </div>
+        <div class = "col-sm-3"></div>
     </div>
     <div class = "container mt-5 text-center">
         {{ form_widget(formulario.Aceptar, {attr: {class: 'btn btn-outline-info btn-lg'}})}}

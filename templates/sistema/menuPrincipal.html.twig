@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inicio{% endblock %}
+{% block title %}Registro Digital - Inicio{% endblock %}
 
 {% block body %}
 {{parent()}}
@@ -14,4 +14,65 @@
         </div>
     </div>
 </div> #}
+
+<div class=" goma container-fluid" >
+    <div  class = "text-center">
+        <h1 class="text-center d-inline " style = "color: gray; opacity: 0.5;"> Home</h1>
+        <img class="img-fluid iconoHome" style="margin-bottom: 15px;" width= "45" src="{{asset('img/icon.png')}}" />
+    </div>
+
+    {# DIV Información #}
+    <div class="container info-div" id = "divFormulario">
+
+        <div class="info-title text-left">
+            <i class="color-unraf-light fas fa-graduation-cap i-width"></i>
+            <h2 class="color-unraf-light d-inline">Últimas titulaciones de egresados cargadas</h2>
+        </div>
+        
+        
+        {# EGRESADOS Tabla #}
+        <table style="text-left" class="table table-hover">
+
+            {# EGRESADO Head #}
+            <thead class="table-head color-unraf-light">
+                <tr>
+                    <th scope="col">Nombre y apellido</th>
+                    <th scope="col">DNI</th>
+                    <th scope="col">Nacimiento</th>
+                </tr>
+            </thead>
+
+            {# EGRESADO Body #}
+            <tbody class="table-body color-unraf-yellow">
+
+                {% for egresado in egresados %}
+                    <tr>
+                        {# EGRESADO Nombre #}
+                        <th>
+                            {{egresado.nombre}} {{egresado.apellido}}
+                        </th>
+
+                        {# EGRESADO Dni #}
+                        <th>
+                            {{egresado.dni}}
+                        </th>
+
+                        {# EGRESADO Lugar de nacimiento #}
+                        <th>
+                            {{egresado.ciudad}} ({{egresado.provincia}})
+                        </th>
+                    </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>   
+        
+    </div>
+
+</div>
+<br>
+<br>
+
 {% endblock %}

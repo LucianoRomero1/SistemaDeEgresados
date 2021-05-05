@@ -120,14 +120,47 @@
     "doctrine/sql-formatter": {
         "version": "1.1.1"
     },
+    "dompdf/dompdf": {
+        "version": "v1.0.2"
+    },
     "egulias/email-validator": {
         "version": "2.1.25"
     },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.3"
     },
+    "guzzlehttp/guzzle": {
+        "version": "7.2.0"
+    },
+    "guzzlehttp/promises": {
+        "version": "1.4.0"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.7.0"
+    },
     "kelunik/certificate": {
         "version": "v1.1.2"
+    },
+    "knplabs/knp-snappy": {
+        "version": "v1.2.1"
+    },
+    "knplabs/knp-snappy-bundle": {
+        "version": "1.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.5",
+            "ref": "c81bdcf4a9d4e7b1959071457f9608631865d381"
+        }
+    },
+    "knpuniversity/oauth2-client-bundle": {
+        "version": "1.20",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.20",
+            "ref": "80acc9223a205cbf5d9828fd616c82a374d281dd"
+        }
     },
     "laminas/laminas-code": {
         "version": "3.4.1"
@@ -137,6 +170,12 @@
     },
     "laminas/laminas-zendframework-bridge": {
         "version": "1.1.1"
+    },
+    "league/oauth2-client": {
+        "version": "2.6.0"
+    },
+    "league/oauth2-google": {
+        "version": "3.0.4"
     },
     "league/uri": {
         "version": "6.4.0"
@@ -152,6 +191,15 @@
     },
     "nikic/php-parser": {
         "version": "v4.10.4"
+    },
+    "paragonie/random_compat": {
+        "version": "v9.99.100"
+    },
+    "phenx/php-font-lib": {
+        "version": "0.5.2"
+    },
+    "phenx/php-svg-lib": {
+        "version": "v0.3.3"
     },
     "php": {
         "version": "7.2"
@@ -174,6 +222,9 @@
     "psr/event-dispatcher": {
         "version": "1.0.0"
     },
+    "psr/http-client": {
+        "version": "1.0.1"
+    },
     "psr/http-message": {
         "version": "1.0.1"
     },
@@ -182,6 +233,12 @@
     },
     "psr/log": {
         "version": "1.1.3"
+    },
+    "ralouphie/getallheaders": {
+        "version": "3.0.3"
+    },
+    "sabberworm/php-css-parser": {
+        "version": "8.3.1"
     },
     "sensio/framework-extra-bundle": {
         "version": "5.2",

@@ -2,77 +2,160 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Bienvenido{% endblock %}</title>
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Novedades - UNRaf{% endblock %}</title>
         {% block stylesheets %}
-            
+            <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+            <link href="{{ asset("css/estiloBase.css") }}" rel="stylesheet" type="text/css">
             <link href="{{ asset("css/estilos.css") }}" rel="stylesheet" type="text/css">
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+            
+            <link rel="icon" href="{{ asset("img/iconoUnraf.png") }}">
         {% endblock %}
     </head>
-    <body>
-        {% block body %}  
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-               
-                {% if app.request.pathinfo == "/menuPrincipal" %}
-                    <a class="navbar-brand" href="{{path('menuPrincipal')}}"><img src="{{ asset("svg/home.svg") }}" width="25" height="25" alt="Home"></a>
-                {% else %}
-                    <a class="navbar-brand" href="{{path('menuPrincipal')}}"><img src="{{ asset("svg/home-blanco.svg") }}" width="25" height="25" alt="Home"></a>
-                {% endif %}
-                
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Egresados
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{path('altaDatosPersonales')}}">Alta Egresados</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{path('verEgresados')}}">Ver/Modificar Egresados</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Datos Académicos
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{path('datosAcademicos')}}">Modificar datos Académicos</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class = "col-sm-9 "></div>
-                    
-                <div class="collapse navbar-collapse " style = "margin-left: -15px;" id="navbarSupportedContent">
-                    <a href = "#" class = "btn"><i class="fas fa-sign-out-alt" style = "font-size: 25px;"></i></a>
-                </div>
-            </nav>
-            <div class="container">
-                {% for message in app.flashes('info') %}
-                    <div class="alert alert-success alert-dismissible mt-4 mb-3">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        {{ message }}
-                    </div>
-                {% endfor %}
-                {% for message in app.flashes('error') %}
-                    <div class="alert alert-danger alert-dismissible mt-4 mb-3">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            </div>
-        {% endblock %}
-        {% block javascripts %}
-           
-        <script
-        src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-        crossorigin="anonymous"></script>
-        
-        
-        <script src= "{{asset('js/accionesQuery.js')}}"></script>
-        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script>
-        <script src="https://use.fontawesome.com/releases/v5.15.2/js/all.js" data-search-pseudo-elements></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-        {% endblock %}
-    </body>
+    <body> 
+    {% block body %}
+    {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPERADMIN') %}
+    <div id="wrapper" class="animate">
 
+        <nav class="navbar header-top fixed-top navbar-expand-lg  navbar-light bg-light">
+
+
+            {# Boton responsive #}
+            <span class="navbar-toggler-icon leftmenutrigger" id = "rayitas"></span>
+
+            {# Boton desplegable #}
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            {# Título del sistema #}
+            <ul class="navbar-nav ml-md-auto">
+                <a style="margin-left: 10px;margin-top:5px;" class="navbar-brand  color-unraf-light grow" href="{{path('menuPrincipal')}}">Registro Digital</a>  
+            </ul>
+     
+            {# Div oculto #}
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav animate side-nav " style = "">
+
+                    {# Parte del perfil #}
+                    {# <div class="container-fluid perfil">
+
+                        <div class="media perfil-p"> #}
+                        
+                            {# Imágen de unraf con border radius #}
+                            {# <img class="perfil-img" src="{{asset('img/iconoUnraf.png')}}"></img> #}
+
+                            {# email #}
+                            {# <p class="perfil-email text-secondary">{{ app.user.email|replace({'@unraf.edu.ar': ''})}}</p>
+                        </div>
+                    <hr>
+                    </div> #}
+                    
+                    {# Home #}
+                    <li id="menuDocumento" class="nav-item perfil-p ">
+                        <a class="nav-link" href="{{path('menuPrincipal')}}"><button class="btn perfil-btn-light" ><i class="fas fa-home" style = "color: #0F9FA8;"></i></button>Inicio</a>
+                    </li>
+
+                    {# Titulaciones de egresados #}
+                    <li id="menuDocumento" class="nav-item perfil-p mt-2">
+                        <a class="nav-link " href="{{path('verEgresados')}}"><button class="btn perfil-btn-light" ><i class="fas fa-graduation-cap" ></i></button>Titulaciones</a>
+                    </li>
+
+                 
+
+                    {% if is_granted('ROLE_ADMIN') %}
+                    {# Graduados #}
+                    <li id="menuDocumento" class="nav-item perfil-p mt-2">
+                        <a class="nav-link " href="{{path('verGraduados')}}"><button class="btn perfil-btn-light" ><i class="fas fa-graduation-cap" ></i></button>Graduados</a>
+                    </li>
+                    
+                    {# Datos académicos #}
+                    <li id="menuDocumento" class="nav-item perfil-p mt-2">
+                        <a class="nav-link" href="{{path('datosAcademicos')}}"><button class="btn perfil-btn-light" ><i class="fas fa-user-graduate"></i></button>Datos académicos</a>
+                    </li>
+                    {% endif %}
+
+                    {% if is_granted('ROLE_SUPERADMIN') %}
+                    {# Roles #}
+                    <li id="menuDocumento" class="nav-item perfil-p mt-2">
+                        <a class="nav-link" href="{{path('roles')}}"><button class="btn perfil-btn-light" ><i class="fas fa-user"></i></button>Rol de usuarios</a>
+                    </li>
+                    {% endif %}
+                  
+
+                    {# Rol debajo de todo #}
+                    {# {% set roles = app.user.roles %} #}
+                    {# <li class="nav-item perfil-rol">
+                        <h6>{{roles|last|slice(5,10)}}</h6>
+                    </li> #}
+
+                </ul>  
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" aria-haspopup="true" aria-expanded="false"  data-toggle="dropdown" href="#"><button class="btn perfil-btn-tomato"><i class="fas fa-user"></i></button></a>
+
+                        <div class="dropdown-menu pers-drop-down" aria-labelledby="navbarDropdownMenuLink">
+                            {# Parte del perfil #}
+                            <div class="container-fluid user-perfil" style = "padding: 5px;">
+
+                                <div class="media">
+                                    {# Imágen de unraf con border radius #}
+                                    <img class="perfil-img" src="{{asset('img/iconoUnraf.png')}}" style = "padding: 1px;"></img>
+                                    {# email #}
+                                    <p class="perfil-email text-secondary">{{ app.user.email|replace({'@unraf.edu.ar': ''})}}</p>
+                                </div>
+                                <p style="font-size: 10px;" class="text-secondary text-right mt-1">ROL: {{app.user.roles|last|slice(5,10)}}</p>
+                                <hr>
+                                <div class = "text-center">
+                                    <a class="user-link" style = "font-size: 18px;" href="{{path('backIntranet')}}"><i class="fas fa-hand-point-left"></i> Intranet</a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                
+                  {# <a class="nav-link itemMenu" style="color:grey;" href="#"> 
+                            Perfil: {{rolPrincipal|slice(5,rolPrincipal|length)|capitalize}}</a>
+                            <a style="background-color:#0F9FA8;color:white;" class="nav-link" href="#">
+                            <img src="#" class="svg" width="18" alt="P">Volver a intranet</a> #}
+            </div>
+        </nav>
+    </div>
+        {% for message in app.flashes('correcto') %}
+                <div id="notificacion" class="container alert alert-success mt-3 wobble-vertical">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('error') %}
+                <div id="notificacion" class="container alert alert-danger mt-3 wobble-vertical">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('warning') %}
+                <div id="notificacion" class="container alert alert-warning mt-3 wobble-vertical">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{ message }}
+                </div>
+        {% endfor %}
+                
+        
+    {% endif %}   
+    {% endblock %}
+        {% block javascripts %} 
+            <script
+                src="https://code.jquery.com/jquery-3.5.1.min.js"
+                integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+                crossorigin="anonymous"></script> 
+            <script src="{{ asset("js/accionesDinamicas.js") }}"></script>
+            <script src= "{{asset('js/accionesQuery.js')}}"></script>
+            <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script>
+            <script src="https://use.fontawesome.com/releases/v5.15.2/js/all.js" data-search-pseudo-elements></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+        {% endblock %}
+        
+    </body>
 </html>

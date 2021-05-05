@@ -18,9 +18,9 @@ class LoginController extends AbstractController
         $user = $this->getUser();
         
         if ($user != null){
-            $url= "http://intranet.unraf.edu.ar/Intranet/public/index.php/login/" . $encriptado->encriptar($user->getEmail());    
+            $url= "http://intranet.unraf.edu.ar/Intranet/login/" . $encriptado->encriptar($user->getEmail());    
         }else{
-            $url= "http://intranet.unraf.edu.ar/Intranet/public/index.php/login/";    
+            $url= "http://intranet.unraf.edu.ar/Intranet/login/";    
         }
         
         return $this->redirect($url);

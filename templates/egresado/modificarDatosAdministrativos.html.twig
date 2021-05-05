@@ -1,58 +1,82 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Modificar Datos Administrativos {% endblock %}
+{% block title %}Registro Digital - Modificar Datos Administrativos {% endblock %}
 
 {% block body %}
 {{parent()}}
-<div class ="container mt-5 " id = "divFormulario">
-    <a class = "text-secondary"href = "{{path('verEgresados')}}"><i class="fas fa-arrow-left" style = "font-size:30px;"></i></a>
-    <h1 class = "text-center">Modificar Datos Administrativos</h1> 
+<h1 class = "text-center" >Modificar datos administrativos de: {{egresado.nombre}} {{egresado.apellido}}</h1> 
+<div class ="container" id = "divFormulario">
+    <a href = "{{path('verEgresados')}}"><i class="fas fa-arrow-left grow" style = "font-size:30px; color: #0F9FA8"></i></a>
+    
     {{ form_start(formulario, {'enctype':'multipart/form-data'})}}
-    <div class = "row mt-5 justify-content-center">
-        <div class = "col-sm-2">
-            {{ form_widget(formulario.nroResolucionME, {attr: {class: 'form-control camposEstandar'}})}}
-            <h6 class = "text-secondary text-center mt-2">Nro resolución ME de aprobación de la carrera</h6>
+    <div class = "row mt-2 justify-content-center">
+        <div class = "col-sm-4">
+            <h6 class = "text-secondary  mt-2 text-left ml-1" style = "font-size: 14px;">Nombre rector/a<h6>
+            {{ form_widget(formulario.nombreRector, {attr: {class: 'form-control camposEstandar'}})}}
         </div>
-        <div class = "col-sm-2"></div>
-        <div class = "col-sm-2">
-            {{ form_widget(formulario.nroResolucionRectoral, {attr: {class: 'form-control camposEstandar'}})}}
-            <h6 class = "text-secondary text-center mt-2">Nro resolución rectoral de expedición</h6>
-        </div>
-    </div>
-    <div class = "row mt-5 justify-content-center">
-        <div class = "col-sm-2">
-            {{ form_widget(formulario.nroExpediente, {attr: {class: 'form-control camposEstandar'}})}}
-            <h6 class = "text-secondary text-center mt-2">Nro de expediente UNRaf de tramitación</h6>
-        </div>
-        <div class = "col-sm-2"></div>
-        <div class = "col-sm-2">
-            {{ form_widget(formulario.nroDiploma, {attr: {class: 'form-control camposEstandar'}})}}
-            <h6 class = "text-secondary text-center mt-2">Nro diploma</h6>
+        <div class = "col-sm-1"></div>
+        <div class = "col-sm-4">
+            <h6 class = "text-secondary  mt-2 text-left ml-1" style = "font-size: 14px;">Apellido rector/a<h6>
+            {{ form_widget(formulario.apellidoRector, {attr: {class: 'form-control camposEstandar'}})}}
         </div>
     </div>
-    <div class = "row mt-5 justify-content-center">
-        <div class = "col-sm-2">
-            {{ form_widget(formulario.nroAnalitico, {attr: {class: 'form-control camposEstandar'}})}}
-            <h6 class = "text-secondary text-center mt-2">Nro certificado analítico</h6>
+    <div class = "row mt-2 justify-content-center">
+        <div class = "col-sm-4">
+            <h6 class = "text-secondary  mt-2 text-left ml-1" style = "font-size: 14px;">Nombre secretario/a<h6>
+            {{ form_widget(formulario.nombreSecretario, {attr: {class: 'form-control camposEstandar'}})}}
+            
         </div>
-        <div class = "col-sm-2"></div>
-        <div class = "col-sm-2">
-            {{ form_widget(formulario.nroRevalida, {attr: {class: 'form-control camposEstandar'}})}}
-            <h6 class = "text-secondary text-center mt-2">Nro certificado de reválida</h6>
+        <div class = "col-sm-1"></div>
+        <div class = "col-sm-4">
+            <h6 class = "text-secondary  mt-2 text-left ml-1" style = "font-size: 14px;">Apellido secretario/a<h6>
+            {{ form_widget(formulario.apellidoSecretario, {attr: {class: 'form-control camposEstandar'}})}}
         </div>
     </div>
-    <div class = "row mt-5 justify-content-center">
-        <div class = "col-sm-2"></div>
+    <div class = "row mt-2 justify-content-center">
         <div class = "col-sm-3">
-            {{ form_widget(formulario.fechaEntrega, {attr: {class: 'form-control camposEstandar'}})}}
-            <h6 class = "text-secondary text-center mt-2">Fecha de entrega</h6>
+            <h6 class = "text-secondary  mt-2 text-left ml-1" style = "font-size: 14px;">Nº de aprobación de carrera UNRaf <h6>
+            {{ form_widget(formulario.nroResolucionAprob, {attr: {class: 'form-control camposEstandar'}})}}
         </div>
-        <div class = "col-sm-2"></div>
+        <div class = "col-sm-3">
+            <h6 class = "text-secondary  mt-2 text-left ml-1" style = "font-size: 14px;">Nº de aprobación de carrera ME <h6>
+            {{ form_widget(formulario.nroResolucionME, {attr: {class: 'form-control camposEstandar'}})}}
+        </div>
+        <div class = "col-sm-3"></div>
     </div>
-    <div class = "container mt-5">
-        
+    <div class = "row mt-2 justify-content-center">
+        <div class = "col-sm-3">
+            <h6 class = "text-secondary  mt-2 text-left ml-1" style = "font-size: 14px;">Nº Expediente de tramitación<h6>
+            {{ form_widget(formulario.nroExpediente, {attr: {class: 'form-control camposEstandar'}})}}
+        </div>
+        <div class = "col-sm-3">
+            <h6 class = "text-secondary  mt-2 text-left ml-1" style = "font-size: 14px;">N° Resolución Rectoral expedición <h6>
+            {{ form_widget(formulario.nroResolucionRectoral, {attr: {class: 'form-control camposEstandar'}})}}
+        </div>
+        <div class = "col-sm-3">
+               <h6 class = "text-secondary  mt-2 text-left ml-1" style = "font-size: 14px;">Nº Diploma<h6>
+            {{ form_widget(formulario.nroDiploma, {attr: {class: 'form-control camposEstandar'}})}}
+        </div>       
     </div>
-    <div class = "container mt-5 text-center">
+    <div class = "row mt-2 justify-content-center">
+        <div class = "col-sm-3">
+            <h6 class = "text-secondary  mt-2 text-left ml-1" style = "font-size: 14px;">Nº Certificado analítico<h6>
+            {{ form_widget(formulario.nroAnalitico, {attr: {class: 'form-control camposEstandar'}})}}
+        </div>
+        <div class = "col-sm-3">
+            <h6 class = "text-secondary  mt-2 text-left ml-1" style = "font-size: 14px;">Nº Certificado reválida<h6>
+            {{ form_widget(formulario.nroRevalida, {attr: {class: 'form-control camposEstandar'}})}}
+        </div>
+        <div class = "col-sm-3"></div>
+    </div>
+    <div class = "row mt-4 justify-content-center">
+        <div class = "col-sm-3"></div>
+        <div class = "col-sm-3">
+            <h6 class = "text-secondary text-left ml-1 mt-2">Fecha de entrega de la documentación</h6>
+            {{ form_widget(formulario.fechaEntrega, {attr: {class: 'form-control camposEstandar', style: 'cursor: text;'}})}} 
+        </div>
+        <div class = "col-sm-3"></div>
+    </div>
+    <div class = "container mt-4 text-center">
         {{ form_widget(formulario.Aceptar, {attr: {class: 'btn btn-outline-info btn-lg'}})}}
     </div>
     {{ form_end(formulario) }}

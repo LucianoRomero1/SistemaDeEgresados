@@ -1,32 +1,300 @@
 
+*{
+    font-family: Helvetica, sans-serif;
+}
+
+nav{
+    padding: 10px;
+    background-color: rgba(246, 238, 238, 0.8);
+    box-shadow: 1px 2px 5px #888888;
+}
+
+body{
+    background-color: #e3e3e3;
+}
+
+
+h1{
+    color: #0F9FA8;
+}
+
 nav{
     padding: 10px;
     box-shadow: 1px 2px 5px #888888;
 }
 
-h1{
-    color: #009C8C;
+ul{
+    list-style-type: none;
 }
+
+.grow{
+    transition: all .2s ease-in-out;
+}
+  
+.grow:hover {
+    transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.tooltip-inner{
+ 
+    max-width: 250px;
+    /* padding: 3px 8px;
+    color: #fff;
+    text-align: center;
+    background-color: #1a1a1c  ; */
+
+    
+}
+/* .tooltip .arrow:before {
+
+    border-bottom-color: #1a1a1c;
+    border-width: 0px; 
+} */
+
+.btn-buscar{
+    background-color: #0F9FA8;
+    color: white;
+    width: 170px;
+    border-radius: 0px 80px 80px 0px;
+}
+
+.btn-buscar:hover{
+    background-color: #096066;
+    color: white;
+    width: 250px;
+    transition: 500ms all;
+    border-radius: 0px 80px 80px 0px;
+}
+
+.nueva{
+    background-color: #FEB413;
+    color: white;
+    width: 170px;
+    border-radius: 80px 80px 80px 80px;
+}
+
+.nueva:hover{
+    background-color: #c99118;
+    color: white;
+    width: 250px;
+    transition: 500ms all;
+    border-radius: 80px 80px 80px 80px;
+}
+
+
 
 #idCarreras, #idTitulos, #idDocumentos{
     background-color: #e9ecef;
 }
 
+#seleccionado{
+    color: #0F9FA8;
+}
+#navbarDropdown:hover{
+    color: #0F9FA8;
+}
+
 #divFormulario{
+    background-color: white;
     padding: 50px;
     border: .5px solid #d8cdcd;
     box-shadow: 2px 3px 10px #d8cdcd;
     border-radius: 15px;
 }
-
-
-#divHover{
-    width: 530px;
-    height: 250px;
-    border: double;
+#divSearch{
+    border: .5px solid #d8cdcd;
 }
-#divBotones{
-    width: 400px;
-    border: 1px solid red;
+
+.datosAcademicos:hover{
+    border-left: 5px solid #0F9FA8;
+    border-right: 5px solid #0F9FA8;
+    color: #0F9FA8;
+}
+.datosAcademicosInt:hover{
+    border-left: 5px solid #FEB413;
+    border-right: 5px solid #FEB413;
+    color: #FEB413;
+}
+/* ******************* Colores ********************** */
+.color-unraf-light{
+    color: #0F9FA8 !important;
+}
+
+.color-unraf-yellow{
+    color: #FEB413 !important;
+}
+
+.color-unraf-blue{
+    color: #306086 !important;
+}
+
+.color-unraf-pink{
+    color: #fc447c;
+}
+
+.color-grey{
+    color: rgb(224, 224, 224);
+}
+
+.required{
+    display: none;
+}
+
+.titulacionGraduado{
+    width: 700px;
+    position: relative;
+    left: -300px;
+}
+.nroGraduado{
+    width: 250px;
+    position: relative;
+    left: -300px;
+}
+.fechaGraduado{
+    width: 200px;
+    margin: 0 auto;
+}
+
+
+/* *********** Containers ************** */
+
+.info-div{
+    margin-top: 10px;
+    border-radius: 20px;
+    padding: 10px 15px;
+    border: 1px solid rgb(243, 239, 239);
+    -webkit-box-shadow: -1px 14px 15px -7px rgba(189,189,189,1);
+    -moz-box-shadow: -1px 14px 15px -7px rgba(189,189,189,1);
+    box-shadow: -1px 14px 15px -7px rgba(189,189,189,1);
+}
+
+.info-title{
+    font-weight: 700;
+    padding-bottom: 10px;
+}
+
+.info-datos{
+    background-color: #ffe09e;
+    color: grey;
+    text-align: left;
+    padding: 5px 10px;
+}
+
+/* ********* Íconos ************* */
+
+.i-width{
+    font-size: 35px;
+}
+
+
+
+/* ****** Tabla ********* */
+
+.table-head{
+    font-size: 19px;
+}
+
+.table-body{
+    font-size: 18px;
+}
+
+/* Rotar icono */
+@keyframes rotate {from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}}
+@-webkit-keyframes rotate {from {-webkit-transform: rotate(0deg);}
+  to {-webkit-transform: rotate(360deg);}}
+.iconoHome{
+    -webkit-animation: 15s rotate linear infinite;
+    animation: 15s rotate linear infinite;
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+}
+
+/* Efecto ADDFLASH */
+@-webkit-keyframes wobble-vertical-on-hover {
+    16.65% {
+      -webkit-transform: translateY(8px);
+      transform: translateY(8px);
+    }
+    33.3% {
+      -webkit-transform: translateY(-6px);
+      transform: translateY(-6px);
+    }
+    49.95% {
+      -webkit-transform: translateY(4px);
+      transform: translateY(4px);
+    }
+    66.6% {
+      -webkit-transform: translateY(-2px);
+      transform: translateY(-2px);
+    }
+    83.25% {
+      -webkit-transform: translateY(1px);
+      transform: translateY(1px);
+    }
+    100% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+  }
+  @keyframes wobble-vertical-on-hover {
+    16.65% {
+      -webkit-transform: translateY(8px);
+      transform: translateY(8px);
+    }
+    33.3% {
+      -webkit-transform: translateY(-6px);
+      transform: translateY(-6px);
+    }
+    49.95% {
+      -webkit-transform: translateY(4px);
+      transform: translateY(4px);
+    }
+    66.6% {
+      -webkit-transform: translateY(-2px);
+      transform: translateY(-2px);
+    }
+    83.25% {
+      -webkit-transform: translateY(1px);
+      transform: translateY(1px);
+    }
+    100% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+  }
+  .wobble-vertical {
+    
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-animation-name: wobble-vertical-on-hover;
+    animation-name: wobble-vertical-on-hover;
+    -webkit-animation-duration: 0.8s;
+    animation-duration: 0.8s;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+  }
+
+
+/* Cosas particulares  solo PC */
+@media screen and (min-width: 1000px) {
+    .divDatosAcademicos{
+        width: 50%;
+        margin: 0px auto;
+    }
+    .divDatosAcademicosInt{
+        width: 75%;
+        margin: 0px auto;
+    }
+}
+
+
+/* Celu */
+@media screen and (max-width: 600px) {
+
 }
 

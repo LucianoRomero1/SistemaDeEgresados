@@ -15,15 +15,19 @@ class DatosAdministrativosOrigType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            //Les tuve que poner required true a todos porque sino no me los tomaba por defecto , idk why
+            ->add('nombreRector', null,['required' => true])
+            ->add('apellidoRector', null,['required' => true])
+            ->add('nombreSecretario', null,['required' => true])
+            ->add('apellidoSecretario', null,['required' => true])
+            ->add('nroResolucionAprob', null,['required' => true])
             ->add('nroResolucionME', null,['required' => true])
             ->add('nroExpediente', null,['required' => true])
             ->add('nroResolucionRectoral', null,['required' => true])
             ->add('nroDiploma', null,['required' => true])
             ->add('nroAnalitico', null,['required' => true])
-            ->add('nroRevalida', null,['required' => true])
-            ->add('fechaEntrega', DateType::class, [
-                'widget' => 'single_text'
-            ])
+            ->add('nroRevalida', null,['required' => false])
+            ->add('fechaEntrega', DateType::class, ['widget' => 'single_text', 'required' => false])
             ->add('Aceptar', SubmitType::class)
         ;
     }

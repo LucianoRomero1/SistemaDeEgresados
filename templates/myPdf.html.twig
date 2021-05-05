@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>PDF de {{egresado.nombre}} {{egresado.apellido}}</title>
+        <link href = "{{asset("css/pdfEstilos.css")}}" rel = "stylesheet" type = "text/css">
+    </head>
+    <body style = "border: 1px solid; font-family: Helvetica, sans-serif;">
+        <div style = "position:relative; left: 70%; top: 3%; height: 140px; width: 180px;">
+            <ul style = "list-style-type:none; font-size: 12px;">
+                <li>
+                    <b>Registro Nº: {{egresado.id}}</b>
+                    <p>Libro: {{egresado.libro}}</p>
+                    <p>Folio: {{egresado.folio}}</p>
+                </li>
+            </ul> 
+        </div>
+        <div style = "text-align: center;  ">
+            <b style = "font-size: 18px; margin: 50px;">Registro de emisión y entrega de Títulos Académicos de la Universidad Nacional de Rafaela</b>
+        </div>
+        <br>
+        <div>
+            <hr>
+            <div style = "margin: 8px; font-size: 14px;"><b>Nombres y apellidos del/la egresado/a:</b> {{egresado.nombre}} {{egresado.apellido}}</div>
+            <hr>
+            <div style = "margin: 8px; font-size: 14px;"><b>Lugar de nacimiento: </b>{{egresado.ciudad}} - {{egresado.provincia}} <b style = "margin-left: 60px;">Fecha de nacimiento: </b> {{egresado.fechaNacimiento|date("d/m/Y")}}</div>
+            <hr>
+            <div style = "margin: 8px; font-size: 14px;"><b>Nacionalidad: </b>{{egresado.nacionalidad}}</div>
+            <hr>
+            <div style = "margin: 8px; font-size: 14px;"><b>Tipo documento de identidad: </b>{{egresado.tipoDocumentoIdentidad}} <b style = "margin-left: 60px;">Nº: </b>{{egresado.dni}}</div>
+            <hr>
+            {% if egresado.piso == null or egresado.piso == 0 and egresado.depto == null or egresado.depto == 0 %}
+                <div style = "margin: 8px; font-size: 14px;"><b>Domicilio del/la egresado/a: </b>{{egresado.calle}} {{egresado.nroDomicilio}}</div>
+                <hr>  
+            {% else %}
+                <div style = "margin: 8px; font-size: 14px;"><b>Domicilio del/la egresado/a: </b>{{egresado.calle}} {{egresado.nroDomicilio}} <b style = "margin-left: 60px;">Piso: </b> {{egresado.piso}} <b style = "margin-left: 50px;">Depto: </b> {{egresado.depto}}</div>
+                <hr>  
+            {% endif %}
+            <div style = "margin: 8px; font-size: 14px;"><b>Denominación de la carrera: </b> {{egresado.denominacionCarrera.nombreCarrera}}</div>
+            <hr>
+            <div style = "margin: 8px; font-size: 14px;"><b>Título otorgado:</b> {{egresado.tituloOtorgado.nombreTitulo}}</div>
+            <hr>
+            <div style = "margin: 8px; font-size: 14px;"><b>Fecha de egreso: </b>{{egresado.fechaEgreso|date("d/m/Y") }}</div>
+            <hr>
+            <div style = "margin: 8px; font-size: 14px;"><b>Tipo de documento entregado: </b>{{egresado.documentoEmitido.tipoDocumento}} <b style = "margin-left: 60px;">Es: </b>{{egresado.originalDuplicado}}</div>
+            <hr>
+            <div style = "margin: 8px; font-size: 14px;"><b>Nº Resolución UNRaf de aprobación de la carrera: </b>{{egresado.nroResolucionAprob}}</div>
+            <hr> 
+            <div style = "margin: 8px; font-size: 14px;"><b>Nº Resolución ME de aprobación de la carrera: </b> {{egresado.nroResolucionME}}</div>
+            <hr> 
+            <div style = "margin: 8px; font-size: 14px;"><b>Nº de expediente UNRaf de tramitación de la solicitud: </b>{{egresado.nroExpediente}}</div>
+            <hr> 
+            <div style = "margin: 8px; font-size: 14px;"><b>Nº Resolución Rectoral de expedición: </b>{{egresado.nroResolucionRectoral}}</div>
+            <hr> 
+            <div style = "margin: 8px; font-size: 14px;"><b>Nº de Diploma: </b>{{egresado.nroDiploma}}</div>
+            <hr> 
+            <div style = "margin: 8px; font-size: 14px;"><b>Nº de Certificado Analítico: </b>{{egresado.nroAnalitico}}</div>
+            <hr> 
+            <div style = "margin: 8px; font-size: 14px;"><b>Nº de Certificado de Reválida: </b>{{egresado.nroRevalida}}</div>
+            <hr>
+            <div style = "margin: 8px; font-size: 14px;"><b>Nombre y apellido del/la Rector/a: </b>{{egresado.nombreRector}} {{egresado.apellidoRector}} </div>
+            <hr> 
+            <div style = "margin: 8px; font-size: 14px;"><b>Nombre y apellido del/la Secretario/a Académico/a: </b>{{egresado.nombreSecretario}} {{egresado.apellidoSecretario}} </div>
+            <hr>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div style = "margin-top: 50px; margin-left: 80px;">  
+            <b style = "font-size: 14px; ">
+                En el día de la fecha recibí en conformidad la documentación que acredita el título de <span style = "text-decoration: underline;">{{egresado.nombre}} {{egresado.apellido}}</span> 
+                expedido por la Universidad Nacional de Rafaela.
+            </b>
+        </div>
+        <div style ="text-align:center; margin-top: 25px;">
+            <h5>...............................................................</h5>
+            <h5>Firma egresado/a</h5>
+        </div>
+        <div style ="text-align:center; margin-top: 25px;">
+            <h5>...............................................................</h5>
+            <h5>Aclaración egresado/a</h5>
+        </div>
+        <div style ="text-align:center; margin-top: 25px;">
+            <h5>Lugar y fecha: .................................................................... , ............. de ............. de .............</h5>
+        </div>
+        <div style ="text-align:center; margin-top: 100px; ">
+            <div style = "position:relative; left: -150px;">
+                <h5>.....................................................</h5>
+                <h6>Firma y sello Director/a del</h6>
+                <h6>Departamento de Títulos y Concursos</h6>
+            </div>
+            <div style = "position:relative; top: -140px; left: 150px;">
+                <h5>.....................................................</h5>
+                <h6>Firma y sello del/la Secretario/a Académico/a</h6>
+            </div>
+        </div>
+    </body>
+</html>

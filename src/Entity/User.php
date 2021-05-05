@@ -34,6 +34,11 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $ultimoAcceso;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -108,5 +113,17 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getUltimoAcceso(): ?\DateTimeInterface
+    {
+        return $this->ultimoAcceso;
+    }
+
+    public function setUltimoAcceso(?\DateTimeInterface $ultimoAcceso): self
+    {
+        $this->ultimoAcceso = $ultimoAcceso;
+
+        return $this;
     }
 }

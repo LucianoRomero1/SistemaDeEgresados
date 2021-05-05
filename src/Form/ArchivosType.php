@@ -17,7 +17,7 @@ class ArchivosType extends AbstractType
         $builder
             ->add('archivosArray', FileType::class, ['required' => false, 'multiple'=>true])
             ->add('pdfAnalitico', FileType::class, ['required' => false, 'multiple'=>false, 'data_class' => null])
-            ->add('Aceptar', SubmitType::class)
+            ->add('CargarEgresado', SubmitType::class)
         ;
     }
 

@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registro Digital - Imagen TED Graduado/a{% endblock %}
+
+{% block body %}
+{{parent()}}
+<h1 class ="text-center">Imagen TED 1c emitida por SIU GUARANI</h1>
+<div class = "container mt-4"  id = "divFormulario"> 
+    {{ form_start(formulario, {'enctype':'multipart/form-data'})}}
+    <div class = "container text-center">
+        {% if imagen != null %}
+            <ul class = "mt-5">
+                <li>
+                    <img src="{{asset('svg/pdf2.png')}}" width="40" alt="PDF">
+                    <a class="btn btn-primary ml-4 grow" href="{{ path('verImagenTED', {'id': graduado.id}) }}"><i class="fas fa-search"></i></a>
+                    <a class = "btn btn-danger text-white ml-4 grow" onclick="DeleteImagenTED({{graduado.id}})" ><i class="fas fa-ban"></i></a>
+                </li>
+            </ul>
+            
+        {% else %}
+            <h6 class = "text-center" style = "font-size: 15px;">*No hay imagen cargada</h6>
+            {{form_widget ( formulario.imagenTED , { attr : {accept : 'application / .jpg, .png, .pdf, .docx, .doc, .jpeg'}})}}
+        {% endif %}
+    </div>
+    <div class = "container mt-5 text-center">
+        {{ form_widget(formulario.Aceptar, {attr: {class: 'btn btn-outline-info btn-lg'}})}}
+    </div>
+    {# {{ form_end(formulario)}} #}
+</div>
+<script src = "{{asset('js/deleteArchivos.js')}}"></script>
+{% endblock %}

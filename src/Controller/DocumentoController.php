@@ -8,26 +8,34 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Documentos;
 use App\Form\DocumentosType;
 use Symfony\Component\HttpFoundation\Request;
+use App\Entity\UserBusqueda;
+use App\Form\UserBusquedaType;
+use App\Services\ConsultaBD;
+use App\Services\ValidacionesAcademicas;
 
 class DocumentoController extends AbstractController
 {
     /**
-     * @Route("/altaDocumentos", name="altaDocumentos")
+     * @Route("admin/altaDocumentos", name="altaDocumentos")
      */
     public function altaDocumentos(Request $request)
     {
-        $documentos = new Documentos();
+        $documento = new Documentos();
+        $validacionesAcademicas = new ValidacionesAcademicas();
 
-        $formulario = $this -> createForm(DocumentosType::class, $documentos);
+        $formulario = $this -> createForm(DocumentosType::class, $documento);
         $formulario -> handleRequest($request);
 
-        if($formulario -> isSubmitted() && $formulario -> isValid()){
+        if($formulario -> isSubmitted() && $formulario -> isValid() && $validacionesAcademicas -> validarDocumento($documento)){
             $em = $this -> getDoctrine() -> getManager();
-            $em -> persist($documentos);
+            $em -> persist($documento);
             $em -> flush();
 
-            $this -> addFlash('info', '¡El documento se cargó correctamente!');
+            $this -> addFlash('correcto', '¡El documento se cargó correctamente!');
             return $this -> redirectToRoute('verDocumentos');
+        }
+        else if($validacionesAcademicas -> validarDocumento($documento) == false){
+            $this -> addFlash('error', 'Ingrese un tipo de documento válido');
         }
 
         return $this -> render('documentos/altaDocumentos.html.twig', [
@@ -36,31 +44,51 @@ class DocumentoController extends AbstractController
     }
 
      /**
-     * @Route("/verDocumentos", name="verDocumentos")
+     * @Route("admin/verDocumentos", name="verDocumentos")
      */
-    public function verDocumentos(){
+    public function verDocumentos(Request $request){
         $em = $this -> getDoctrine() -> getManager();
-        $documentos = $em -> getRepository(Documentos::class) -> findAll();
+        $consultaBD = new ConsultaBD();
 
-        return $this -> render('documentos/verDocumentos.html.twig',[
-            'documentos' => $documentos
-        ]);
+        $form = $this -> createForm(UserBusquedaType::class, new UserBusqueda());
+        $form -> handleRequest($request);
+        $busqueda = $form ->getData();
+
+        $documentos = $em -> getRepository(Documentos::class)->findBy(array(), array('tipoDocumento' => 'ASC'));
+
+        if($form -> isSubmitted()){
+            return $this -> render('documentos/verDocumentos.html.twig', [
+                'documentos' => $consultaBD -> buscarDocumentos($busqueda, $em), 'formulario' => $form -> createView()
+            ]);
+        }
+        else{
+            return $this -> render('documentos/verDocumentos.html.twig',[
+                'documentos' => $documentos,
+                'formulario' => $form ->createView()
+            ]);
+        }
+     
     }
 
     /**
-     * @Route("/modificarDocumentos/{id}", name="modificarDocumentos")
+     * @Route("admin/modificarDocumentos/{id}", name="modificarDocumentos")
      */
     public function modificarDocumentos(Request $request, $id){
         $em =  $this -> getDoctrine() -> getManager();
-        $documentos = $em -> getRepository(Documentos::class) -> find($id);
+        $validacionesAcademicas = new ValidacionesAcademicas();
+        
+        $documento = $em -> getRepository(Documentos::class) -> find($id);
 
-        $formulario = $this -> createForm(DocumentosType::class, $documentos);
+        $formulario = $this -> createForm(DocumentosType::class, $documento);
         $formulario -> handleRequest($request);
 
-        if($formulario -> isSubmitted() && $formulario -> isValid()){
+        if($formulario -> isSubmitted() && $formulario -> isValid() && $validacionesAcademicas -> validarDocumento($documento)){
             $em -> flush();
-            $this -> addFlash('info', '¡El documento se modificó correctamente!');
-            return $this -> redirectToRoute('verdocumentos');
+            $this -> addFlash('correcto', '¡El documento se modificó correctamente!');
+            return $this -> redirectToRoute('verDocumentos');
+        }
+        else if($validacionesAcademicas -> validarDocumento($documento) == false){
+            $this -> addFlash('error', 'Ingrese un tipo de documento válido');
         }
 
         return $this -> render('documentos/modificarDocumentos.html.twig',[
@@ -70,7 +98,7 @@ class DocumentoController extends AbstractController
 
     
     /**
-     * @Route("/eliminarDocumentos/{id}", name="eliminarDocumentos")
+     * @Route("admin/eliminarDocumentos/{id}", name="eliminarDocumentos")
      */
     public function eliminarDocumentos($id){
         $em = $this -> getDoctrine() -> getManager();
@@ -79,8 +107,12 @@ class DocumentoController extends AbstractController
         $em->remove($documentos);
         $em -> flush();
 
-        $this -> addFlash('info', '¡El documento se eliminó correctamente!');
-        return $this -> redirectToRoute('verdocumentos');
+        $this -> addFlash('correcto', '¡El documento se eliminó correctamente!');
+        return $this -> redirectToRoute('verDocumentos');
         
     }
+
+
+
+    
 }

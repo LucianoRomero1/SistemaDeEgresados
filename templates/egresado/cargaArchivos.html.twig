@@ -1,26 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Carga de Archivos{% endblock %}
+{% block title %}Registro Digital - Carga de Archivos{% endblock %}
 
 {% block body %}
 {{parent()}}
-<div class = "container mt-5" id= "divFormulario">
-    <h1 class = "text-center">Carga de archivos</h1> 
+<h1 class = "text-center">Carga de archivos</h1> 
+<div class = "container" id= "divFormulario">
+    
     <h6 class= "text-center text-secondary">*No son campos obligatorios <h6>
     {{ form_start(formulario, {'enctype':'multipart/form-data'})}}
-    <div class = "row mt-5 justify-content-center">
+    <div class = "row mt-4 justify-content-center">
         <div class = "col-sm-4">
-            <h6> PDF del certificado analítico </h6>
+            <h6 class = "text-info"> PDF del certificado analítico </h6>
             {{form_widget ( formulario.pdfAnalitico , { attr : { accept : ' application / .pdf' }})}}
         </div>
         <div class = "col-sm-2"></div>
         <div class = "col-sm-4">
-           <h6> Imagenes digitales </h6>
-            {{form_widget ( formulario.archivosArray , { attr : { accept : 'application / .jpg , .png, .pdf, .jpeg'  }})}}
+           <h6 class = "text-info"> Imagenes digitales</h6>
+            {{form_widget ( formulario.archivosArray , { attr : { accept : 'application / .jpg, .png, .pdf, .docx, .doc, .jpeg', title: 'Seleccionar todas juntas, máximo 5 imágenes'}})}}
         </div>
     </div>
-     <div class = "container mt-5 text-center">
-        {{ form_widget(formulario.Aceptar, {attr: {class: 'btn btn-outline-info btn-lg'}})}}
+     <div class = "container mt-4 text-center">
+        {{ form_widget(formulario.CargarEgresado, {attr: {class: 'btn btn-outline-info btn-lg'}})}}
     </div>
     {{ form_end(formulario) }}
 </div>

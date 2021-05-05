@@ -25,9 +25,10 @@ class Carreras
     private $nombreCarrera;
 
     /**
-     * @ORM\OneToMany(targetEntity=Egresado::class, mappedBy="denominacionCarrera")
+     * @ORM\OneToMany(targetEntity=Egresado::class, mappedBy="denominacionCarrera",cascade={"remove"})
      */
     private $egresados;
+
 
     public function __construct()
     {
@@ -82,6 +83,4 @@ class Carreras
 
         return $this;
     }
-
-
 }

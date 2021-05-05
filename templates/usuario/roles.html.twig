@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registro Digital - Modificar Roles{% endblock %}
+
+{% block body %}
+{{parent()}}
+<div class = "container">
+    <h2 class = "text-center text-info" style = "font-size: 50px"> Usuarios </h2>
+    <div class = "list-group " id = "divFormulario">
+            {{ form_start(formulario, {'enctype':'multipart/form-data'})}}
+            <div class = "container row mt-3">
+                <div class = "col-sm-7 media">
+                    {{ form_widget(formulario.buscar, {attr: {class: 'form-control campoForm' , placeholder: 'Buscar por apellido..'} }) }}  
+                    {{ form_widget(formulario.Buscar, {attr: {class: 'btn btn-buscar d-inline'} }) }}  
+                </div>
+                <div class = "col-sm-1"></div>
+                <div class = "col-sm-2">
+                    <a class = "btn form-control campoForm nueva" href = "{{path('altaDatosPersonales')}}">Crear Egresado</a>
+                </div>
+            </div>
+            <hr>
+            <div class = "col-sm-4">
+                <b style = "color: #0F9FA8;">Cantidad de usuarios: {{usuarios|length}} </b>
+            </div>
+            </div>
+        {{ form_end(formulario) }}
+        
+        <div class = "container mt-2 p-5 " id = "divFormulario">
+            <div class = "row">
+                <div class = "col-sm-4">
+                    <h5 class = "text-center" style = "color: #0F9FA8">Email</h5>
+                </div>
+                <div class = "col-sm-3">
+                    <h5 class = "text-center" style = "color: #0F9FA8">Último acceso</h5>   
+                </div>
+                <div class = "col-sm-5">
+                    <h5 class = "text-center" style = "color: #0F9FA8">Asignar roles</h5>
+                </div>
+            </div>
+            {% for user in usuarios %}
+                   <div class = "row mt-5">
+                        <div class = "col-sm-4">
+                            <p class = "text-center">{{user.email}}</p>
+                        </div>
+                        <div class = "col-sm-3">
+                            <p class = "text-center">{{user.ultimoAcceso|date("d/m H:i")}}</p>
+                        </div>
+                        <div class = "col-sm-5">
+                             {% for rol in user.roles %}
+                        {# El loop last sirve para analizar en base al ultimo rol, y que no aparezcan 70 botones, porque uno
+                        Tiene 1 o mas roles siempre #}
+                                {% if loop.last %} 
+                                    {% if rol == "ROLE_SUPERADMIN" %}
+                                        <div class = "text-center">
+                                            <a class = "btn btn-outline-info ml-3 " href = "{{path('cambioUser', {'id': user.id})}}">User</a>
+                                            <a class = "btn btn-outline-info ml-3 " href = "{{path('cambioAdmin', {'id': user.id})}}">Admin</a>
+                                            <a class = "btn btn-outline-danger ml-3 " onclick="DeleteFunction({{user.id}})">Eliminar</a>
+                                        </div>
+                                    {% elseif rol == "ROLE_ADMIN" %}
+                                        <div class = "text-center">
+                                            <a class = "btn btn-outline-info ml-3  " href = "{{path('cambioUser', {'id': user.id})}}">User</a>
+                                            <a class = "btn btn-outline-info ml-3 " href = "{{path('cambioSuperadmin', {'id': user.id})}}">SuperAdmin</a>
+                                            <a class = "btn btn-outline-danger ml-3" onclick="DeleteFunction({{user.id}})">Eliminar</a>
+                                        </div>
+                                    {% elseif rol == "ROLE_USER"%}
+                                        <div class = "text-center">
+                                            <a class = "btn btn-outline-info ml-3 " href = "{{path('cambioAdmin', {'id': user.id})}}">Admin</a>
+                                            <a class = "btn btn-outline-info ml-3 " href = "{{path('cambioSuperadmin', {'id': user.id})}}">SuperAdmin</a>
+                                            <a class = "btn btn-outline-danger ml-3 " onclick="DeleteFunction({{user.id}})">Eliminar</a>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                <hr style = "background-color: orange;">
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<script src = "{{asset('js/deleteUser.js')}}"></script>
+{% endblock %}

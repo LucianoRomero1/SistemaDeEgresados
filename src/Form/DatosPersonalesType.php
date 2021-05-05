@@ -17,31 +17,42 @@ class DatosPersonalesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombre')
-            ->add('apellido')
+            //En los choices el primero es el que se muestra en el choice y el segundo es el nombre
+            //Con el cual se guarda en la DB
+            ->add('nombre', null,['required' => true])
+            ->add('apellido', null,['required' => true])
+            ->add('dni', null,['required' => true])
+            ->add('tipoDocumentoIdentidad', ChoiceType::class, [
+                'choices'  => [
+                    'DNI' => 'DNI',
+                    'Pasaporte' => 'Pasaporte',
+                    'Documento Extranjero' => 'Documento Extranjero',
+                    'Partida de nacimiento' => 'Partida de nacimiento',
+                    'Otro' => 'Otro'
+                ],
+            ])
             ->add('email', EmailType::class)
-            ->add('telefono')
+            ->add('telefono', null,['required' => true])
             ->add('fechaNacimiento', DateType::class,[
                 'widget' => 'single_text',
             ])
-            ->add('ciudad')
-            ->add('provincia')
+            ->add('ciudad', null,['required' => true])
+            ->add('provincia', null,['required' => true])
             ->add('nacionalidad', ChoiceType::class, [
                 'choices'  => [
-                    'Argentina' => 'Argentina',
-                    'Brasil' => 'Brasil',
-                    'Chile' => 'Chile',
-                    'Colombia' => 'Colombia',
-                    'Ecuador' => 'Ecuador',
-                    'Uruguay' => 'Uruguay',
+                    'Argentino/a' => 'Argentino/a',
+                    'Brasilero/a' => 'Brasilero/a',
+                    'Chileno/a' => 'Chileno/a',
+                    'Colombiano/a' => 'Colombiano/a',
+                    'Ecuatoriano/a' => 'Ecuatoriano/a',
+                    'Uruguayo/a' => 'Uruguayo/a',
                 ],
             ])
-            ->add('dni')
-            ->add('calle')
-            ->add('nroDomicilio')
+            ->add('calle', null,['required' => true])
+            ->add('nroDomicilio', null,['required' => true])
             ->add('piso', null,['required' => false])
             ->add('depto', null,['required' => false])
-            ->add('Aceptar', SubmitType::class)
+            ->add('Siguiente', SubmitType::class)
         ;
     }
 

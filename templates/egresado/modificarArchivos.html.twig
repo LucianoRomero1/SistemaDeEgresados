@@ -1,17 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modificar Archivos{% endblock %}
+{% block title %}Registro Digital - Modificar Archivos{% endblock %}
 
 {% block body %}
 {{parent()}}
-<div class = "container mt-5" id= "divFormulario">
-    <h1 class = "text-center">Modificar archivos cargados de: {{egresado.nombre}} {{egresado.apellido}}</h1> 
+<h1 class = "text-center">Modificar archivos cargados de: {{egresado.nombre}} {{egresado.apellido}}</h1> 
+<div class = "container" id= "divFormulario">
+    <a href = "{{path('verEgresados')}}"><i class="fas fa-arrow-left grow" style = "font-size:30px; color: #0F9FA8"></i></a>
+    
     {{ form_start(formulario, {'enctype':'multipart/form-data'})}}
     <div class = "row mt-5 justify-content-center">
         <div class = "col-sm-4 text-center">
             {% if pdf != null %}
-                <h6 class = "text-secondary"> Certificado Analítico<h6>
-                <a class="btn btn-light" href="{{ path('verPDF', {'id': egresado.id}) }}"><img src="{{asset('svg/pdf2.png')}}" width="40" alt="PDF"></a>
+                <h6 class = "text-secondary text-center"> Certificado Analítico<h6>
+                <ul class = "mt-5">
+                    <li>
+                        <img src="{{asset('svg/pdf2.png')}}" width="40" alt="PDF">
+                        <a class="btn btn-primary ml-4 grow" href="{{ path('verPDF', {'id': egresado.id}) }}"><i class="fas fa-search"></i></a>
+                        <a class = "btn btn-success ml-4 grow" href = "{{asset('uploads/pdfsAnalitico/' ~ pdf )}} " download ="{{'pdfAnalitico de ' ~ egresado.nombre ~ ' ' ~ egresado.apellido }}"><i class="fas fa-download"></i></a>
+                        <a class = "btn btn-danger text-white ml-4 grow" onclick="DeletePDF({{egresado.id}})" ><i class="fas fa-ban"></i></a>
+                    </li>
+                </ul>
             {% else %}
                 <h6 class = "text-center" style = "font-size: 15px;">*No hay pdf cargado</h6>
                 {{form_widget (formulario.pdfAnalitico , { attr : { accept : ' application / .pdf' }})}}
@@ -19,22 +28,28 @@
         </div>
         <div class = "col-sm-3"></div>
         <div class = "col-sm-5">
-            <h6 class = "text-secondary text-center"> Imagenes - Máx. 5<h6>
-            
-            {% if imagenes|length < 5 %}
-                {{form_widget ( formulario.archivosArray , { attr : { accept : 'application / .jpg , .png, .pdf, .jpeg'  }})}}    
-            {% endif %}
+            <h6 class = "text-secondary text-center">{{imagenes|length}} de 5 imágenes cargadas<h6>
             {% for imagen in imagenes %}    
-                <a class="btn btn-light" href="{{ path('verImagen', {'nombreImagen': imagen.nombreArchivo}) }}"><img src="{{asset('uploads/imagenesDigitales/' ~ imagen.nombreArchivo )}}" width="55" alt="PNG"></a>
+                <ul>
+                    <li class = "mt-4">
+                        <img src="{{asset('uploads/imagenesDigitales/' ~ imagen.nombreArchivo )}}" width="55" alt="PNG">
+                        <a class="btn btn-primary ml-5 grow" href="{{ path('verImagen', {'nombreImagen': imagen.nombreArchivo})}}"><i class="fas fa-search"></i></a>
+                        <a class = "btn btn-success ml-5 grow"  href = "{{asset('uploads/imagenesDigitales/' ~ imagen.nombreArchivo )}} " download ="{{egresado.nombre ~ ' ' ~ egresado.apellido ~ ' ' ~ 'imagenDigital'}}"><i class="fas fa-download"></i></a>
+                        <a class = "btn btn-danger text-white ml-5 grow" onclick="DeleteImagen({{imagen.id}},{{egresado.id}})" ><i class="fas fa-ban"></i></a>
+                        <hr>
+                    </li>
+                </ul>
             {% endfor %}
+            {% if imagenes|length < 5 %}
+                {{form_widget ( formulario.archivosArray , { attr : { class: 'text-center' , style: 'color: #0F9FA8;' , accept : 'application / .jpg , .png, .pdf, .jpeg'  }})}}    
+            {% endif %}
         </div>
     </div>
-    <div class = "container mt-5">
-      
-        
-    </div>
+
      <div class = "container mt-5 text-center">
         {{ form_widget(formulario.Aceptar, {attr: {class: 'btn btn-outline-info btn-lg'}})}}
     </div>
+    {# No pongo el end form para que no me ponga el seleccionar #}
 </div>
+<script src = "{{asset('js/deleteArchivos.js')}}"></script>
 {% endblock %}

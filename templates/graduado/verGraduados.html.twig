@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registro Digital - Ver Graduados/as{% endblock %}
+
+{% block body %}
+{{parent()}}
+<div class = "container-fluid">
+    {{ form_start(form, {'enctype':'multipart/form-data'})}}
+    <div class = "container row mt-3">
+        <div class = "col-sm-7 media">
+            {{ form_widget(form.buscar, {attr: {class: 'form-control campoForm' , placeholder: 'Buscar por apellido o por DNI'} }) }}  
+            {{ form_widget(form.Buscar, {attr: {class: 'btn btn-buscar d-inline'} }) }}  
+        </div>
+        <div class = "col-sm-3"></div>
+        <div class = "col-sm-2">
+            <a class = "btn form-control campoForm nueva" style = "background-color: #; color: white;" href = "{{path('datosPersonalesGraduado')}}">Nuevo graduado/a</a>
+        </div>
+    </div>
+    <hr>
+    <div class = "m-3">
+        <b style = "color: #0F9FA8;">Cantidad de graduados/as cargadas: {{graduados|length}} </b>
+    </div>
+    {{ form_end(form) }}
+    <table class="table table-borderless mt-2">
+            <thead class = "text-white" style = "background-color: #0F9FA8;">
+                    <th>Nº</th>
+                    <th>Apellido</th>
+                    <th>Nombre</th>
+                    <th style="text-align: center;">Datos Graduado</th>
+                    <th style="text-align: center;">Imagen TED</th>
+                    <th style="text-align: center;">Eliminar</th>
+                </tr>
+            </thead>
+        
+        <tbody id="myTable">
+            {% for graduado in graduados %}
+                <tr>
+                    <th class = "pl-3">{{loop.index}}</th>
+                    <td>{{graduado.apellido}}</td>
+                    <td>{{graduado.nombre}}</td>
+                    {% if  is_granted('ROLE_SUPERADMIN') or is_granted('ROLE_ADMIN') %}
+                    <td style="text-align: center;">
+                        <a class ="btn grow" href="{{path('modificarDatosPersonalesGraduado', {'id': graduado.id})}}"><i class="fas fa-user-edit mb-3" data-toggle="tooltip" data-placement="left" data-html="true" title="Modificar datos personales" style = "font-size: 20px;color: #0F9FA8;"></i></a>
+                        <a class ="btn grow" href="#"><i class="fas fa-user-graduate mb-3"  data-toggle="tooltip" data-placement="bottom" data-html="true" title="Modificar titulos obtenidos" style = "font-size: 20px;color: #0F9FA8;"></i></a>
+                    </td>
+                    <td style="text-align: center;"><a class ="btn grow" href="{{path('modificarImagenGraduado', {'id': graduado.id})}}"><i class="fas fa-file-alt mb-3"  data-toggle="tooltip" data-placement="right" data-html="true" title="Modificar imagen TED" style = "font-size: 20px; color: #FEB413;"></i></a></td>
+                    <td style="text-align: center;"><a class ="btn grow" onclick="#"><i class=" fas fa-trash text-danger" style = "font-size: 20px;"></i></a></td> 
+                    {% else %} 
+                    <td style="text-align: center;">
+                        <a class ="btn grow" href="#"><i class="fas fa-user-edit mb-3" style = "font-size: 20px;color: grey;" data-toggle="tooltip" data-placement="left" data-html="true" title="No tiene el rol necesario para esta acción"></i></a>
+                        <a class ="btn grow" href="#"><i class="fas fa-user-graduate mb-3"   style = "font-size: 20px;color: grey;" data-toggle="tooltip" data-placement="left" data-html="true" title="No tiene el rol necesario para esta acción"></i></a>
+                    </td>
+                    <td style="text-align: center;"><a class ="btn grow" href="#"><i class="fas fa-file-alt mb-3" style = "font-size: 20px; color: grey" data-toggle="tooltip" data-placement="left" data-html="true" title="No tiene el rol necesario para esta acción"></i></a></td>
+                    <td style="text-align: center;"><a class ="btn grow" onclick="#"><i class=" fas fa-trash"   style = "font-size: 20px; color:grey;" data-toggle="tooltip" data-placement="left" data-html="true" title="No tiene el rol necesario para esta acción"></i></a></td>  
+                    {% endif %}   
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table> 
+</div>
+{% endblock %}
+{% block  javascripts %}
+{{parent()}}
+<script src= "{{asset('js/deleteEgresado.js')}}"></script> 
+<script src = "{{asset('js/popup.js')}}"></script>
+{% endblock %}

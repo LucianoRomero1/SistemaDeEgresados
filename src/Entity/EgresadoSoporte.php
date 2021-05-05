@@ -99,39 +99,35 @@ class EgresadoSoporte
     private $documentoEmitido;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=60, nullable=true)
      */
     private $nroResolucionME;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type ="string", length = 60, nullable=true)
      */
     private $nroExpediente;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type ="string", length = 60, nullable=true)
      */
     private $nroResolucionRectoral;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type ="string", length = 60, nullable=true)
      */
     private $nroDiploma;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type ="string", length = 60, nullable=true)
      */
     private $nroAnalitico;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type ="string", length = 60, nullable=true)
      */
     private $nroRevalida;
 
-    /**
-     * @ORM\Column(type="date", nullable = true)
-     */
-    private $fechaEntrega;
 
     /**
      * @ORM\Column(type="string", length=255, nullable = true)
@@ -159,6 +155,46 @@ class EgresadoSoporte
      * @ORM\OneToMany(targetEntity=Archivo::class, mappedBy="egresadoSoporte", cascade={"remove"})
      */
     private $archivos;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $nombreRector;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $apellidoRector;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $nombreSecretario;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $apellidoSecretario;
+
+    /**
+     * @ORM\Column(type="string", length=60, nullable=true)
+     */
+    private $nroResolucionAprob;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $tipoDocumentoIdentidad;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $fechaEntrega;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $originalDuplicado;
 
     public function __construct()
     {
@@ -354,89 +390,79 @@ class EgresadoSoporte
         return $this;
     }
 
-    public function getNroResolucionME(): ?int
+    public function getNroResolucionME(): ?string
     {
         return $this->nroResolucionME;
     }
 
-    public function setNroResolucionME(?int $nroResolucionME): self
+    public function setNroResolucionME(?string $nroResolucionME): self
     {
         $this->nroResolucionME = $nroResolucionME;
 
         return $this;
     }
 
-    public function getNroExpediente(): ?int
+    public function getNroExpediente(): ?string
     {
         return $this->nroExpediente;
     }
 
-    public function setNroExpediente(?int $nroExpediente): self
+    public function setNroExpediente(?string $nroExpediente): self
     {
         $this->nroExpediente = $nroExpediente;
 
         return $this;
     }
 
-    public function getNroResolucionRectoral(): ?int
+    public function getNroResolucionRectoral(): ?string
     {
         return $this->nroResolucionRectoral;
     }
 
-    public function setNroResolucionRectoral(?int $nroResolucionRectoral): self
+    public function setNroResolucionRectoral(?string $nroResolucionRectoral): self
     {
         $this->nroResolucionRectoral = $nroResolucionRectoral;
 
         return $this;
     }
 
-    public function getNroDiploma(): ?int
+    public function getNroDiploma(): ?string
     {
         return $this->nroDiploma;
     }
 
-    public function setNroDiploma(?int $nroDiploma): self
+    public function setNroDiploma(?string $nroDiploma): self
     {
         $this->nroDiploma = $nroDiploma;
 
         return $this;
     }
 
-    public function getNroAnalitico(): ?int
+    public function getNroAnalitico(): ?string
     {
         return $this->nroAnalitico;
     }
 
-    public function setNroAnalitico(?int $nroAnalitico): self
+    public function setNroAnalitico(?string $nroAnalitico): self
     {
         $this->nroAnalitico = $nroAnalitico;
 
         return $this;
     }
 
-    public function getNroRevalida(): ?int
+    public function getNroRevalida(): ?string
     {
         return $this->nroRevalida;
     }
 
-    public function setNroRevalida(?int $nroRevalida): self
+    public function setNroRevalida(?string $nroRevalida): self
     {
         $this->nroRevalida = $nroRevalida;
 
         return $this;
     }
 
-    public function getFechaEntrega(): ?\DateTimeInterface
-    {
-        return $this->fechaEntrega;
-    }
 
-    public function setFechaEntrega(\DateTimeInterface $fechaEntrega): self
-    {
-        $this->fechaEntrega = $fechaEntrega;
-
-        return $this;
-    }
 
     public function getEmail(): ?string
     {
@@ -513,6 +539,102 @@ class EgresadoSoporte
                 $archivo->setEgresadoSoporte(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNombreRector(): ?string
+    {
+        return $this->nombreRector;
+    }
+
+    public function setNombreRector(?string $nombreRector): self
+    {
+        $this->nombreRector = $nombreRector;
+
+        return $this;
+    }
+
+    public function getApellidoRector(): ?string
+    {
+        return $this->apellidoRector;
+    }
+
+    public function setApellidoRector(?string $apellidoRector): self
+    {
+        $this->apellidoRector = $apellidoRector;
+
+        return $this;
+    }
+
+    public function getNombreSecretario(): ?string
+    {
+        return $this->nombreSecretario;
+    }
+
+    public function setNombreSecretario(?string $nombreSecretario): self
+    {
+        $this->nombreSecretario = $nombreSecretario;
+
+        return $this;
+    }
+
+    public function getApellidoSecretario(): ?string
+    {
+        return $this->apellidoSecretario;
+    }
+
+    public function setApellidoSecretario(?string $apellidoSecretario): self
+    {
+        $this->apellidoSecretario = $apellidoSecretario;
+
+        return $this;
+    }
+
+    public function getNroResolucionAprob(): ?string
+    {
+        return $this->nroResolucionAprob;
+    }
+
+    public function setNroResolucionAprob(?string $nroResolucionAprob): self
+    {
+        $this->nroResolucionAprob = $nroResolucionAprob;
+
+        return $this;
+    }
+
+    public function getTipoDocumentoIdentidad(): ?string
+    {
+        return $this->tipoDocumentoIdentidad;
+    }
+
+    public function setTipoDocumentoIdentidad(?string $tipoDocumentoIdentidad): self
+    {
+        $this->tipoDocumentoIdentidad = $tipoDocumentoIdentidad;
+
+        return $this;
+    }
+
+    public function getFechaEntrega(): ?\DateTimeInterface
+    {
+        return $this->fechaEntrega;
+    }
+
+    public function setFechaEntrega(?\DateTimeInterface $fechaEntrega): self
+    {
+        $this->fechaEntrega = $fechaEntrega;
+
+        return $this;
+    }
+
+    public function getOriginalDuplicado(): ?string
+    {
+        return $this->originalDuplicado;
+    }
+
+    public function setOriginalDuplicado(?string $originalDuplicado): self
+    {
+        $this->originalDuplicado = $originalDuplicado;
 
         return $this;
     }

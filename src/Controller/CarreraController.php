@@ -8,26 +8,34 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Carreras;
 use App\Form\CarrerasType;
+use App\Entity\UserBusqueda;
+use App\Form\UserBusquedaType;
+use App\Services\ConsultaBD;
+use App\Services\ValidacionesAcademicas;
 
 class CarreraController extends AbstractController
 {
     /**
-     * @Route("/altaCarreras", name="altaCarreras")
+     * @Route("/admin/altaCarreras", name="altaCarreras")
      */
     public function altaCarreras(Request $request)
     {
-        $carreras = new Carreras();
+        $carrera = new Carreras();
+        $validacionesAcademicas = new ValidacionesAcademicas();
 
-        $formulario = $this -> createForm(CarrerasType::class, $carreras);
+        $formulario = $this -> createForm(CarrerasType::class, $carrera);
         $formulario -> handleRequest($request);
 
-        if($formulario -> isSubmitted() && $formulario -> isValid()){
+        if($formulario -> isSubmitted() && $formulario -> isValid() && $validacionesAcademicas -> validarCarrera($carrera)){
             $em = $this -> getDoctrine() -> getManager();
-            $em -> persist($carreras);
+            $em -> persist($carrera);
             $em -> flush();
 
-            $this -> addFlash('info', '¡La carrera se ha creado correctamente!');
+            $this -> addFlash('correcto', '¡La carrera se ha creado correctamente!');
             return $this -> redirectToRoute('verCarreras');
+        }
+        else if($validacionesAcademicas -> validarCarrera($carrera) == false){
+            $this -> addFlash('error', 'Ingrese un nombre de carrera válido');
         }
 
         return $this -> render('carreras/altaCarreras.html.twig', [
@@ -38,32 +46,50 @@ class CarreraController extends AbstractController
 
 
     /**
-     * @Route("/verCarreras", name="verCarreras")
+     * @Route("/admin/verCarreras", name="verCarreras")
      */
-    public function verCarreras(){
+    public function verCarreras(Request $request){
         $em = $this -> getDoctrine() -> getManager();
+        $consultaBD = new ConsultaBD();
 
-        $carreras = $em -> getRepository(Carreras::class)->findAll();
+        $form = $this -> createForm(UserBusquedaType::class, new UserBusqueda());
+        $form -> handleRequest($request);
+        $busqueda = $form ->getData();
 
-        return $this -> render('carreras/verCarreras.html.twig', [
-            'carreras' => $carreras
-        ]);
+        $carreras = $em -> getRepository(Carreras::class)->findBy(array(), array('nombreCarrera' => 'ASC'));
+
+        if($form -> isSubmitted()){
+            return $this -> render('carreras/verCarreras.html.twig', [
+                'carreras' => $consultaBD -> buscarCarreras($busqueda, $em), 'formulario' => $form -> createView()
+            ]);
+        }
+        else{   
+            return $this -> render('carreras/verCarreras.html.twig', [
+                'carreras' => $carreras,
+                'formulario' => $form -> createView()
+            ]);
+        }
+
     }
 
         /**
-     * @Route("/modificarCarreras/{id}", name="modificarCarreras")
+     * @Route("/admin/modificarCarreras/{id}", name="modificarCarreras")
      */
     public function modificarCarreras(Request $request, $id){
         $em = $this -> getDoctrine() -> getManager();
-        $carreras = $em -> getRepository(Carreras::class) -> find($id);
+        $validacionesAcademicas = new ValidacionesAcademicas();
+        $carrera = $em -> getRepository(Carreras::class) -> find($id);
 
-        $formulario = $this -> createForm(CarrerasType::class, $carreras);
+        $formulario = $this -> createForm(CarrerasType::class, $carrera);
         $formulario -> handleRequest($request);
 
-        if($formulario -> isSubmitted() && $formulario -> isValid()){
+        if($formulario -> isSubmitted() && $formulario -> isValid() && $validacionesAcademicas -> validarCarrera($carrera)){
             $em -> flush();
-            $this -> addFlash('info', '¡La carrera se ha modificado correctamente!');
+            $this -> addFlash('correcto', '¡La carrera se ha modificado correctamente!');
             return $this -> redirectToRoute('verCarreras');
+        }
+        else if($validacionesAcademicas -> validarCarrera($carrera) == false){
+            $this -> addFlash('error', 'Ingrese un nombre de carrera válido');
         }
 
         return $this -> render('carreras/modificarCarreras.html.twig', [
@@ -72,7 +98,7 @@ class CarreraController extends AbstractController
     }
 
     /**
-     * @Route("/eliminarCarreras/{id}", name="eliminarCarreras")
+     * @Route("/admin/eliminarCarreras/{id}", name="eliminarCarreras")
      */
     public function eliminarCarreras($id)
     {
@@ -82,8 +108,12 @@ class CarreraController extends AbstractController
        
         $manager->remove($carreras);
         $manager->flush();
-        $this -> addFlash('info', '¡La carrera se ha eliminado correctamente!');
+        $this -> addFlash('correcto', '¡La carrera se ha eliminado correctamente!');
         return $this->redirectToRoute("verCarreras");
         
     }
+
+  
+
+
 }

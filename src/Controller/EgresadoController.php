@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Egresado;
 use App\Entity\EgresadoSoporte;
 use App\Entity\Archivo;
+use App\Entity\Titulos;
 use App\Form\DatosPersonalesType;
 use App\Form\DatosPersonalesOrigType;
 use App\Form\DatosAcademicosType;
@@ -17,11 +18,21 @@ use App\Form\DatosAdministrativosOrigType;
 use App\Form\ArchivosType;
 use App\Form\ArchivosOrigType;
 use Symfony\Component\HttpFoundation\Request;
+use App\Entity\UserBusqueda;
+use App\Form\UserBusquedaType;
+use DateTime;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class EgresadoController extends AbstractController
 {
+
+    ########### EMPIEZA ABM ########### 
+
     /**
-     * @Route("/altaDatosPersonales", name="altaDatosPersonales")
+     * @Route("/user/altaDatosPersonales", name="altaDatosPersonales")
      */
     public function altaDatosPersonales(Request $request)
     {
@@ -45,15 +56,17 @@ class EgresadoController extends AbstractController
     }
 
     /**
-     * @Route("/altaDatosAcademicos/{id}", name="altaDatosAcademicos")
+     * @Route("/user/altaDatosAcademicos/{id}", name="altaDatosAcademicos")
      */
     public function altaDatosAcademicos(Request $request, $id)
     {
         $em = $this -> getDoctrine() -> getManager();
         $egresado = $em -> getRepository(EgresadoSoporte::class) -> find($id);
 
+
         $formulario = $this -> createForm(DatosAcademicosType::class, $egresado);
         $formulario -> handleRequest($request);
+        
 
         if($formulario -> isSubmitted() && $formulario -> isValid() && $this -> validarFechaEgreso($egresado)){
             $em = $this -> getDoctrine() -> getManager();
@@ -70,7 +83,7 @@ class EgresadoController extends AbstractController
 
     
     /**
-     * @Route("/altaDatosAdministrativos/{id}", name="altaDatosAdministrativos")
+     * @Route("/user/altaDatosAdministrativos/{id}", name="altaDatosAdministrativos")
      */
     public function altaDatosAdministrativos(Request $request, $id){
         
@@ -80,7 +93,7 @@ class EgresadoController extends AbstractController
         $formulario = $this -> createForm(DatosAdministrativosType::class, $egresado);
         $formulario -> handleRequest($request);
 
-        if($formulario -> isSubmitted() && $formulario -> isValid() ){
+        if($formulario -> isSubmitted() && $formulario -> isValid() && $this -> validarDatosAdministrativos($egresado)){
             $em = $this -> getDoctrine() -> getManager();
             $em -> persist($egresado);
             $em -> flush();
@@ -96,7 +109,7 @@ class EgresadoController extends AbstractController
 
 
     /**
-     * @Route("/altaArchivos/{id}", name="altaArchivos")
+     * @Route("/user/altaArchivos/{id}", name="altaArchivos")
      */
     public function altaArchivos(Request $request, $id){
         $em = $this -> getDoctrine() -> getManager();
@@ -132,14 +145,13 @@ class EgresadoController extends AbstractController
                 }
 
             }
-
             //Termina envio de PDF
+
             //Carga de imagenes
             $archivos = $egresado -> getArchivosArray();
             $contador = 0;
             foreach($archivos as $archivo){
                 if($archivo != null){
-
                     $documento = new Archivo();
                     $extensionArchivo = $archivo -> guessExtension();
 
@@ -152,7 +164,6 @@ class EgresadoController extends AbstractController
                         $documento -> setNombreArchivo($nombreArchivo);
                         $egresado -> addArchivo($documento);
                         $em -> persist($documento);
-                        
                     }
                     else{
                         $this -> addFlash('error', 'Extension inválida en las imágenes, sólo se permiten .jpg, .png, .pdf, .docx, .doc, .jpeg');
@@ -165,52 +176,56 @@ class EgresadoController extends AbstractController
 
             $em -> persist($egresado);
 
-
             $egresadoOriginal = new Egresado();
 
             $this->copyEgresado($egresadoOriginal,$egresado);
-            
-            //print_r($egresadoOriginal->getDni());die;
+            $egresadoOriginal = $this -> sumarLibroFolio($egresadoOriginal);
+
 
             $em -> persist($egresadoOriginal);
             $em -> remove($egresado);
             $em -> flush();
 
            
-            $this -> addFlash('info', '¡El egresado se ha registrado correctamente!');
+            $this -> addFlash('correcto', '¡La titulación del egresado se ha registrado correctamente!');
             return $this->redirectToRoute('verEgresados');
         }
-        else{
-           
-            return $this -> render('egresado/cargaArchivos.html.twig', [
-                'formulario' => $formulario -> createView()
-            ]);
-        }
-
         return $this -> render('egresado/cargaArchivos.html.twig', [
             'formulario' => $formulario -> createView()
         ]);
     }
 
 
-
-
     /**
-     * @Route("/verEgresados", name="verEgresados")
+     * @Route("/user/verEgresados", name="verEgresados")
      */
-    public function verEgresados(){
+    public function verEgresados(Request $request){
         $em = $this -> getDoctrine() -> getManager();
 
-        $egresados = $em -> getRepository(Egresado::class)->findBy(array(), array('apellido' => 'ASC'));
+             
+        $form = $this->createForm(UserBusquedaType::class,new UserBusqueda());
+        $form->handleRequest($request);
+        $busqueda=$form->getData();
 
-        return $this -> render('egresado/verEgresados.html.twig', [
-            'egresados' => $egresados
+        $egresados = $em -> getRepository(Egresado::class)->findBy(array(), array('apellido' => 'DESC'));
+
+        //Esto es para el buscador
+        if ($form->isSubmitted()){
+            return $this->render('egresado/verEgresados.html.twig', [
+            'egresados' => $this->consultaTodos($busqueda),'formulario' => $form->createView()
         ]);
+        }
+        else{
+            return $this -> render('egresado/verEgresados.html.twig', [
+                'egresados' => $egresados, 'formulario' => $form->createView()
+            ]);
+        }
+        
     }
     
-    
+
     /**
-     * @Route("/modificarDatosPersonales/{id}", name="modificarDatosPersonales")
+     * @Route("/admin/modificarDatosPersonales/{id}", name="modificarDatosPersonales")
      */
     public function modificarDatosPersonales(Request $request, $id){
         $em = $this -> getDoctrine() -> getManager();
@@ -221,60 +236,63 @@ class EgresadoController extends AbstractController
 
         if($formulario -> isSubmitted() && $formulario -> isValid() && $this -> validarDatosPersonales($egresado)){
             $em -> flush();
-            $this -> addFlash('info', '¡Los datos personales se han modificado correctamente!');
+            $this -> addFlash('correcto', '¡Los datos personales de '. $egresado->getNombre(). ' '. $egresado->getApellido().' DNI Nº: '. $egresado->getDni() .' se han modificado correctamente!');
             return $this -> redirectToRoute('verEgresados');
         }
 
         return $this -> render('egresado/modificarDatosPersonales.html.twig', [
-            'formulario' => $formulario -> createView()
+            'formulario' => $formulario -> createView(),
+            'egresado' => $egresado
         ]);
     }
 
     
     /**
-     * @Route("/modificarDatosAcademicos/{id}", name="modificarDatosAcademicos")
+     * @Route("/admin/modificarDatosAcademicos/{id}", name="modificarDatosAcademicos")
      */
     public function modificarDatosAcademicos(Request $request, $id){
         $em = $this -> getDoctrine() -> getManager();
-        $egresados = $em -> getRepository(Egresado::class) -> find($id);
+        $egresado = $em -> getRepository(Egresado::class) -> find($id);
 
-        $formulario = $this -> createForm(DatosAcademicosOrigType::class, $egresados);
+        $formulario = $this -> createForm(DatosAcademicosOrigType::class, $egresado);
         $formulario -> handleRequest($request);
 
         if($formulario -> isSubmitted() && $formulario -> isValid()){
             $em -> flush();
-            $this -> addFlash('info', '¡Los datos académicos se han modificado correctamente!');
+            $this -> addFlash('correcto', '¡Los datos académicos de ' . $egresado->getNombre(). ' '. $egresado->getApellido().' DNI Nº: '. $egresado->getDni() . ' se han modificado correctamente!');
             return $this -> redirectToRoute('verEgresados');
         }
 
         return $this -> render('egresado/modificarDatosAcademicos.html.twig', [
-            'formulario' => $formulario -> createView()
+            'formulario' => $formulario -> createView(),
+            'egresado' => $egresado
         ]);
     }
 
     /**
-     * @Route("/modificarDatosAdministrativos/{id}", name="modificarDatosAdministrativos")
+     * @Route("/admin/modificarDatosAdministrativos/{id}", name="modificarDatosAdministrativos")
      */
     public function modificarDatosAdministrativos(Request $request, $id){
         $em = $this -> getDoctrine() -> getManager();
-        $egresados = $em -> getRepository(Egresado::class) -> find($id);
+        $egresado = $em -> getRepository(Egresado::class) -> find($id);
 
-        $formulario = $this -> createForm(DatosAdministrativosOrigType::class, $egresados);
+        $formulario = $this -> createForm(DatosAdministrativosOrigType::class, $egresado);
         $formulario -> handleRequest($request);
 
-        if($formulario -> isSubmitted() && $formulario -> isValid()){
+        if($formulario -> isSubmitted() && $formulario -> isValid() && $this -> validarDatosAdministrativos($egresado)){
             $em -> flush();
-            $this -> addFlash('info', '¡Los datos administrativos se han modificado correctamente!');
+            $this -> addFlash('correcto', '¡Los datos administrativos de ' . $egresado->getNombre(). ' '. $egresado->getApellido().' DNI Nº: '. $egresado->getDni() . ' se han modificado correctamente!');
             return $this -> redirectToRoute('verEgresados');
         }
 
         return $this -> render('egresado/modificarDatosAdministrativos.html.twig', [
-            'formulario' => $formulario -> createView()
+            'formulario' => $formulario -> createView(),
+            'egresado' => $egresado
         ]);
     }
     
      /**
-     * @Route("/modificarArchivos/{id}", name="modificarArchivos")
+     * @Route("/admin/modificarArchivos/{id}", name="modificarArchivos")
      */
     public function modificarArchivos($id , Request $request){
         $em = $this -> getDoctrine() -> getManager();
@@ -308,20 +326,23 @@ class EgresadoController extends AbstractController
                     $egresado->setPdfAnalitico($nombreArchivo);
                     
                 }else{
+                    $egresado->setPdfAnalitico($urlPdf);
                     $this -> addFlash('error', 'Sólo se pueden cargar extensiones .pdf en el certificado analítico');
                     return $this->render('egresado/modificarArchivos.html.twig', [
                         'formulario' => $formulario->createView(),
-                        'pdf' => $egresado -> getPdfAnalitico()
+                        'pdf' => $egresado -> getPdfAnalitico(),
+                        'egresado' => $egresado,
+                        'imagenes' => $archivosEgresado
                     ]);
                 }
 
-            }else{
-                //Si no se carga nada, cargo de nuevo el mismo icono que estaba antes.
+            }
+            else{
                 $egresado->setPdfAnalitico($urlPdf);
             }
             //ACA TERMINA LA MODIFICACION DE PDF
+
             //ARRANCA LA DE IMAGENES
-        
             $contador = 0; //ES PARA QUE NO SE COPIEN LOS NOMBRES
             foreach($archivos as $archivo){
                 if($archivo != null){
@@ -349,15 +370,18 @@ class EgresadoController extends AbstractController
                     }
                 }
             }
-            $this -> addFlash('info', '¡Los archivos se modificaron correctamente!');
+            
+            $this -> addFlash('correcto', '¡Los archivos de ' . $egresado->getNombre(). ' '. $egresado->getApellido().' DNI Nº: '. $egresado->getDni() .  ' se modificaron correctamente!');
+            // $this -> addFlash('correcto', '¡Los archivos se cargaron correctamente!');
 
             $em -> persist($egresado);
             $em -> flush();
 
+            // return $this -> redirectToRoute('modificarArchivos', ['id' => $id]);
             return $this -> redirectToRoute('verEgresados');
         }
         else{
-                
+            $egresado->setPdfAnalitico($urlPdf);
             return $this -> render('egresado/modificarArchivos.html.twig', [
                 'formulario' => $formulario -> createView(),
                 'pdf' => $egresado -> getPdfAnalitico(),
@@ -376,17 +400,18 @@ class EgresadoController extends AbstractController
    
 
     /**
-     * @Route("/eliminarEgresados/{id}", name="eliminarEgresados")
+     * @Route("/admin/eliminarEgresados/{id}", name="eliminarEgresados")
      */
     public function eliminarEgresados($id)
     {
         $manager=$this->getDoctrine()->getManager();
                 
-        $egresados= $manager->getRepository(Egresado::class)->find($id);
+        $egresado= $manager->getRepository(Egresado::class)->find($id);
        
-        $manager->remove($egresados);
+        $this -> addFlash('correcto', '¡El egresado ' . $egresado -> getNombre() .' '. $egresado -> getApellido() .' se ha eliminado correctamente!');
+        $manager->remove($egresado);
         $manager->flush();
-        $this -> addFlash('info', '¡El egresado se ha eliminado correctamente!');
+        
         return $this->redirectToRoute("verEgresados");
     }
 
@@ -404,9 +429,195 @@ class EgresadoController extends AbstractController
         }
     }
 
+
+    ########### FIN ABM ###########
+
+
+    ########### MANEJO DE IMAGENES Y PDF ###########
+        
+    /**
+     * @Route("/admin/verPDF/{id}", name="verPDF")
+     */
+    public function verPDF($id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $egresado= $entityManager->getRepository(Egresado::class)->find($id);
+
+        return $this->redirect("https://intranet.unraf.edu.ar/RegistroDigital/uploads/pdfsAnalitico/" . $egresado->getPdfAnalitico());
+    }
+
+
+    /**
+     * @Route("/admin/verImagen/{nombreImagen}", name="verImagen")
+     */
+    public function verImagen($nombreImagen)
+    {
+        //$entityManager = $this->getDoctrine()->getManager();
+
+        // $egresado= $entityManager->getRepository(Egresado::class)->find($id);
+
+        return $this->redirect("https://intranet.unraf.edu.ar/RegistroDigital/uploads/imagenesDigitales/" . $nombreImagen);
+    }
+
+     /**
+     * @Route("/admin/eliminarPDF/{id}", name="eliminarPDF")
+     */
+    public function eliminarPDF($id){
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $egresado = $entityManager->getRepository(Egresado::class)->find($id);
+
+        unlink('uploads/pdfsAnalitico/' . $egresado -> getPdfAnalitico());
+        $egresado ->setPdfAnalitico(null);
+        //Se setea a nulo porque el remove en este caso no sirve, se utiliza para casos como para borrar
+        //la entidad o para borrar un objeto
+        $entityManager->flush();
+
+        $this -> addFlash('correcto', '¡El pdf se eliminó correctamente!');
+        return $this -> redirectToRoute('modificarArchivos', ['id' => $id]);
+
+    }
+
+    /**
+     * @Route("/admin/eliminarImagen/{idImagen}/{id}", name="eliminarImagen")
+     */
+    public function eliminarImagen($idImagen, $id){
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $imagen = $entityManager->getRepository(Archivo::class)->find($idImagen);
+
+        unlink('uploads/imagenesDigitales/' . $imagen -> getNombreArchivo());
+        $entityManager->remove($imagen);
+        $entityManager->flush();
+
+        $this -> addFlash('correcto', '¡La imagen se eliminó correctamente!');
+        return $this -> redirectToRoute('modificarArchivos', ['id' => $id]);
+
+    }
+
+
+    ########### FIN MANEJO DE IMAGENES Y PDF ###########
+
+
+    ########### PDF HECHO A MANO  ###########
+
+    /**
+     * @Route("/admin/generatePdf/{id}", name="generatePdf")
+     */
+    public function generatePdf($id)
+    {
+        $em = $this -> getDoctrine() -> getManager();
+        $egresado = $em -> getRepository(Egresado::class) -> find($id);
+        
+        
+        // Configure Dompdf según sus necesidades
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+        $pdfOptions->set('isPhpEnabled', true);
+        // $pdfOptions->set(array('isRemoteEnabled' => true));
+        
+        
+        // Crea una instancia de Dompdf con nuestras opciones
+        $dompdf = new Dompdf($pdfOptions);
+        
+        // Recupere el HTML generado en nuestro archivo twig
+        $html = $this->renderView('myPdf.html.twig', [
+            'egresado' => $egresado
+        ]);
+        
+        // Cargar HTML en Dompdf
+        $dompdf->loadHtml($html);
+        
+        
+        // (Opcional) Configure el tamaño del papel y la orientación 'vertical' o 'vertical'
+        $dompdf->setPaper('A4', 'portrait');
+        
+        // Renderiza el HTML como PDF
+        $dompdf->render();
+
+        $canvas = $dompdf->getCanvas(); 
+
+        
+        // $imageURL = 'img/logounraf.png'; 
+        // $imgWidth = 180; 
+        // $imgHeight = 55; 
+        // $x = 70; 
+        // $y = 70; 
+        // $canvas->set_opacity(1); 
+        
+        // $canvas->image($imageURL, $x, $y, $imgWidth, $imgHeight); 
+
+        $canvas->page_script('
+            if( $PAGE_NUM == 1){
+                $pdf->set_opacity(1);
+                $pdf->image("img/logounraf.png", 70, 70, 180, 55);
+            }
+        ');
+      
+        // Envíe el PDF generado al navegador (vista en línea)
+        $dompdf->stream("Egresado-".$egresado->getNombre(). "" .$egresado->getApellido() .".pdf", [
+            "Attachment" => false
+        ]);
+    }
+
+    public function sumarLibroFolio($egresadoOriginal){
+        $egresadoAnterior = $this -> buscarEgresadoAnterior();
+        $egresadoAnterior = end($egresadoAnterior);
+        if($egresadoAnterior != null){
+            if($egresadoAnterior->getFolio() <= 100){
+                $egresadoOriginal->setFolio( $egresadoAnterior->getFolio() + 1);
+                $egresadoOriginal->setLibro($egresadoAnterior->getLibro());
+            }
+            else{
+                $egresadoOriginal->setFolio(1);
+                $egresadoOriginal->setLibro($egresadoAnterior->getLibro() + 1);
+            }
+        }
+        else{
+            $egresadoOriginal -> setFolio(1);
+            $egresadoOriginal -> setLibro(1);
+        }
+
+     
+        return $egresadoOriginal;
+    }
+    
+    public function buscarEgresadoAnterior(){
+        
+        $manager=$this->getDoctrine()->getManager();
+        
+        
+        $query = $manager->createQuery(
+        "   SELECT e
+            FROM App\Entity\Egresado e
+            ORDER BY  e.id DESC"
+        );
+        
+        //Límite de resultados..
+        $query->setMaxResults(1);
+        
+        //Retorna busqueda de la compra..
+        return $query->getResult();
+
+    }
+    
+    ########### FIN PDF HECHO A MANO  ###########
+
+    ########### VALIDACIONES ###########
+
     public function validarDatosPersonales($egresado){
 
         //Googlear REGEX para saber que estoy haciendo
+
+        //Validar nombre
+        $nombre = $egresado -> getNombre();
+        $validarNombre = '/^[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙÑñ .]{2,149}$/';
+        if(!preg_match($validarNombre, $nombre)){
+            $this -> addFlash('error', 'Ingrese un nombre válido');
+            return false;
+        }
+
         //Validar apellido
         $apellido = $egresado -> getApellido();
         $validarApellido = '/^[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙÑñ .]{2,149}$/';
@@ -416,27 +627,28 @@ class EgresadoController extends AbstractController
         }
         
         
-        //Validar nombre
-        $nombre = $egresado -> getNombre();
-        $validarNombre = '/^[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙÑñ .]{2,149}$/';
-        if(!preg_match($validarNombre, $nombre)){
-            $this -> addFlash('error', 'Ingrese un nombre válido');
-            return false;
-        }
+        // //Validar DNI
+        // $dni = $egresado -> getDni();
+        // $validarDni = '/^[0-9]{7,8}$/' ;
+        // if(!preg_match($validarDni, $dni)){
+        //     $this -> addFlash('error', 'Ingrese un DNI válido');
+        //     return false;
+        // }
 
-        //Validar DNI
-        $dni = $egresado -> getDni();
-        $validarDni = '/^[0-9]{7,8}$/' ;
-        if(!preg_match($validarDni, $dni)){
-            $this -> addFlash('error', 'Ingrese un DNI válido');
-            return false;
-        }
+        //No valido el DNI para que sino es DNI y es otra cosa, escriba libremente
+        // $dni = $egresado -> getDni();
+        // if(!is_numeric($dni)){
+        //     $this -> addFlash('error', 'Ingrese un nº de documento válido');
+        //     return false;
+        // }
+        
+    
 
         //Validar año de la Fecha
         $fecha = $egresado -> getFechaNacimiento();
         if($fecha != null){
             $anio = $fecha->format('Y');
-            if($anio < 1900 || $anio >= 2060){
+            if($anio < 1920 || $anio >= 2060){
                 $this -> addFlash('error', 'No se permiten años menores a 1900 o superiores a 2060');
                 return false;
             }
@@ -452,7 +664,7 @@ class EgresadoController extends AbstractController
 
         //Validar ciudad
         $ciudad = $egresado -> getCiudad();
-        $validarCiudad = '/^[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙÑñ .]{4,149}$/';
+        $validarCiudad = '/^[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙÑñ .]{3,149}$/';
         if(!preg_match($validarCiudad, $ciudad)){
             $this -> addFlash('error', 'Ingrese una ciudad con nombre válido');
             return false;
@@ -460,7 +672,7 @@ class EgresadoController extends AbstractController
 
         //Validar provincia
         $provincia = $egresado -> getProvincia();
-        $validarProvincia = '/^[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙÑñ .]{4,149}$/';
+        $validarProvincia = '/^[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙÑñ .]{3,149}$/';
         if(!preg_match($validarProvincia, $provincia)){
             $this -> addFlash('error', 'Ingrese una provincia con nombre válido');
             return false;
@@ -468,7 +680,7 @@ class EgresadoController extends AbstractController
 
         //Validar Calle
         $calle = $egresado -> getCalle();
-        $validarCalle = '/^[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙÑñ .]{4,149}$/';
+        $validarCalle = '/^[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙÑñ .]{3,149}$/';
         if(!preg_match($validarCalle, $calle)){
             $this -> addFlash('error', 'Ingrese un domicilio válido ');
             return false;
@@ -510,8 +722,8 @@ class EgresadoController extends AbstractController
         $fecha = $egresado -> getFechaEgreso();
         if($fecha != null){
             $anio = $fecha->format('Y');
-            if($anio < 2010 || $anio >= 2060){
-                $this -> addFlash('error', 'No se permiten años menores a 2010 o superiores a 2060');
+            if($anio < 2010){
+                $this -> addFlash('error', 'No se permiten años menores a 2010');
                 return false;
             }
         }
@@ -519,59 +731,133 @@ class EgresadoController extends AbstractController
     }
 
     public function validarDatosAdministrativos($egresado){
-        $nroME = $egresado->getNroResolucionME();
-        $nroExpediente = $egresado->getNroExpediente();
-        $nroRectoral = $egresado->getNroResolucionRectoral();
-        $nroDiploma = $egresado->getNroDiploma();
-        $nroAnalitico = $egresado->getNroAnalitico();
-        $nroRevalida = $egresado->getNroRevalida();
+        $nombreRector = $egresado -> getNombreRector();
+        $apellidoRector = $egresado -> getApellidoRector();
+        $nombreSecretario = $egresado -> getNombreSecretario();
+        $apellidoSecretario = $egresado -> getApellidoSecretario();
+        $fecha = $egresado->getFechaEntrega();
 
-        if($nroME <= 0 || $nroExpediente <= 0 || $nroRectoral <= 0 || $nroDiploma <= 0 || $nroAnalitico <= 0 || $nroRevalida <= 0){
-            $this -> addFlash('error', 'No se permiten numeros negativos o 0 en esta sección');
+        //Validar apellidos
+        $validarApellido = '/^[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙÑñ .]{2,149}$/';
+        if(!preg_match($validarApellido, $apellidoRector) || !preg_match($validarApellido, $apellidoSecretario)){
+            $this -> addFlash('error', 'Ingrese un apellido válido');
+            return false;
+        }
+        
+        
+        //Validar nombres
+        $validarNombre = '/^[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙÑñ .]{2,149}$/';
+        if(!preg_match($validarNombre, $nombreRector) || !preg_match($validarApellido, $nombreSecretario)){
+            $this -> addFlash('error', 'Ingrese un nombre válido');
             return false;
         }
 
-        $fecha = $egresado->getFechaEntrega();
+        
         if($fecha != null){
             $anio = $fecha->format('Y');
-            if($anio < 2010 || $anio >= 2060){
-                $this -> addFlash('error', 'No se permiten años menores a 2010 o superiores a 2060');
+            if($anio < 2010){
+                $this -> addFlash('error', 'No se permiten años menores a 2010');
                 return false;
             }
         }
+
+        return true;
     }
 
+    ########## FIN VALIDACIONES ###########
 
+
+
+
+    ######### BUSQUEDA DE USUARIOS ###########
+
+    //Como realmente no es necesario aplicar filtro de busqueda, momenteaneamente lo voy a sacar
+    // public function buscarUsuarios(UserBusqueda $busqueda){
+    //     if($busqueda -> getFiltrarPor() == 1){
+    //         return $this -> consultaApellidos($busqueda);
+    //     }
+    //     else if($busqueda -> getFiltrarPor() == 2){
+    //         return $this -> consultaDni($busqueda);
+    //     }
+    //     else{
+    //         return $this ->consultaTodos($busqueda);
+    //     }
+    // }
+
+
+    // public function consultaApellidos(UserBusqueda $busqueda){
+        
+    //     $manager=$this->getDoctrine()->getManager();
+        
+    //     $query = $manager->createQuery(
+    //     "SELECT u
+    //     FROM App\Entity\Egresado u
+    //     WHERE u.apellido LIKE :apellido
+    //     ORDER BY u.id DESC
+    //     "
+    //     )
+    //     ->setParameter('apellido',$busqueda->getBuscar().'%');
+        
+        
+    //     $query->setMaxResults(100);
+        
+        
+    //     return $query->getResult();
+    // }
+
+    // public function consultaDni(UserBusqueda $busqueda){
+        
+    //     $manager=$this->getDoctrine()->getManager();
+        
+    //     $query = $manager->createQuery(
+    //     "SELECT u
+    //     FROM App\Entity\Egresado u
+    //     WHERE u.dni LIKE :dni
+    //     ORDER BY u.id DESC
+    //     "
+    //     )
+    //     ->setParameter('dni',$busqueda->getBuscar().'%');
     
-    /**
-     * @Route("verPDF/{id}", name="verPDF")
-     */
-    public function verPDF($id)
-    {
-        $entityManager = $this->getDoctrine()->getManager();
+        
+    //     $query->setMaxResults(100);
+        
+        
+    //     return $query->getResult();
+    // }
 
-        $egresado= $entityManager->getRepository(Egresado::class)->find($id);
-
-        return $this->redirect("https://intranet.unraf.edu.ar/RegistroDigital/uploads/pdfsAnalitico/" . $egresado->getPdfAnalitico());
+    public function consultaTodos(UserBusqueda $busqueda){
+        
+        $manager=$this->getDoctrine()->getManager();
+        
+        $query = $manager->createQuery(
+        "SELECT u
+        FROM App\Entity\Egresado u
+        WHERE u.apellido LIKE :apellido
+        OR u.dni LIKE :dni
+        ORDER BY u.id DESC
+        "
+        )
+        ->setParameter('apellido',$busqueda->getBuscar().'%')
+        ->setParameter('dni',$busqueda->getBuscar().'%');
+        
+        //Límite de resultados..
+        $query->setMaxResults(100);
+        
+        //Retorna busqueda de la compra..
+        return $query->getResult();
     }
 
-    /**
-     * @Route("verImagen/{nombreImagen}", name="verImagen")
-     */
-    public function verImagen($nombreImagen)
-    {
-        //$entityManager = $this->getDoctrine()->getManager();
+    ######## FIN BUSQUEDA USUARIOS #########
 
-        // $egresado= $entityManager->getRepository(Egresado::class)->find($id);
 
-        return $this->redirect("https://intranet.unraf.edu.ar/RegistroDigital/uploads/imagenesDigitales/" . $nombreImagen);
-    }
 
-    //Copiar a Pata la entidad PORQUE NO ME DEJA DE OTRA FORMA SINO
+    ######## COPIAR ENTIDAD A PATA #########
+
     public function copyEgresado($egresadoOriginal, $egresado){
 
         $egresadoOriginal->setApellido($egresado->getApellido());
         $egresadoOriginal->setNombre($egresado->getNombre());
+        $egresadoOriginal->setTipoDocumentoIdentidad($egresado->getTipoDocumentoIdentidad());
         $egresadoOriginal->setDni($egresado->getDni());
         $egresadoOriginal->setFechaNacimiento($egresado->getFechaNacimiento());
         $egresadoOriginal->setTelefono($egresado->getTelefono());
@@ -590,14 +876,25 @@ class EgresadoController extends AbstractController
         $egresadoOriginal->setDenominacionCarrera($egresado->getDenominacionCarrera());
         $egresadoOriginal->setTituloOtorgado($egresado->getTituloOtorgado());
         $egresadoOriginal->setDocumentoEmitido($egresado->getDocumentoEmitido());
+        $egresadoOriginal->setOriginalDuplicado($egresado->getOriginalDuplicado());
         $egresadoOriginal->setFechaEgreso($egresado->getFechaEgreso());
+        $egresadoOriginal->setNombreRector($egresado->getNombreRector());
+        $egresadoOriginal->setApellidoRector($egresado->getApellidoRector());
+        $egresadoOriginal->setNombreSecretario($egresado->getNombreSecretario());
+        $egresadoOriginal->setApellidoSecretario($egresado->getApellidoSecretario());
+        $egresadoOriginal->setNroResolucionAprob($egresado->getNroResolucionAprob());
         $egresadoOriginal->setNroResolucionME($egresado->getNroResolucionME());
         $egresadoOriginal->setNroExpediente($egresado->getNroExpediente());
         $egresadoOriginal->setNroResolucionRectoral($egresado->getNroResolucionRectoral());
         $egresadoOriginal->setNroDiploma($egresado->getNroDiploma());
         $egresadoOriginal->setNroAnalitico($egresado->getNroAnalitico());
-        $egresadoOriginal->setNroRevalida($egresado->getNroRevalida());
-        $egresadoOriginal->setFechaEntrega($egresado->getFechaEntrega());
+        if($egresado->getNroRevalida() != null){
+            $egresadoOriginal->setNroRevalida($egresado->getNroRevalida());
+        }
+        if($egresado->getFechaEntrega() != null){
+            $egresadoOriginal->setFechaEntrega($egresado->getFechaEntrega());
+        }
+        
         $egresadoOriginal->setPdfAnalitico($egresado->getPdfAnalitico());
         
 
@@ -629,6 +926,6 @@ class EgresadoController extends AbstractController
         return $egresadoOriginal;
     }
     
-    
+    ########### FIN ENTIDAD A PATA ############
        
 }

@@ -25,7 +25,7 @@ class Documentos
     private $tipoDocumento;
 
     /**
-     * @ORM\OneToMany(targetEntity=Egresado::class, mappedBy="documentoEmitido")
+     * @ORM\OneToMany(targetEntity=Egresado::class, mappedBy="documentoEmitido", cascade={"remove"})
      */
     private $egresados;
 
