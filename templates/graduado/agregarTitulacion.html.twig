@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registro Digital - Agregar Titulación/es Graduado/a{% endblock %}
+
+{% block body %}
+{{parent()}}
+<h1 class = "text-center" >Agregar titulacion/es a: {{graduado.nombre}} {{graduado.apellido}} </h1>
+<div class = "container justify-content-center text-center" id = "divFormulario"> 
+    <a class = "float-left" href = "{{path('verTitulacionesGraduado', {'id': graduado.id})}}"><i class="fas fa-arrow-left grow" style = "font-size:30px; color: #0F9FA8;"></i></a>
+    {{ form_start(formulario, {'enctype':'multipart/form-data'})}}
+    <div class = "mt-5">
+        <div class = "row justify-content-center">
+            <div class = "col-sm-6">
+                <ul style="list-style:none;" class="titulacion" data-prototype="{{form_widget(formulario.titulaciones.vars.prototype)|e('html_attr') }}">
+                    <li data-collection-holder-class="titulacion">{{ form_widget(formularioTitulacion)}}</li>
+                    <h6 class = "text-center text-secondary mt-2">Fecha Egreso</h6>
+                    <br>
+                </ul>
+            </div>
+        </div>
+        <div class ="text-right">
+            <button type="button" class="add_item_link btn btn-outline-info text-center" data-collection-holder-class="titulacion">Agregar otra titulación</button>
+        </div>
+    </div>
+    <div class = "container mt-4 text-center ">
+        {{ form_widget(formulario.Aceptar, {attr: {class: 'btn btn-outline-info btn-lg'}})}}
+    </div>
+    {{ form_end(formulario)}}
+</div>
+<br>
+{% endblock %}
+{% block javascripts %}
+    {{parent()}}
+    <script src = "{{asset('js/integrarForm.js')}}"></script>
+        
+{% endblock %}

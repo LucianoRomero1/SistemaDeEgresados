@@ -129,7 +129,7 @@ class __TwigTemplate_f9780e52594b5a77292f0ec627b3d891a7dd4d2f1bb8586644e8dd5aa16
         echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["formulario"]) || array_key_exists("formulario", $context) ? $context["formulario"] : (function () { throw new RuntimeError('Variable "formulario" does not exist.', 26, $this->source); })()), 'form_end');
         echo "
     <table class=\"table table-borderless\">
-        <thead>
+        <thead  class = \"text-white\">
                 <tr style = \"background-color: #0F9FA8;\">
                 <th>Nro</th>
                 <th>Tipo de documentos</th>
@@ -249,7 +249,7 @@ class __TwigTemplate_f9780e52594b5a77292f0ec627b3d891a7dd4d2f1bb8586644e8dd5aa16
     </div>
     {{ form_end(formulario) }}
     <table class=\"table table-borderless\">
-        <thead>
+        <thead  class = \"text-white\">
                 <tr style = \"background-color: #0F9FA8;\">
                 <th>Nro</th>
                 <th>Tipo de documentos</th>

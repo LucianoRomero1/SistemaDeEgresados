@@ -11,22 +11,22 @@ use App\Form\CarrerasType;
 use App\Entity\UserBusqueda;
 use App\Form\UserBusquedaType;
 use App\Services\ConsultaBD;
-use App\Services\ValidacionesAcademicas;
+
+use App\Repository\CarrerasRepository;
 
 class CarreraController extends AbstractController
 {
     /**
      * @Route("/admin/altaCarreras", name="altaCarreras")
      */
-    public function altaCarreras(Request $request)
+    public function altaCarreras(Request $request, CarrerasRepository $carreraRepo)
     {
         $carrera = new Carreras();
-        $validacionesAcademicas = new ValidacionesAcademicas();
 
         $formulario = $this -> createForm(CarrerasType::class, $carrera);
         $formulario -> handleRequest($request);
 
-        if($formulario -> isSubmitted() && $formulario -> isValid() && $validacionesAcademicas -> validarCarrera($carrera)){
+        if($formulario -> isSubmitted() && $formulario -> isValid() && $carreraRepo -> validarCarrera($carrera)){
             $em = $this -> getDoctrine() -> getManager();
             $em -> persist($carrera);
             $em -> flush();
@@ -34,7 +34,7 @@ class CarreraController extends AbstractController
             $this -> addFlash('correcto', '¡La carrera se ha creado correctamente!');
             return $this -> redirectToRoute('verCarreras');
         }
-        else if($validacionesAcademicas -> validarCarrera($carrera) == false){
+        else if($carreraRepo -> validarCarrera($carrera) == false){
             $this -> addFlash('error', 'Ingrese un nombre de carrera válido');
         }
 
@@ -75,20 +75,22 @@ class CarreraController extends AbstractController
         /**
      * @Route("/admin/modificarCarreras/{id}", name="modificarCarreras")
      */
-    public function modificarCarreras(Request $request, $id){
+    public function modificarCarreras(Request $request, $id, CarrerasRepository $carreraRepo){
         $em = $this -> getDoctrine() -> getManager();
-        $validacionesAcademicas = new ValidacionesAcademicas();
+        
+        
         $carrera = $em -> getRepository(Carreras::class) -> find($id);
+        
 
         $formulario = $this -> createForm(CarrerasType::class, $carrera);
         $formulario -> handleRequest($request);
-
-        if($formulario -> isSubmitted() && $formulario -> isValid() && $validacionesAcademicas -> validarCarrera($carrera)){
+        
+        if($formulario -> isSubmitted() && $formulario -> isValid() && $carreraRepo -> validarCarrera($carrera)){
             $em -> flush();
             $this -> addFlash('correcto', '¡La carrera se ha modificado correctamente!');
             return $this -> redirectToRoute('verCarreras');
         }
-        else if($validacionesAcademicas -> validarCarrera($carrera) == false){
+        else if($carreraRepo -> validarCarrera($carrera) == false){
             $this -> addFlash('error', 'Ingrese un nombre de carrera válido');
         }
 

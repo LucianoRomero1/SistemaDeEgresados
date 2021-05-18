@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registro Digital - Ver Titulaciones Graduado/a{% endblock %}
+
+{% block body %}
+{{parent()}}
+<div class = "container-fluid">
+    <div class = "container row ">
+        <div class = "col-sm-1">
+            <a class = ""  href = "{{path('verGraduados')}}"><i class="fas fa-arrow-left mt-2 grow" title = "Volver a los graduados/as" style = "font-size:30px;color: #0F9FA8; margin-top: 5px;"></i></a>
+        </div>
+        <div class = "col-sm-15 media">
+            <h1 class = "text-left mb-4">Titulaciones de: {{graduado.apellido}} {{graduado.nombre}}</h1> 
+            <a class = "ml-5 mt-2 btn form-control  nueva" style = "background-color: #; color: white;" href = "{{path('agregarTitulacion', {'id': graduado.id})}}">Agregar Titulación/es</a>
+        </div>
+    </div>
+    <table class="table table-borderless">
+        <thead class = "text-white">
+                <tr style = "background-color: #0F9FA8;">
+                <th>Nro</th>
+                <th>Título</th>
+                <th>Fecha Egreso</th>
+                <th style="text-align: center;">Editar</th>
+                <th style="text-align: center;">Eliminar</th>
+            </tr>
+        </thead>
+        <tbody >
+            {% for titulacion in titulaciones %}
+            <tr>
+                <th>{{ loop.index }}</th>
+                <td>{{titulacion.tituloOtorgado.nombreTitulo}}</td>
+                <td>{{titulacion.fechaEgreso|date('d-m-Y')}}</td>
+                <td style="text-align: center;"><a class ="btn grow" href="{{path('modificarTitulacionesGraduado', {'id': titulacion.id, 'idGrad': graduado.id})}}" ><i class="far fa-edit text-success" style = "font-size: 20px;"></i></a></td>
+                <td style="text-align: center;"><a class = "btn grow" onclick="DeleteTitulacion({{titulacion.id}}, {{graduado.id}})"><i class=" fas fa-trash text-danger"   style = "font-size: 20px"></i></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table> 
+</div>
+{% block  javascripts %}
+{{parent()}}
+    <script src= "{{asset('js/deleteGraduado.js')}}"></script> 
+    <script src = "{{asset('js/popup.js')}}"></script>
+{% endblock %}
+
+{% endblock %}

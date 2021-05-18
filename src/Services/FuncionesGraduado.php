@@ -5,8 +5,6 @@
 class FuncionesGraduado {
     public function cargarImagenGraduado($formulario){
         $graduado = $formulario->getData();
-        
-      
         if($graduado -> getImagenTED() != null){
             $imagenTED = $formulario->get('imagenTED')->getData();
             $extensionArchivo=$imagenTED->guessExtension();
@@ -28,6 +26,7 @@ class FuncionesGraduado {
             }
 
         }
+
     }
 
     public function modificarImagenGraduado($formulario, $urlImagen){

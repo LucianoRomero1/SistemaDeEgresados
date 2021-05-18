@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\GraduadoSoporte;
+use App\Entity\Graduado;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,9 +20,9 @@ class GraduadoTitulacionesType extends AbstractType
                 'entry_options' => ['label' => false],
                'by_reference' =>  false,
                 'allow_add'=> true,
-                'allow_delete'=> true
+                'allow_delete'=> true,
             ])
-            ->add('Cargar', SubmitType::class)
+            ->add('Aceptar', SubmitType::class)
 
         ;
     }
@@ -30,7 +30,7 @@ class GraduadoTitulacionesType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => GraduadoSoporte::class,
+            'data_class' => Graduado::class,
         ]);
     }
 }

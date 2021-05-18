@@ -89,55 +89,62 @@ class __TwigTemplate_09d30afebb8843b6091a75c629c910e793d6b7744619b083786e033bef5
         echo "
 <h1 class =\"text-center\">Imagen TED 1c emitida por SIU GUARANI</h1>
 <div class = \"container mt-4\"  id = \"divFormulario\"> 
-    ";
+    <a href = \"";
         // line 9
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["formulario"]) || array_key_exists("formulario", $context) ? $context["formulario"] : (function () { throw new RuntimeError('Variable "formulario" does not exist.', 9, $this->source); })()), 'form_start', ["enctype" => "multipart/form-data"]);
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("verGraduados");
+        echo "\"><i class=\"fas fa-arrow-left grow\" style = \"font-size:30px; color: #0F9FA8;\"></i></a>
+    ";
+        // line 10
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["formulario"]) || array_key_exists("formulario", $context) ? $context["formulario"] : (function () { throw new RuntimeError('Variable "formulario" does not exist.', 10, $this->source); })()), 'form_start', ["enctype" => "multipart/form-data"]);
         echo "
     <div class = \"container text-center\">
         ";
-        // line 11
-        if ((0 !== twig_compare((isset($context["imagen"]) || array_key_exists("imagen", $context) ? $context["imagen"] : (function () { throw new RuntimeError('Variable "imagen" does not exist.', 11, $this->source); })()), null))) {
-            // line 12
+        // line 12
+        if ((0 !== twig_compare((isset($context["imagen"]) || array_key_exists("imagen", $context) ? $context["imagen"] : (function () { throw new RuntimeError('Variable "imagen" does not exist.', 12, $this->source); })()), null))) {
+            // line 13
             echo "            <ul class = \"mt-5\">
                 <li>
                     <img src=\"";
-            // line 14
+            // line 15
             echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("svg/pdf2.png"), "html", null, true);
             echo "\" width=\"40\" alt=\"PDF\">
                     <a class=\"btn btn-primary ml-4 grow\" href=\"";
-            // line 15
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("verImagenTED", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["graduado"]) || array_key_exists("graduado", $context) ? $context["graduado"] : (function () { throw new RuntimeError('Variable "graduado" does not exist.', 15, $this->source); })()), "id", [], "any", false, false, false, 15)]), "html", null, true);
+            // line 16
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("verImagenTED", ["id" => twig_get_attribute($this->env, $this->source, (isset($context["graduado"]) || array_key_exists("graduado", $context) ? $context["graduado"] : (function () { throw new RuntimeError('Variable "graduado" does not exist.', 16, $this->source); })()), "id", [], "any", false, false, false, 16)]), "html", null, true);
             echo "\"><i class=\"fas fa-search\"></i></a>
                     <a class = \"btn btn-danger text-white ml-4 grow\" onclick=\"DeleteImagenTED(";
-            // line 16
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["graduado"]) || array_key_exists("graduado", $context) ? $context["graduado"] : (function () { throw new RuntimeError('Variable "graduado" does not exist.', 16, $this->source); })()), "id", [], "any", false, false, false, 16), "html", null, true);
+            // line 17
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["graduado"]) || array_key_exists("graduado", $context) ? $context["graduado"] : (function () { throw new RuntimeError('Variable "graduado" does not exist.', 17, $this->source); })()), "id", [], "any", false, false, false, 17), "html", null, true);
             echo ")\" ><i class=\"fas fa-ban\"></i></a>
                 </li>
             </ul>
             
         ";
         } else {
-            // line 21
+            // line 22
             echo "            <h6 class = \"text-center\" style = \"font-size: 15px;\">*No hay imagen cargada</h6>
             ";
-            // line 22
-            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formulario"]) || array_key_exists("formulario", $context) ? $context["formulario"] : (function () { throw new RuntimeError('Variable "formulario" does not exist.', 22, $this->source); })()), "imagenTED", [], "any", false, false, false, 22), 'widget', ["attr" => ["accept" => "application / .jpg, .png, .pdf, .docx, .doc, .jpeg"]]);
+            // line 23
+            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formulario"]) || array_key_exists("formulario", $context) ? $context["formulario"] : (function () { throw new RuntimeError('Variable "formulario" does not exist.', 23, $this->source); })()), "imagenTED", [], "any", false, false, false, 23), 'widget', ["attr" => ["accept" => "application / .jpg, .png, .pdf, .docx, .doc, .jpeg"]]);
             echo "
         ";
         }
-        // line 24
+        // line 25
         echo "    </div>
     <div class = \"container mt-5 text-center\">
         ";
-        // line 26
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formulario"]) || array_key_exists("formulario", $context) ? $context["formulario"] : (function () { throw new RuntimeError('Variable "formulario" does not exist.', 26, $this->source); })()), "Aceptar", [], "any", false, false, false, 26), 'widget', ["attr" => ["class" => "btn btn-outline-info btn-lg"]]);
+        // line 27
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formulario"]) || array_key_exists("formulario", $context) ? $context["formulario"] : (function () { throw new RuntimeError('Variable "formulario" does not exist.', 27, $this->source); })()), "Aceptar", [], "any", false, false, false, 27), 'widget', ["attr" => ["class" => "btn btn-outline-info btn-lg"]]);
         echo "
     </div>
     ";
-        // line 29
-        echo "</div>
-<script src = \"";
         // line 30
+        echo "    ";
+        // line 31
+        echo "</div>
+
+<script src = \"";
+        // line 33
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/deleteArchivos.js"), "html", null, true);
         echo "\"></script>
 ";
@@ -161,7 +168,7 @@ class __TwigTemplate_09d30afebb8843b6091a75c629c910e793d6b7744619b083786e033bef5
 
     public function getDebugInfo()
     {
-        return array (  141 => 30,  138 => 29,  133 => 26,  129 => 24,  124 => 22,  121 => 21,  113 => 16,  109 => 15,  105 => 14,  101 => 12,  99 => 11,  94 => 9,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  148 => 33,  144 => 31,  142 => 30,  137 => 27,  133 => 25,  128 => 23,  125 => 22,  117 => 17,  113 => 16,  109 => 15,  105 => 13,  103 => 12,  98 => 10,  94 => 9,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -174,6 +181,7 @@ class __TwigTemplate_09d30afebb8843b6091a75c629c910e793d6b7744619b083786e033bef5
 {{parent()}}
 <h1 class =\"text-center\">Imagen TED 1c emitida por SIU GUARANI</h1>
 <div class = \"container mt-4\"  id = \"divFormulario\"> 
+    <a href = \"{{path('verGraduados')}}\"><i class=\"fas fa-arrow-left grow\" style = \"font-size:30px; color: #0F9FA8;\"></i></a>
     {{ form_start(formulario, {'enctype':'multipart/form-data'})}}
     <div class = \"container text-center\">
         {% if imagen != null %}
@@ -194,7 +202,9 @@ class __TwigTemplate_09d30afebb8843b6091a75c629c910e793d6b7744619b083786e033bef5
         {{ form_widget(formulario.Aceptar, {attr: {class: 'btn btn-outline-info btn-lg'}})}}
     </div>
     {# {{ form_end(formulario)}} #}
+    {# NO CIERRO EL FORM PORQUE SINO TIRA ERROR Y NO SE ME OCULTA COMO YO QUIERO #}
 </div>
+
 <script src = \"{{asset('js/deleteArchivos.js')}}\"></script>
 {% endblock %}", "graduado/modificarImagenGraduado.html.twig", "/var/www/html/RegistroDigital/templates/graduado/modificarImagenGraduado.html.twig");
     }

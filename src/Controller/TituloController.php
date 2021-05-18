@@ -11,22 +11,22 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\UserBusqueda;
 use App\Form\UserBusquedaType;
 use App\Services\ConsultaBD;
-use App\Services\ValidacionesAcademicas;
+use App\Repository\TitulosRepository;
 
 class TituloController extends AbstractController
 {
     /**
      * @Route("admin/altaTitulos", name="altaTitulos")
      */
-    public function altaTitulos(Request $request)
+    public function altaTitulos(Request $request, TitulosRepository $titRepo)
     {
         $titulo = new Titulos();
-        $validacionesAcademicas = new ValidacionesAcademicas();
+        
 
         $formulario = $this -> createForm(TitulosType::class, $titulo);
         $formulario -> handleRequest($request);
 
-        if($formulario -> isSubmitted() && $formulario -> isValid() && $validacionesAcademicas -> validarTitulo($titulo)){
+        if($formulario -> isSubmitted() && $formulario -> isValid() && $titRepo -> validarTitulo($titulo)){
             $em = $this -> getDoctrine() -> getManager();
             $em -> persist($titulo);
             $em -> flush();
@@ -34,7 +34,7 @@ class TituloController extends AbstractController
             $this -> addFlash('correcto', '¡El título se cargó correctamente!');
             return $this -> redirectToRoute('verTitulos');
         }
-        else if($validacionesAcademicas -> validarTitulo($titulo) == false){
+        else if($titRepo -> validarTitulo($titulo) == false){
             $this -> addFlash('error', 'Ingrese un nombre de título válido');
         }
 
@@ -74,20 +74,20 @@ class TituloController extends AbstractController
     /**
      * @Route("admin/modificarTitulos/{id}", name="modificarTitulos")
      */
-    public function modificarTitulos(Request $request, $id){
+    public function modificarTitulos(Request $request, $id, TitulosRepository $titRepo){
         $em =  $this -> getDoctrine() -> getManager();
-        $validacionesAcademicas = new ValidacionesAcademicas();
+        
         $titulo = $em -> getRepository(Titulos::class) -> find($id);
 
         $formulario = $this -> createForm(TitulosType::class, $titulo);
         $formulario -> handleRequest($request);
 
-        if($formulario -> isSubmitted() && $formulario -> isValid() && $validacionesAcademicas -> validarTitulo($titulo)){
+        if($formulario -> isSubmitted() && $formulario -> isValid() && $titRepo -> validarTitulo($titulo)){
             $em -> flush();
             $this -> addFlash('correcto', '¡El título ' . $titulo->getNombreTitulo() . ' se modificó correctamente!');
             return $this -> redirectToRoute('verTitulos');
         }
-        else if($validacionesAcademicas -> validarTitulo($titulo) == false){
+        else if($titRepo -> validarTitulo($titulo) == false){
             $this -> addFlash('error', 'Ingrese un nombre de título válido');
         }
 

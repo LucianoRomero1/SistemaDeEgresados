@@ -20,11 +20,9 @@ use App\Form\ArchivosOrigType;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\UserBusqueda;
 use App\Form\UserBusquedaType;
-use DateTime;
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use App\Services\FuncionesEgresado;
 
 class EgresadoController extends AbstractController
 {
@@ -32,7 +30,7 @@ class EgresadoController extends AbstractController
     ########### EMPIEZA ABM ########### 
 
     /**
-     * @Route("/user/altaDatosPersonales", name="altaDatosPersonales")
+     * @Route("/admin/altaDatosPersonales", name="altaDatosPersonales")
      */
     public function altaDatosPersonales(Request $request)
     {
@@ -56,7 +54,7 @@ class EgresadoController extends AbstractController
     }
 
     /**
-     * @Route("/user/altaDatosAcademicos/{id}", name="altaDatosAcademicos")
+     * @Route("/admin/altaDatosAcademicos/{id}", name="altaDatosAcademicos")
      */
     public function altaDatosAcademicos(Request $request, $id)
     {
@@ -83,7 +81,7 @@ class EgresadoController extends AbstractController
 
     
     /**
-     * @Route("/user/altaDatosAdministrativos/{id}", name="altaDatosAdministrativos")
+     * @Route("/admin/altaDatosAdministrativos/{id}", name="altaDatosAdministrativos")
      */
     public function altaDatosAdministrativos(Request $request, $id){
         
@@ -109,10 +107,11 @@ class EgresadoController extends AbstractController
 
 
     /**
-     * @Route("/user/altaArchivos/{id}", name="altaArchivos")
+     * @Route("/admin/altaArchivos/{id}", name="altaArchivos")
      */
     public function altaArchivos(Request $request, $id){
         $em = $this -> getDoctrine() -> getManager();
+        $funcionesEgresado = new FuncionesEgresado();
         $egresado = $em -> getRepository(EgresadoSoporte::class) -> find($id);
         //Esto esta porque necesito usar el mismo egresado que venia de los pasos anteriores
 
@@ -120,60 +119,8 @@ class EgresadoController extends AbstractController
         $formulario = $this -> createForm(ArchivosType::class, $egresado);
         $formulario -> handleRequest($request);
 
-        //SUBIR EL PDF ANALITICO
-        if($formulario -> isSubmitted() && $this -> validarArchivos($egresado)){
+        if($formulario -> isSubmitted() && $this -> validarArchivos($egresado) && $funcionesEgresado ->cargarPdf($formulario) && $funcionesEgresado ->cargarArchivos($egresado, $em)){
             
-            $egresado = $formulario->getData();
-            
-            if($egresado -> getPdfAnalitico() != null){
-                $pdfAnalitico = $formulario->get('pdfAnalitico')->getData();
-                $extensionArchivo=$pdfAnalitico->guessExtension();
-                
-                if ($extensionArchivo == 'pdf'){
-
-                    $nombreArchivo= time().".".$extensionArchivo;
-                        
-                    $pdfAnalitico->move("uploads/pdfsAnalitico/",$nombreArchivo);
-
-                    $egresado->setPdfAnalitico($nombreArchivo);    
-
-                }else{
-                    $this -> addFlash('error', 'Sólo se pueden cargar extensiones .pdf en el certificado analítico');
-                    return $this->render('egresado/cargaArchivos.html.twig', [
-                        'formulario' => $formulario -> createView()
-                    ]);
-                }
-
-            }
-            //Termina envio de PDF
-
-            //Carga de imagenes
-            $archivos = $egresado -> getArchivosArray();
-            $contador = 0;
-            foreach($archivos as $archivo){
-                if($archivo != null){
-                    $documento = new Archivo();
-                    $extensionArchivo = $archivo -> guessExtension();
-
-                    if($extensionArchivo == 'jpg' || $extensionArchivo == 'png' || $extensionArchivo == 'pdf' || $extensionArchivo == 'jpeg' ){
-
-                        $nombreArchivo= time() . $contador .".".$extensionArchivo;
-                        $contador++;
-                        //$archivo -> move("uploads/imagenesDigitales/", $nombreArchivo);
-
-                        $documento -> setNombreArchivo($nombreArchivo);
-                        $egresado -> addArchivo($documento);
-                        $em -> persist($documento);
-                    }
-                    else{
-                        $this -> addFlash('error', 'Extension inválida en las imágenes, sólo se permiten .jpg, .png, .pdf, .docx, .doc, .jpeg');
-                        return $this -> render('egresado/cargaArchivos.html.twig', [
-                            'formulario' => $formulario -> createView()
-                        ]);
-                    }
-                }
-            }
-
             $em -> persist($egresado);
 
             $egresadoOriginal = new Egresado();
@@ -190,6 +137,18 @@ class EgresadoController extends AbstractController
             $this -> addFlash('correcto', '¡La titulación del egresado se ha registrado correctamente!');
             return $this->redirectToRoute('verEgresados');
         }
+        else if($funcionesEgresado ->cargarPdf($formulario) == false){
+            $this -> addFlash('error', 'Sólo se pueden cargar extensiones .pdf en el certificado analítico');
+            return $this->render('egresado/cargaArchivos.html.twig', [
+                'formulario' => $formulario -> createView()
+            ]);
+        }
+        else if($funcionesEgresado ->cargarArchivos($egresado, $em) == false){
+            $this -> addFlash('error', 'Sólo se pueden cargar extensiones .pdf, .png, .jpg, .jpeg en las imagenes');
+            return $this->render('egresado/cargaArchivos.html.twig', [
+                'formulario' => $formulario -> createView()
+            ]);
+        }
         return $this -> render('egresado/cargaArchivos.html.twig', [
             'formulario' => $formulario -> createView()
         ]);
@@ -197,7 +156,7 @@ class EgresadoController extends AbstractController
 
 
     /**
-     * @Route("/user/verEgresados", name="verEgresados")
+     * @Route("/admin/verEgresados", name="verEgresados")
      */
     public function verEgresados(Request $request){
         $em = $this -> getDoctrine() -> getManager();
@@ -837,8 +796,8 @@ class EgresadoController extends AbstractController
         ORDER BY u.id DESC
         "
         )
-        ->setParameter('apellido',$busqueda->getBuscar().'%')
-        ->setParameter('dni',$busqueda->getBuscar().'%');
+        ->setParameter('apellido', '%'. $busqueda->getBuscar().'%')
+        ->setParameter('dni', '%'. $busqueda->getBuscar().'%');
         
         //Límite de resultados..
         $query->setMaxResults(100);

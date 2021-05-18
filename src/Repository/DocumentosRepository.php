@@ -19,6 +19,14 @@ class DocumentosRepository extends ServiceEntityRepository
         parent::__construct($registry, Documentos::class);
     }
 
+    public function validarDocumento($documento){
+        if(is_numeric($documento -> getTipoDocumento())){
+            
+            return false;
+        }
+        return true;
+    }
+
     // /**
     //  * @return Documentos[] Returns an array of Documentos objects
     //  */

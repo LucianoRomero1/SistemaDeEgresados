@@ -50,6 +50,8 @@ class TitulacionesAlcanzadas
      */
     private $graduado;
 
+ 
+
 
 
     public function getId(): ?int
@@ -132,5 +134,6 @@ class TitulacionesAlcanzadas
 
         return $this;
     }
+
 
 }

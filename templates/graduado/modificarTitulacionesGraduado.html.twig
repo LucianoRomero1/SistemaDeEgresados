@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registro Digital - Modificar Titulaciones Graduado/a{% endblock %}
+
+{% block body %}
+{{parent()}}
+<h1 class = "text-center" >Modificar título</h1>
+<div class = "container" id = "divFormulario">
+    <a class = "float-left" href = "{{path('verTitulacionesGraduado', {'id': graduado.id})}}"><i class="fas fa-arrow-left grow" style = "font-size:30px; color: #0F9FA8;"></i></a>
+    {{ form_start(formulario, {'enctype':'multipart/form-data'})}}
+    <div class = "container row mt-3 justify-content-center">
+        <div class = "col-sm-8">
+            {{form_widget(formulario.tituloOtorgado, {attr: {class: 'form-control camposEstandar', placeholder: 'Nombre'}})}}
+        </div>
+    </div>
+    <div class = "container row mt-3 justify-content-center">
+        <div class = "col-sm-2">
+            <h6 class = "text-secondary  mt-2 ml-1" style = "font-size: 14px;">Nº Resolución ministerial<h6>
+            {{form_widget(formulario.nroResolucionMinisterial, {attr: {class: 'form-control camposEstandar', placeholder: 'Nombre'}})}}
+        </div>
+        <div class = "col-sm-2"></div>
+        <div class = "col-sm-2">
+            <h6 class = "text-secondary  mt-2 ml-1" style = "font-size: 14px;">Nº Resolución UNRaf<h6>
+            {{form_widget(formulario.nroResolucionUnraf, {attr: {class: 'form-control camposEstandar', placeholder: 'Nombre'}})}}
+        </div>
+    </div>
+    <div class = "container row mt-3 justify-content-center">
+        <div class = "col-sm-3">
+            <h6 class = "text-secondary  mt-2 ml-1" style = "font-size: 14px;">Fecha egreso<h6>
+            {{form_widget(formulario.fechaEgreso, {attr: {class: 'form-control camposEstandar', placeholder: 'Nombre'}})}}
+        </div>
+        <div class = "col-sm-5"></div>
+    </div>
+    <div class = "container mt-4 text-center">
+        {{ form_widget(formulario.Aceptar, {attr: {class: 'btn btn-outline-info btn-lg'}})}}
+    </div>
+    {{ form_end(formulario) }}
+</div>
+<br>
+{% endblock %}

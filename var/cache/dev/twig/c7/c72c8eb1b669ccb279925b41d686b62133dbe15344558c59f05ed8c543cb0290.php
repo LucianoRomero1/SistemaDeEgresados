@@ -88,13 +88,13 @@ class __TwigTemplate_3187b8eacf65ac5fae389f792eab357a971769d114c9b263d85e37e44b4
         // line 6
         $this->displayParentBlock("body", $context, $blocks);
         echo "
-<h1 class = \"text-center\" >Alta datos personales graduado/a</h1>
+<h1 class = \"text-center\" >Alta titulaciones graduado/a</h1>
 <div class = \"container\" id = \"divFormulario\"> 
     ";
         // line 9
         echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["formulario"]) || array_key_exists("formulario", $context) ? $context["formulario"] : (function () { throw new RuntimeError('Variable "formulario" does not exist.', 9, $this->source); })()), 'form_start', ["enctype" => "multipart/form-data"]);
         echo "
-    <div class = \"container row mt-3 justify-content-center\">
+    
         ";
         // line 12
         echo "        ";
@@ -123,14 +123,15 @@ class __TwigTemplate_3187b8eacf65ac5fae389f792eab357a971769d114c9b263d85e37e44b4
     <div class = \"container mt-4 text-center\">
         ";
         // line 52
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formulario"]) || array_key_exists("formulario", $context) ? $context["formulario"] : (function () { throw new RuntimeError('Variable "formulario" does not exist.', 52, $this->source); })()), "Cargar", [], "any", false, false, false, 52), 'widget', ["attr" => ["class" => "btn btn-outline-info btn-lg"]]);
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formulario"]) || array_key_exists("formulario", $context) ? $context["formulario"] : (function () { throw new RuntimeError('Variable "formulario" does not exist.', 52, $this->source); })()), "Aceptar", [], "any", false, false, false, 52), 'widget', ["attr" => ["class" => "btn btn-outline-info btn-lg"]]);
         echo "
     </div>
     ";
         // line 54
         echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["formulario"]) || array_key_exists("formulario", $context) ? $context["formulario"] : (function () { throw new RuntimeError('Variable "formulario" does not exist.', 54, $this->source); })()), 'form_end');
         echo "
-    
+</div>
+<br>
 ";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
@@ -140,7 +141,7 @@ class __TwigTemplate_3187b8eacf65ac5fae389f792eab357a971769d114c9b263d85e37e44b4
 
     }
 
-    // line 57
+    // line 58
     public function block_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -150,16 +151,12 @@ class __TwigTemplate_3187b8eacf65ac5fae389f792eab357a971769d114c9b263d85e37e44b4
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 58
+        // line 59
         echo "        ";
         $this->displayParentBlock("javascripts", $context, $blocks);
         echo "
-        <script src=\"https://code.jquery.com/jquery-3.2.1.slim.min.js\" integrity=\"sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN\" crossorigin=\"anonymous\"></script>
-        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js\" integrity=\"sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q\" crossorigin=\"anonymous\"></script>
-        <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js\" integrity=\"sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx\" crossorigin=\"anonymous\"></script>
-        <script src=\"https://use.fontawesome.com/releases/v5.15.2/js/all.js\" data-search-pseudo-elements></script>
         <script src = \"";
-        // line 63
+        // line 60
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/integrarForm.js"), "html", null, true);
         echo "\"></script>
         
@@ -184,7 +181,7 @@ class __TwigTemplate_3187b8eacf65ac5fae389f792eab357a971769d114c9b263d85e37e44b4
 
     public function getDebugInfo()
     {
-        return array (  163 => 63,  154 => 58,  144 => 57,  131 => 54,  126 => 52,  111 => 40,  107 => 39,  102 => 36,  100 => 12,  95 => 9,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
+        return array (  160 => 60,  155 => 59,  145 => 58,  131 => 54,  126 => 52,  111 => 40,  107 => 39,  102 => 36,  100 => 12,  95 => 9,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -195,10 +192,10 @@ class __TwigTemplate_3187b8eacf65ac5fae389f792eab357a971769d114c9b263d85e37e44b4
 
 {% block body %}
 {{parent()}}
-<h1 class = \"text-center\" >Alta datos personales graduado/a</h1>
+<h1 class = \"text-center\" >Alta titulaciones graduado/a</h1>
 <div class = \"container\" id = \"divFormulario\"> 
     {{ form_start(formulario, {'enctype':'multipart/form-data'})}}
-    <div class = \"container row mt-3 justify-content-center\">
+    
         {# ESTO LO COMENTE PORQUE NO ES NECESARIO DIRECTAMENTE EDITAR DESDE ABAJOOOOOOOOOOOOOOOOOOOOOOO #}
         {# <div class = \"col-sm-8\">
             <h6 class = \"text-secondary text-left ml-1  \">Nombre completo del título obtenido por el/la graduado/a</h6> 
@@ -240,17 +237,14 @@ class __TwigTemplate_3187b8eacf65ac5fae389f792eab357a971769d114c9b263d85e37e44b4
         </div>
     </div>
     <div class = \"container mt-4 text-center\">
-        {{ form_widget(formulario.Cargar, {attr: {class: 'btn btn-outline-info btn-lg'}})}}
+        {{ form_widget(formulario.Aceptar, {attr: {class: 'btn btn-outline-info btn-lg'}})}}
     </div>
     {{ form_end(formulario)}}
-    
+</div>
+<br>
 {% endblock %}
 {% block javascripts %}
         {{parent()}}
-        <script src=\"https://code.jquery.com/jquery-3.2.1.slim.min.js\" integrity=\"sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN\" crossorigin=\"anonymous\"></script>
-        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js\" integrity=\"sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q\" crossorigin=\"anonymous\"></script>
-        <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js\" integrity=\"sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx\" crossorigin=\"anonymous\"></script>
-        <script src=\"https://use.fontawesome.com/releases/v5.15.2/js/all.js\" data-search-pseudo-elements></script>
         <script src = \"{{asset('js/integrarForm.js')}}\"></script>
         
 {% endblock %}

@@ -18,6 +18,13 @@ class TitulosRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Titulos::class);
     }
+    
+    public function validarTitulo($titulo){
+        if(is_numeric($titulo -> getNombreTitulo())){
+            return false;
+        }
+        return true;
+    }
 
     // /**
     //  * @return Titulos[] Returns an array of Titulos objects

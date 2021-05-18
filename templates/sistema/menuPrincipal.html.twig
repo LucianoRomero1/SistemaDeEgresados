@@ -20,13 +20,62 @@
         <h1 class="text-center d-inline " style = "color: gray; opacity: 0.5;"> Home</h1>
         <img class="img-fluid iconoHome" style="margin-bottom: 15px;" width= "45" src="{{asset('img/icon.png')}}" />
     </div>
-
     {# DIV Información #}
-    <div class="container info-div" id = "divFormulario">
+    <div class="container info-div" id = "">
 
         <div class="info-title text-left">
             <i class="color-unraf-light fas fa-graduation-cap i-width"></i>
-            <h2 class="color-unraf-light d-inline">Últimas titulaciones de egresados cargadas</h2>
+            <h2 class="color-unraf-light d-inline">Últimos/as graduados/as cargadas</h2>
+        </div>
+        
+        
+        {# EGRESADOS Tabla #}
+        <table style="text-left" class="table table-hover">
+
+            {# EGRESADO Head #}
+            <thead class="table-head color-unraf-light">
+                <tr>
+                    <th scope="col">Nombre y apellido</th>
+                    <th scope="col">DNI</th>
+                    <th scope="col">Nacimiento</th>
+                </tr>
+            </thead>
+
+            {# EGRESADO Body #}
+            <tbody class="table-body color-unraf-yellow">
+
+                {% for graduado in graduados %}
+                    <tr>
+                        {# EGRESADO Nombre #}
+                        <th>
+                            {{graduado.nombre}} {{graduado.apellido}}
+                        </th>
+
+                        {# EGRESADO Dni #}
+                        <th>
+                            {{graduado.documentoIdentidad}}
+                        </th>
+
+                        {# EGRESADO Lugar de nacimiento #}
+                        <th>
+                            {{graduado.ciudad}} ({{graduado.provincia}})
+                        </th>
+                    </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>   
+        
+    </div>
+
+    {# DIV Información #}
+    <div class="container info-div" id = "">
+
+        <div class="info-title text-left">
+            <i class="color-unraf-light fas fa-book i-width"></i>
+            <h2 class="color-unraf-light d-inline">Últimas titulaciones de egresados/as cargadas</h2>
         </div>
         
         
@@ -70,6 +119,7 @@
         </table>   
         
     </div>
+    
 
 </div>
 <br>

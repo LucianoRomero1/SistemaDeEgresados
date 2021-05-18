@@ -114,7 +114,7 @@ class __TwigTemplate_d92b2b74db9b4bd6b10263c0d0c16f60a95c747d2c2367cb19203d64e3a
     </div>
     <hr>
     <div class = \"m-3\">
-        <b style = \"color: #0F9FA8;\">Cantidad de graduados/as cargadas: ";
+        <b style = \"color: #0F9FA8;\">Cantidad de graduados/as encontrados/as: ";
         // line 21
         echo twig_escape_filter($this->env, twig_length_filter($this->env, (isset($context["graduados"]) || array_key_exists("graduados", $context) ? $context["graduados"] : (function () { throw new RuntimeError('Variable "graduados" does not exist.', 21, $this->source); })())), "html", null, true);
         echo " </b>
@@ -167,36 +167,24 @@ class __TwigTemplate_d92b2b74db9b4bd6b10263c0d0c16f60a95c747d2c2367cb19203d64e3a
             // line 40
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["graduado"], "nombre", [], "any", false, false, false, 40), "html", null, true);
             echo "</td>
-                    ";
-            // line 41
-            if (($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_SUPERADMIN") || $this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN"))) {
-                // line 42
-                echo "                    <td style=\"text-align: center;\">
+                    <td style=\"text-align: center;\">
                         <a class =\"btn grow\" href=\"";
-                // line 43
-                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("modificarDatosPersonalesGraduado", ["id" => twig_get_attribute($this->env, $this->source, $context["graduado"], "id", [], "any", false, false, false, 43)]), "html", null, true);
-                echo "\"><i class=\"fas fa-user-edit mb-3\" data-toggle=\"tooltip\" data-placement=\"left\" data-html=\"true\" title=\"Modificar datos personales\" style = \"font-size: 20px;color: #0F9FA8;\"></i></a>
-                        <a class =\"btn grow\" href=\"#\"><i class=\"fas fa-user-graduate mb-3\"  data-toggle=\"tooltip\" data-placement=\"bottom\" data-html=\"true\" title=\"Modificar titulos obtenidos\" style = \"font-size: 20px;color: #0F9FA8;\"></i></a>
+            // line 42
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("modificarDatosPersonalesGraduado", ["id" => twig_get_attribute($this->env, $this->source, $context["graduado"], "id", [], "any", false, false, false, 42)]), "html", null, true);
+            echo "\"><i class=\"fas fa-user-edit mb-3\" data-toggle=\"tooltip\" data-placement=\"left\" data-html=\"true\" title=\"Modificar datos personales\" style = \"font-size: 20px;color: #0F9FA8;\"></i></a>
+                        <a class =\"btn grow\" href=\"";
+            // line 43
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("verTitulacionesGraduado", ["id" => twig_get_attribute($this->env, $this->source, $context["graduado"], "id", [], "any", false, false, false, 43)]), "html", null, true);
+            echo "\"><i class=\"fas fa-user-graduate mb-3\"  data-toggle=\"tooltip\" data-placement=\"bottom\" data-html=\"true\" title=\"Modificar titulos obtenidos\" style = \"font-size: 20px;color: #0F9FA8;\"></i></a>
                     </td>
                     <td style=\"text-align: center;\"><a class =\"btn grow\" href=\"";
-                // line 46
-                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("modificarImagenGraduado", ["id" => twig_get_attribute($this->env, $this->source, $context["graduado"], "id", [], "any", false, false, false, 46)]), "html", null, true);
-                echo "\"><i class=\"fas fa-file-alt mb-3\"  data-toggle=\"tooltip\" data-placement=\"right\" data-html=\"true\" title=\"Modificar imagen TED\" style = \"font-size: 20px; color: #FEB413;\"></i></a></td>
-                    <td style=\"text-align: center;\"><a class =\"btn grow\" onclick=\"#\"><i class=\" fas fa-trash text-danger\" style = \"font-size: 20px;\"></i></a></td> 
-                    ";
-            } else {
-                // line 48
-                echo " 
-                    <td style=\"text-align: center;\">
-                        <a class =\"btn grow\" href=\"#\"><i class=\"fas fa-user-edit mb-3\" style = \"font-size: 20px;color: grey;\" data-toggle=\"tooltip\" data-placement=\"left\" data-html=\"true\" title=\"No tiene el rol necesario para esta acción\"></i></a>
-                        <a class =\"btn grow\" href=\"#\"><i class=\"fas fa-user-graduate mb-3\"   style = \"font-size: 20px;color: grey;\" data-toggle=\"tooltip\" data-placement=\"left\" data-html=\"true\" title=\"No tiene el rol necesario para esta acción\"></i></a>
-                    </td>
-                    <td style=\"text-align: center;\"><a class =\"btn grow\" href=\"#\"><i class=\"fas fa-file-alt mb-3\" style = \"font-size: 20px; color: grey\" data-toggle=\"tooltip\" data-placement=\"left\" data-html=\"true\" title=\"No tiene el rol necesario para esta acción\"></i></a></td>
-                    <td style=\"text-align: center;\"><a class =\"btn grow\" onclick=\"#\"><i class=\" fas fa-trash\"   style = \"font-size: 20px; color:grey;\" data-toggle=\"tooltip\" data-placement=\"left\" data-html=\"true\" title=\"No tiene el rol necesario para esta acción\"></i></a></td>  
-                    ";
-            }
-            // line 55
-            echo "   
+            // line 45
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("modificarImagenGraduado", ["id" => twig_get_attribute($this->env, $this->source, $context["graduado"], "id", [], "any", false, false, false, 45)]), "html", null, true);
+            echo "\"><i class=\"fas fa-file-alt mb-3\"  data-toggle=\"tooltip\" data-placement=\"right\" data-html=\"true\" title=\"Modificar imagen TED\" style = \"font-size: 20px; color: #FEB413;\"></i></a></td>
+                    <td style=\"text-align: center;\"><a class =\"btn grow\" onclick=\"DeleteGraduado(";
+            // line 46
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["graduado"], "id", [], "any", false, false, false, 46), "html", null, true);
+            echo ")\"><i class=\" fas fa-trash text-danger\" style = \"font-size: 20px;\"></i></a></td> 
                 </tr>
             ";
             ++$context['loop']['index0'];
@@ -211,7 +199,7 @@ class __TwigTemplate_d92b2b74db9b4bd6b10263c0d0c16f60a95c747d2c2367cb19203d64e3a
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['graduado'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 58
+        // line 49
         echo "        </tbody>
 
     </table> 
@@ -225,7 +213,7 @@ class __TwigTemplate_d92b2b74db9b4bd6b10263c0d0c16f60a95c747d2c2367cb19203d64e3a
 
     }
 
-    // line 63
+    // line 54
     public function block_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -235,15 +223,15 @@ class __TwigTemplate_d92b2b74db9b4bd6b10263c0d0c16f60a95c747d2c2367cb19203d64e3a
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 64
+        // line 55
         $this->displayParentBlock("javascripts", $context, $blocks);
         echo "
 <script src= \"";
-        // line 65
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/deleteEgresado.js"), "html", null, true);
+        // line 56
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/deleteGraduado.js"), "html", null, true);
         echo "\"></script> 
 <script src = \"";
-        // line 66
+        // line 57
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/popup.js"), "html", null, true);
         echo "\"></script>
 ";
@@ -267,7 +255,7 @@ class __TwigTemplate_d92b2b74db9b4bd6b10263c0d0c16f60a95c747d2c2367cb19203d64e3a
 
     public function getDebugInfo()
     {
-        return array (  247 => 66,  243 => 65,  239 => 64,  229 => 63,  215 => 58,  199 => 55,  189 => 48,  183 => 46,  177 => 43,  174 => 42,  172 => 41,  168 => 40,  164 => 39,  160 => 38,  157 => 37,  140 => 36,  124 => 23,  119 => 21,  111 => 16,  104 => 12,  100 => 11,  94 => 8,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
+        return array (  235 => 57,  231 => 56,  227 => 55,  217 => 54,  203 => 49,  186 => 46,  182 => 45,  177 => 43,  173 => 42,  168 => 40,  164 => 39,  160 => 38,  157 => 37,  140 => 36,  124 => 23,  119 => 21,  111 => 16,  104 => 12,  100 => 11,  94 => 8,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -292,7 +280,7 @@ class __TwigTemplate_d92b2b74db9b4bd6b10263c0d0c16f60a95c747d2c2367cb19203d64e3a
     </div>
     <hr>
     <div class = \"m-3\">
-        <b style = \"color: #0F9FA8;\">Cantidad de graduados/as cargadas: {{graduados|length}} </b>
+        <b style = \"color: #0F9FA8;\">Cantidad de graduados/as encontrados/as: {{graduados|length}} </b>
     </div>
     {{ form_end(form) }}
     <table class=\"table table-borderless mt-2\">
@@ -312,21 +300,12 @@ class __TwigTemplate_d92b2b74db9b4bd6b10263c0d0c16f60a95c747d2c2367cb19203d64e3a
                     <th class = \"pl-3\">{{loop.index}}</th>
                     <td>{{graduado.apellido}}</td>
                     <td>{{graduado.nombre}}</td>
-                    {% if  is_granted('ROLE_SUPERADMIN') or is_granted('ROLE_ADMIN') %}
                     <td style=\"text-align: center;\">
                         <a class =\"btn grow\" href=\"{{path('modificarDatosPersonalesGraduado', {'id': graduado.id})}}\"><i class=\"fas fa-user-edit mb-3\" data-toggle=\"tooltip\" data-placement=\"left\" data-html=\"true\" title=\"Modificar datos personales\" style = \"font-size: 20px;color: #0F9FA8;\"></i></a>
-                        <a class =\"btn grow\" href=\"#\"><i class=\"fas fa-user-graduate mb-3\"  data-toggle=\"tooltip\" data-placement=\"bottom\" data-html=\"true\" title=\"Modificar titulos obtenidos\" style = \"font-size: 20px;color: #0F9FA8;\"></i></a>
+                        <a class =\"btn grow\" href=\"{{path('verTitulacionesGraduado', {'id': graduado.id})}}\"><i class=\"fas fa-user-graduate mb-3\"  data-toggle=\"tooltip\" data-placement=\"bottom\" data-html=\"true\" title=\"Modificar titulos obtenidos\" style = \"font-size: 20px;color: #0F9FA8;\"></i></a>
                     </td>
                     <td style=\"text-align: center;\"><a class =\"btn grow\" href=\"{{path('modificarImagenGraduado', {'id': graduado.id})}}\"><i class=\"fas fa-file-alt mb-3\"  data-toggle=\"tooltip\" data-placement=\"right\" data-html=\"true\" title=\"Modificar imagen TED\" style = \"font-size: 20px; color: #FEB413;\"></i></a></td>
-                    <td style=\"text-align: center;\"><a class =\"btn grow\" onclick=\"#\"><i class=\" fas fa-trash text-danger\" style = \"font-size: 20px;\"></i></a></td> 
-                    {% else %} 
-                    <td style=\"text-align: center;\">
-                        <a class =\"btn grow\" href=\"#\"><i class=\"fas fa-user-edit mb-3\" style = \"font-size: 20px;color: grey;\" data-toggle=\"tooltip\" data-placement=\"left\" data-html=\"true\" title=\"No tiene el rol necesario para esta acción\"></i></a>
-                        <a class =\"btn grow\" href=\"#\"><i class=\"fas fa-user-graduate mb-3\"   style = \"font-size: 20px;color: grey;\" data-toggle=\"tooltip\" data-placement=\"left\" data-html=\"true\" title=\"No tiene el rol necesario para esta acción\"></i></a>
-                    </td>
-                    <td style=\"text-align: center;\"><a class =\"btn grow\" href=\"#\"><i class=\"fas fa-file-alt mb-3\" style = \"font-size: 20px; color: grey\" data-toggle=\"tooltip\" data-placement=\"left\" data-html=\"true\" title=\"No tiene el rol necesario para esta acción\"></i></a></td>
-                    <td style=\"text-align: center;\"><a class =\"btn grow\" onclick=\"#\"><i class=\" fas fa-trash\"   style = \"font-size: 20px; color:grey;\" data-toggle=\"tooltip\" data-placement=\"left\" data-html=\"true\" title=\"No tiene el rol necesario para esta acción\"></i></a></td>  
-                    {% endif %}   
+                    <td style=\"text-align: center;\"><a class =\"btn grow\" onclick=\"DeleteGraduado({{graduado.id}})\"><i class=\" fas fa-trash text-danger\" style = \"font-size: 20px;\"></i></a></td> 
                 </tr>
             {% endfor %}
         </tbody>
@@ -336,7 +315,7 @@ class __TwigTemplate_d92b2b74db9b4bd6b10263c0d0c16f60a95c747d2c2367cb19203d64e3a
 {% endblock %}
 {% block  javascripts %}
 {{parent()}}
-<script src= \"{{asset('js/deleteEgresado.js')}}\"></script> 
+<script src= \"{{asset('js/deleteGraduado.js')}}\"></script> 
 <script src = \"{{asset('js/popup.js')}}\"></script>
 {% endblock %}
 ", "graduado/verGraduados.html.twig", "/var/www/html/RegistroDigital/templates/graduado/verGraduados.html.twig");

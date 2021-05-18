@@ -62,10 +62,10 @@ class __TwigTemplate_4d092979eb686573951bfaa4824aaccb421fd25e7f5e816e27e56b27342
     ";
         // line 16
         $this->displayBlock('body', $context, $blocks);
-        // line 148
+        // line 147
         echo "        ";
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 159
+        // line 158
         echo "        
     </body>
 </html>
@@ -199,65 +199,64 @@ class __TwigTemplate_4d092979eb686573951bfaa4824aaccb421fd25e7f5e816e27e56b27342
             echo "\"><button class=\"btn perfil-btn-light\" ><i class=\"fas fa-home\" style = \"color: #0F9FA8;\"></i></button>Inicio</a>
                     </li>
 
+
                     ";
             // line 61
-            echo "                    <li id=\"menuDocumento\" class=\"nav-item perfil-p mt-2\">
-                        <a class=\"nav-link \" href=\"";
-            // line 62
-            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("verEgresados");
-            echo "\"><button class=\"btn perfil-btn-light\" ><i class=\"fas fa-graduation-cap\" ></i></button>Titulaciones</a>
-                    </li>
-
-                 
-
-                    ";
-            // line 67
             if ($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) {
-                // line 68
+                // line 62
                 echo "                    ";
-                // line 69
+                // line 63
                 echo "                    <li id=\"menuDocumento\" class=\"nav-item perfil-p mt-2\">
                         <a class=\"nav-link \" href=\"";
-                // line 70
+                // line 64
+                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("verEgresados");
+                echo "\"><button class=\"btn perfil-btn-light\" ><i class=\"fas fa-graduation-cap\" ></i></button>Titulaciones</a>
+                    </li>
+
+                    ";
+                // line 68
+                echo "                    <li id=\"menuDocumento\" class=\"nav-item perfil-p mt-2\">
+                        <a class=\"nav-link \" href=\"";
+                // line 69
                 echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("verGraduados");
                 echo "\"><button class=\"btn perfil-btn-light\" ><i class=\"fas fa-graduation-cap\" ></i></button>Graduados</a>
                     </li>
                     
                     ";
-                // line 74
+                // line 73
                 echo "                    <li id=\"menuDocumento\" class=\"nav-item perfil-p mt-2\">
                         <a class=\"nav-link\" href=\"";
-                // line 75
+                // line 74
                 echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("datosAcademicos");
                 echo "\"><button class=\"btn perfil-btn-light\" ><i class=\"fas fa-user-graduate\"></i></button>Datos académicos</a>
                     </li>
                     ";
             }
-            // line 78
+            // line 77
             echo "
                     ";
-            // line 79
+            // line 78
             if ($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_SUPERADMIN")) {
-                // line 80
+                // line 79
                 echo "                    ";
-                // line 81
+                // line 80
                 echo "                    <li id=\"menuDocumento\" class=\"nav-item perfil-p mt-2\">
                         <a class=\"nav-link\" href=\"";
-                // line 82
+                // line 81
                 echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("roles");
                 echo "\"><button class=\"btn perfil-btn-light\" ><i class=\"fas fa-user\"></i></button>Rol de usuarios</a>
                     </li>
                     ";
             }
-            // line 85
+            // line 84
             echo "                  
 
                     ";
+            // line 87
+            echo "                    ";
             // line 88
             echo "                    ";
-            // line 89
-            echo "                    ";
-            // line 92
+            // line 91
             echo "
                 </ul>  
                 <ul class=\"navbar-nav ml-auto\">
@@ -266,29 +265,29 @@ class __TwigTemplate_4d092979eb686573951bfaa4824aaccb421fd25e7f5e816e27e56b27342
 
                         <div class=\"dropdown-menu pers-drop-down\" aria-labelledby=\"navbarDropdownMenuLink\">
                             ";
-            // line 100
+            // line 99
             echo "                            <div class=\"container-fluid user-perfil\" style = \"padding: 5px;\">
 
                                 <div class=\"media\">
                                     ";
-            // line 104
+            // line 103
             echo "                                    <img class=\"perfil-img\" src=\"";
             echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("img/iconoUnraf.png"), "html", null, true);
             echo "\" style = \"padding: 1px;\"></img>
                                     ";
-            // line 106
+            // line 105
             echo "                                    <p class=\"perfil-email text-secondary\">";
-            echo twig_escape_filter($this->env, twig_replace_filter(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 106, $this->source); })()), "user", [], "any", false, false, false, 106), "email", [], "any", false, false, false, 106), ["@unraf.edu.ar" => ""]), "html", null, true);
+            echo twig_escape_filter($this->env, twig_replace_filter(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 105, $this->source); })()), "user", [], "any", false, false, false, 105), "email", [], "any", false, false, false, 105), ["@unraf.edu.ar" => ""]), "html", null, true);
             echo "</p>
                                 </div>
                                 <p style=\"font-size: 10px;\" class=\"text-secondary text-right mt-1\">ROL: ";
-            // line 108
-            echo twig_escape_filter($this->env, twig_slice($this->env, twig_last($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 108, $this->source); })()), "user", [], "any", false, false, false, 108), "roles", [], "any", false, false, false, 108)), 5, 10), "html", null, true);
+            // line 107
+            echo twig_escape_filter($this->env, twig_slice($this->env, twig_last($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 107, $this->source); })()), "user", [], "any", false, false, false, 107), "roles", [], "any", false, false, false, 107)), 5, 10), "html", null, true);
             echo "</p>
                                 <hr>
                                 <div class = \"text-center\">
                                     <a class=\"user-link\" style = \"font-size: 18px;\" href=\"";
-            // line 111
+            // line 110
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("backIntranet");
             echo "\"><i class=\"fas fa-hand-point-left\"></i> Intranet</a>
                                 </div>
@@ -299,20 +298,20 @@ class __TwigTemplate_4d092979eb686573951bfaa4824aaccb421fd25e7f5e816e27e56b27342
                 </ul>
                 
                   ";
-            // line 123
+            // line 122
             echo "            </div>
         </nav>
     </div>
         ";
-            // line 126
+            // line 125
             $context['_parent'] = $context;
-            $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 126, $this->source); })()), "flashes", [0 => "correcto"], "method", false, false, false, 126));
+            $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 125, $this->source); })()), "flashes", [0 => "correcto"], "method", false, false, false, 125));
             foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
-                // line 127
+                // line 126
                 echo "                <div id=\"notificacion\" class=\"container alert alert-success mt-3 wobble-vertical\">
                     <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
                     ";
-                // line 129
+                // line 128
                 echo twig_escape_filter($this->env, $context["message"], "html", null, true);
                 echo "
                 </div>
@@ -321,16 +320,16 @@ class __TwigTemplate_4d092979eb686573951bfaa4824aaccb421fd25e7f5e816e27e56b27342
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 132
+            // line 131
             echo "            ";
             $context['_parent'] = $context;
-            $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 132, $this->source); })()), "flashes", [0 => "error"], "method", false, false, false, 132));
+            $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 131, $this->source); })()), "flashes", [0 => "error"], "method", false, false, false, 131));
             foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
-                // line 133
+                // line 132
                 echo "                <div id=\"notificacion\" class=\"container alert alert-danger mt-3 wobble-vertical\">
                     <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
                     ";
-                // line 135
+                // line 134
                 echo twig_escape_filter($this->env, $context["message"], "html", null, true);
                 echo "
                 </div>
@@ -339,16 +338,16 @@ class __TwigTemplate_4d092979eb686573951bfaa4824aaccb421fd25e7f5e816e27e56b27342
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 138
+            // line 137
             echo "            ";
             $context['_parent'] = $context;
-            $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 138, $this->source); })()), "flashes", [0 => "warning"], "method", false, false, false, 138));
+            $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 137, $this->source); })()), "flashes", [0 => "warning"], "method", false, false, false, 137));
             foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
-                // line 139
+                // line 138
                 echo "                <div id=\"notificacion\" class=\"container alert alert-warning mt-3 wobble-vertical\">
                     <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
                     ";
-                // line 141
+                // line 140
                 echo twig_escape_filter($this->env, $context["message"], "html", null, true);
                 echo "
                 </div>
@@ -357,12 +356,12 @@ class __TwigTemplate_4d092979eb686573951bfaa4824aaccb421fd25e7f5e816e27e56b27342
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 144
+            // line 143
             echo "                
         
     ";
         }
-        // line 146
+        // line 145
         echo "   
     ";
         
@@ -373,7 +372,7 @@ class __TwigTemplate_4d092979eb686573951bfaa4824aaccb421fd25e7f5e816e27e56b27342
 
     }
 
-    // line 148
+    // line 147
     public function block_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -389,11 +388,11 @@ class __TwigTemplate_4d092979eb686573951bfaa4824aaccb421fd25e7f5e816e27e56b27342
                 integrity=\"sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=\"
                 crossorigin=\"anonymous\"></script> 
             <script src=\"";
-        // line 153
+        // line 152
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/accionesDinamicas.js"), "html", null, true);
         echo "\"></script>
             <script src= \"";
-        // line 154
+        // line 153
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/accionesQuery.js"), "html", null, true);
         echo "\"></script>
             <script type=\"text/javascript\" src=\"//cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js\"></script>
@@ -415,7 +414,7 @@ class __TwigTemplate_4d092979eb686573951bfaa4824aaccb421fd25e7f5e816e27e56b27342
 
     public function getDebugInfo()
     {
-        return array (  397 => 154,  393 => 153,  377 => 148,  366 => 146,  361 => 144,  352 => 141,  348 => 139,  343 => 138,  334 => 135,  330 => 133,  325 => 132,  316 => 129,  312 => 127,  308 => 126,  303 => 123,  292 => 111,  286 => 108,  280 => 106,  275 => 104,  270 => 100,  261 => 92,  259 => 89,  257 => 88,  253 => 85,  247 => 82,  244 => 81,  242 => 80,  240 => 79,  237 => 78,  231 => 75,  228 => 74,  222 => 70,  219 => 69,  217 => 68,  215 => 67,  207 => 62,  204 => 61,  198 => 57,  195 => 56,  192 => 54,  190 => 50,  187 => 48,  185 => 47,  182 => 45,  180 => 42,  175 => 38,  169 => 34,  166 => 33,  159 => 27,  155 => 24,  148 => 18,  145 => 17,  135 => 16,  123 => 12,  118 => 10,  114 => 9,  111 => 8,  101 => 7,  82 => 6,  69 => 159,  66 => 148,  64 => 16,  60 => 14,  58 => 7,  54 => 6,  47 => 1,);
+        return array (  396 => 153,  392 => 152,  376 => 147,  365 => 145,  360 => 143,  351 => 140,  347 => 138,  342 => 137,  333 => 134,  329 => 132,  324 => 131,  315 => 128,  311 => 126,  307 => 125,  302 => 122,  291 => 110,  285 => 107,  279 => 105,  274 => 103,  269 => 99,  260 => 91,  258 => 88,  256 => 87,  252 => 84,  246 => 81,  243 => 80,  241 => 79,  239 => 78,  236 => 77,  230 => 74,  227 => 73,  221 => 69,  218 => 68,  212 => 64,  209 => 63,  207 => 62,  205 => 61,  198 => 57,  195 => 56,  192 => 54,  190 => 50,  187 => 48,  185 => 47,  182 => 45,  180 => 42,  175 => 38,  169 => 34,  166 => 33,  159 => 27,  155 => 24,  148 => 18,  145 => 17,  135 => 16,  123 => 12,  118 => 10,  114 => 9,  111 => 8,  101 => 7,  82 => 6,  69 => 158,  66 => 147,  64 => 16,  60 => 14,  58 => 7,  54 => 6,  47 => 1,);
     }
 
     public function getSourceContext()
@@ -479,14 +478,13 @@ class __TwigTemplate_4d092979eb686573951bfaa4824aaccb421fd25e7f5e816e27e56b27342
                         <a class=\"nav-link\" href=\"{{path('menuPrincipal')}}\"><button class=\"btn perfil-btn-light\" ><i class=\"fas fa-home\" style = \"color: #0F9FA8;\"></i></button>Inicio</a>
                     </li>
 
+
+                    {% if is_granted('ROLE_ADMIN') %}
                     {# Titulaciones de egresados #}
                     <li id=\"menuDocumento\" class=\"nav-item perfil-p mt-2\">
                         <a class=\"nav-link \" href=\"{{path('verEgresados')}}\"><button class=\"btn perfil-btn-light\" ><i class=\"fas fa-graduation-cap\" ></i></button>Titulaciones</a>
                     </li>
 
-                 
-
-                    {% if is_granted('ROLE_ADMIN') %}
                     {# Graduados #}
                     <li id=\"menuDocumento\" class=\"nav-item perfil-p mt-2\">
                         <a class=\"nav-link \" href=\"{{path('verGraduados')}}\"><button class=\"btn perfil-btn-light\" ><i class=\"fas fa-graduation-cap\" ></i></button>Graduados</a>

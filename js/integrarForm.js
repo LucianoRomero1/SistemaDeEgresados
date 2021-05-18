@@ -55,7 +55,7 @@ function addFormToCollection($collectionHolderClass) {
 
 function addTagFormDeleteLink($tagFormLi) {
     //AGREGO EL H6 NOMAS PARA QUE SE VEA ABAJO DE LA FECHA DE EGRESO, EN REALIDAD NO ES NECESARIO EL BOTON ES LO QUE IMPORTA Y VIENE DESPUES
-    var $removeFormButton = $('<h6 class = "text-center text-secondary mt-2">Fecha Egreso</h6> <button class="btn btn-outline-danger mt-4" style = "position: relative; left: -300px;" type="button">Eliminar Contacto</button>');
+    var $removeFormButton = $('<h6 class = "text-center text-secondary mt-2">Fecha Egreso</h6> <button class="btn btn-outline-danger mt-4" style = "position: relative; left: -300px;" type="button">Eliminar Titulación</button>');
     $tagFormLi.append($removeFormButton);
 
     $removeFormButton.on('click', function(e) {

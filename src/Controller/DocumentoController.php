@@ -11,22 +11,22 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\UserBusqueda;
 use App\Form\UserBusquedaType;
 use App\Services\ConsultaBD;
-use App\Services\ValidacionesAcademicas;
+use App\Repository\DocumentosRepository;
 
 class DocumentoController extends AbstractController
 {
     /**
      * @Route("admin/altaDocumentos", name="altaDocumentos")
      */
-    public function altaDocumentos(Request $request)
+    public function altaDocumentos(Request $request, DocumentosRepository $docRepo)
     {
         $documento = new Documentos();
-        $validacionesAcademicas = new ValidacionesAcademicas();
+        
 
         $formulario = $this -> createForm(DocumentosType::class, $documento);
         $formulario -> handleRequest($request);
 
-        if($formulario -> isSubmitted() && $formulario -> isValid() && $validacionesAcademicas -> validarDocumento($documento)){
+        if($formulario -> isSubmitted() && $formulario -> isValid() && $docRepo -> validarDocumento($documento)){
             $em = $this -> getDoctrine() -> getManager();
             $em -> persist($documento);
             $em -> flush();
@@ -34,7 +34,7 @@ class DocumentoController extends AbstractController
             $this -> addFlash('correcto', '¡El documento se cargó correctamente!');
             return $this -> redirectToRoute('verDocumentos');
         }
-        else if($validacionesAcademicas -> validarDocumento($documento) == false){
+        else if($docRepo -> validarDocumento($documento) == false){
             $this -> addFlash('error', 'Ingrese un tipo de documento válido');
         }
 
@@ -73,21 +73,21 @@ class DocumentoController extends AbstractController
     /**
      * @Route("admin/modificarDocumentos/{id}", name="modificarDocumentos")
      */
-    public function modificarDocumentos(Request $request, $id){
+    public function modificarDocumentos(Request $request, $id, DocumentosRepository $docRepo){
         $em =  $this -> getDoctrine() -> getManager();
-        $validacionesAcademicas = new ValidacionesAcademicas();
+        
         
         $documento = $em -> getRepository(Documentos::class) -> find($id);
 
         $formulario = $this -> createForm(DocumentosType::class, $documento);
         $formulario -> handleRequest($request);
 
-        if($formulario -> isSubmitted() && $formulario -> isValid() && $validacionesAcademicas -> validarDocumento($documento)){
+        if($formulario -> isSubmitted() && $formulario -> isValid() && $docRepo -> validarDocumento($documento)){
             $em -> flush();
             $this -> addFlash('correcto', '¡El documento se modificó correctamente!');
             return $this -> redirectToRoute('verDocumentos');
         }
-        else if($validacionesAcademicas -> validarDocumento($documento) == false){
+        else if($docRepo -> validarDocumento($documento) == false){
             $this -> addFlash('error', 'Ingrese un tipo de documento válido');
         }
 

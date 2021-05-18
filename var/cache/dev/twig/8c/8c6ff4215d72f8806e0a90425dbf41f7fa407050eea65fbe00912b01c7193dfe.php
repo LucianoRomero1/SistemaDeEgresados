@@ -65,7 +65,7 @@ class __TwigTemplate_8933845168d0e7cbee6c5e01f72d51b52f0cdecd266a63df4b7d7119b04
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        echo "Modificar Titulos";
+        echo "Registro Digital - Modificar Titulo";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
@@ -91,7 +91,7 @@ class __TwigTemplate_8933845168d0e7cbee6c5e01f72d51b52f0cdecd266a63df4b7d7119b04
 <div class =\"container\" id = \"divFormulario\">
     <a class = \"\"href = \"";
         // line 9
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("datosAcademicos");
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("verTitulos");
         echo "\"><i class=\"fas fa-arrow-left grow\" title =\"Volver a ver todos los títulos\" style = \"font-size:30px;color: #0F9FA8;\"></i></a>
     
     ";
@@ -147,13 +147,13 @@ class __TwigTemplate_8933845168d0e7cbee6c5e01f72d51b52f0cdecd266a63df4b7d7119b04
     {
         return new Source("{% extends 'base.html.twig' %}
 
-{% block title %}Modificar Titulos{% endblock %}
+{% block title %}Registro Digital - Modificar Titulo{% endblock %}
 
 {% block body %}
 {{parent()}}
 <h1 class = \"text-center\">Modificar Título</h1> 
 <div class =\"container\" id = \"divFormulario\">
-    <a class = \"\"href = \"{{path('datosAcademicos')}}\"><i class=\"fas fa-arrow-left grow\" title =\"Volver a ver todos los títulos\" style = \"font-size:30px;color: #0F9FA8;\"></i></a>
+    <a class = \"\"href = \"{{path('verTitulos')}}\"><i class=\"fas fa-arrow-left grow\" title =\"Volver a ver todos los títulos\" style = \"font-size:30px;color: #0F9FA8;\"></i></a>
     
     {{ form_start(formulario, {'enctype':'multipart/form-data'})}}
     <div class = \"row mt-4 justify-content-center\">

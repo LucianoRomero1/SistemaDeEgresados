@@ -437,9 +437,6 @@
     <service id="App\Form\GraduadoPersonalesType" class="App\Form\GraduadoPersonalesType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
-    <service id="App\Form\GraduadoTitulacionesOrigType" class="App\Form\GraduadoTitulacionesOrigType" autowire="true" autoconfigure="true">
-      <tag name="form.type"/>
-    </service>
     <service id="App\Form\GraduadoTitulacionesType" class="App\Form\GraduadoTitulacionesType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
@@ -450,6 +447,9 @@
       <tag name="form.type"/>
     </service>
     <service id="App\Form\TitulacionesGraduadoType" class="App\Form\TitulacionesGraduadoType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
+    <service id="App\Form\TitulacionesModifType" class="App\Form\TitulacionesModifType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
     <service id="App\Form\TitulosType" class="App\Form\TitulosType" autowire="true" autoconfigure="true">
@@ -516,24 +516,24 @@
       <argument type="service" id="security.csrf.token_manager"/>
     </service>
     <service id="App\Services\ConsultaBD" class="App\Services\ConsultaBD" autowire="true" autoconfigure="true"/>
+    <service id="App\Services\FuncionesEgresado" class="App\Services\FuncionesEgresado" autowire="true" autoconfigure="true"/>
     <service id="App\Services\FuncionesGenerales" class="App\Services\FuncionesGenerales" autowire="true" autoconfigure="true"/>
     <service id="App\Services\FuncionesGraduado" class="App\Services\FuncionesGraduado" autowire="true" autoconfigure="true"/>
-    <service id="App\Services\ValidacionesAcademicas" class="App\Services\ValidacionesAcademicas" autowire="true" autoconfigure="true"/>
     <service id="App\encriptado" class="App\encriptado" autowire="true" autoconfigure="true"/>
-    <service id="App\talexd\Core" class="App\talexd\Core" autowire="true" autoconfigure="true"/>
-    <service id="App\talexd\Crypto" class="App\talexd\Crypto" autowire="true" autoconfigure="true"/>
-    <service id="App\talexd\DerivedKeys" class="App\talexd\DerivedKeys" autowire="true" autoconfigure="true"/>
-    <service id="App\talexd\Encoding" class="App\talexd\Encoding" autowire="true" autoconfigure="true"/>
-    <service id="App\talexd\Exception\BadFormatException" class="App\talexd\Exception\BadFormatException" autowire="true" autoconfigure="true"/>
-    <service id="App\talexd\Exception\CryptoException" class="App\talexd\Exception\CryptoException" autowire="true" autoconfigure="true"/>
-    <service id="App\talexd\Exception\EnvironmentIsBrokenException" class="App\talexd\Exception\EnvironmentIsBrokenException" autowire="true" autoconfigure="true"/>
-    <service id="App\talexd\Exception\IOException" class="App\talexd\Exception\IOException" autowire="true" autoconfigure="true"/>
-    <service id="App\talexd\Exception\WrongKeyOrModifiedCiphertextException" class="App\talexd\Exception\WrongKeyOrModifiedCiphertextException" autowire="true" autoconfigure="true"/>
-    <service id="App\talexd\File" class="App\talexd\File" autowire="true" autoconfigure="true"/>
-    <service id="App\talexd\Key" class="App\talexd\Key" autowire="true" autoconfigure="true"/>
-    <service id="App\talexd\KeyOrPassword" class="App\talexd\KeyOrPassword" autowire="true" autoconfigure="true"/>
-    <service id="App\talexd\KeyProtectedByPassword" class="App\talexd\KeyProtectedByPassword" autowire="true" autoconfigure="true"/>
-    <service id="App\talexd\RuntimeTests" class="App\talexd\RuntimeTests" autowire="true" autoconfigure="true"/>
+    <service id="App\x\Core" class="App\x\Core" autowire="true" autoconfigure="true"/>
+    <service id="App\x\Crypto" class="App\x\Crypto" autowire="true" autoconfigure="true"/>
+    <service id="App\x\DerivedKeys" class="App\x\DerivedKeys" autowire="true" autoconfigure="true"/>
+    <service id="App\x\Encoding" class="App\x\Encoding" autowire="true" autoconfigure="true"/>
+    <service id="App\x\Exception\BadFormatException" class="App\x\Exception\BadFormatException" autowire="true" autoconfigure="true"/>
+    <service id="App\x\Exception\CryptoException" class="App\x\Exception\CryptoException" autowire="true" autoconfigure="true"/>
+    <service id="App\x\Exception\EnvironmentIsBrokenException" class="App\x\Exception\EnvironmentIsBrokenException" autowire="true" autoconfigure="true"/>
+    <service id="App\x\Exception\IOException" class="App\x\Exception\IOException" autowire="true" autoconfigure="true"/>
+    <service id="App\x\Exception\WrongKeyOrModifiedCiphertextException" class="App\x\Exception\WrongKeyOrModifiedCiphertextException" autowire="true" autoconfigure="true"/>
+    <service id="App\x\File" class="App\x\File" autowire="true" autoconfigure="true"/>
+    <service id="App\x\Key" class="App\x\Key" autowire="true" autoconfigure="true"/>
+    <service id="App\x\KeyOrPassword" class="App\x\KeyOrPassword" autowire="true" autoconfigure="true"/>
+    <service id="App\x\KeyProtectedByPassword" class="App\x\KeyProtectedByPassword" autowire="true" autoconfigure="true"/>
+    <service id="App\x\RuntimeTests" class="App\x\RuntimeTests" autowire="true" autoconfigure="true"/>
     <service id="argument_metadata_factory" class="Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory"/>
     <service id="response_listener" class="Symfony\Component\HttpKernel\EventListener\ResponseListener">
       <tag name="kernel.event_subscriber"/>
@@ -1013,11 +1013,11 @@
         <argument>App\Form\DocumentosType</argument>
         <argument>App\Form\GraduadoPersonalesOrigType</argument>
         <argument>App\Form\GraduadoPersonalesType</argument>
-        <argument>App\Form\GraduadoTitulacionesOrigType</argument>
         <argument>App\Form\GraduadoTitulacionesType</argument>
         <argument>App\Form\ImagenGraduadoOrigType</argument>
         <argument>App\Form\ImagenGraduadoType</argument>
         <argument>App\Form\TitulacionesGraduadoType</argument>
+        <argument>App\Form\TitulacionesModifType</argument>
         <argument>App\Form\TitulosType</argument>
         <argument>App\Form\UserBusquedaType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\FormType</argument>
@@ -1377,7 +1377,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension">
-      <argument type="service" id=".service_locator.5b0V5Lf"/>
+      <argument type="service" id=".service_locator.c2VpbE5"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -5415,8 +5415,6 @@
     <service id=".abstract.instanceof.App\Form\GraduadoPersonalesOrigType" class="App\Form\GraduadoPersonalesOrigType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\GraduadoPersonalesType" class="App\Form\GraduadoPersonalesType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\GraduadoPersonalesType" class="App\Form\GraduadoPersonalesType" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\GraduadoTitulacionesOrigType" class="App\Form\GraduadoTitulacionesOrigType" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Form\GraduadoTitulacionesOrigType" class="App\Form\GraduadoTitulacionesOrigType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\GraduadoTitulacionesType" class="App\Form\GraduadoTitulacionesType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\GraduadoTitulacionesType" class="App\Form\GraduadoTitulacionesType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ImagenGraduadoOrigType" class="App\Form\ImagenGraduadoOrigType" autowire="true" abstract="true"/>
@@ -5425,6 +5423,8 @@
     <service id=".abstract.instanceof.App\Form\ImagenGraduadoType" class="App\Form\ImagenGraduadoType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\TitulacionesGraduadoType" class="App\Form\TitulacionesGraduadoType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\TitulacionesGraduadoType" class="App\Form\TitulacionesGraduadoType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\TitulacionesModifType" class="App\Form\TitulacionesModifType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\TitulacionesModifType" class="App\Form\TitulacionesModifType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\TitulosType" class="App\Form\TitulosType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\TitulosType" class="App\Form\TitulosType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\UserBusquedaType" class="App\Form\UserBusquedaType" autowire="true" abstract="true"/>
@@ -5708,6 +5708,18 @@
         <argument key="loader" type="service" id=".errored..service_locator.KfbR3DY.Symfony\Component\Config\Loader\LoaderInterface"/>
       </argument>
     </service>
+    <service id=".service_locator.Zmc._l6" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="carreraRepo" type="service" id="App\Repository\CarrerasRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.pLWX.Wo" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="docRepo" type="service" id="App\Repository\DocumentosRepository"/>
+      </argument>
+    </service>
     <service id=".service_locator.LvaNcPg" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -5720,11 +5732,23 @@
         <argument key="authenticationUtils" type="service" id="security.authentication_utils"/>
       </argument>
     </service>
-    <service id=".service_locator.stv1z3x" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.VH7nKuz" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="titRepo" type="service" id="App\Repository\TitulosRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.KnVKQ6m" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="App\Controller\CarreraController::altaCarreras" type="service" id=".service_locator.Zmc._l6"/>
+        <argument key="App\Controller\CarreraController::modificarCarreras" type="service" id=".service_locator.Zmc._l6"/>
+        <argument key="App\Controller\DocumentoController::altaDocumentos" type="service" id=".service_locator.pLWX.Wo"/>
+        <argument key="App\Controller\DocumentoController::modificarDocumentos" type="service" id=".service_locator.pLWX.Wo"/>
         <argument key="App\Controller\EgresadoController::consultaTodos" type="service" id=".service_locator.LvaNcPg"/>
         <argument key="App\Controller\SecurityController::login" type="service" id=".service_locator.UDgw6Ol"/>
+        <argument key="App\Controller\TituloController::altaTitulos" type="service" id=".service_locator.VH7nKuz"/>
+        <argument key="App\Controller\TituloController::modificarTitulos" type="service" id=".service_locator.VH7nKuz"/>
         <argument key="App\Controller\UsuarioController::buscarUsuarios" type="service" id=".service_locator.LvaNcPg"/>
         <argument key="App\Kernel::loadRoutes" type="service" id=".service_locator.KfbR3DY"/>
         <argument key="App\Kernel::registerContainerConfiguration" type="service" id=".service_locator.KfbR3DY"/>
@@ -5732,8 +5756,14 @@
         <argument key="kernel::loadRoutes" type="service" id=".service_locator.KfbR3DY"/>
         <argument key="kernel::registerContainerConfiguration" type="service" id=".service_locator.KfbR3DY"/>
         <argument key="kernel::terminate" type="service" id=".service_locator.KfwZsne"/>
+        <argument key="App\Controller\CarreraController:altaCarreras" type="service" id=".service_locator.Zmc._l6"/>
+        <argument key="App\Controller\CarreraController:modificarCarreras" type="service" id=".service_locator.Zmc._l6"/>
+        <argument key="App\Controller\DocumentoController:altaDocumentos" type="service" id=".service_locator.pLWX.Wo"/>
+        <argument key="App\Controller\DocumentoController:modificarDocumentos" type="service" id=".service_locator.pLWX.Wo"/>
         <argument key="App\Controller\EgresadoController:consultaTodos" type="service" id=".service_locator.LvaNcPg"/>
         <argument key="App\Controller\SecurityController:login" type="service" id=".service_locator.UDgw6Ol"/>
+        <argument key="App\Controller\TituloController:altaTitulos" type="service" id=".service_locator.VH7nKuz"/>
+        <argument key="App\Controller\TituloController:modificarTitulos" type="service" id=".service_locator.VH7nKuz"/>
         <argument key="App\Controller\UsuarioController:buscarUsuarios" type="service" id=".service_locator.LvaNcPg"/>
         <argument key="kernel:loadRoutes" type="service" id=".service_locator.KfbR3DY"/>
         <argument key="kernel:registerContainerConfiguration" type="service" id=".service_locator.KfbR3DY"/>
@@ -5799,7 +5829,7 @@
       <argument type="service" id="debug.argument_resolver.not_tagged_controller.inner"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.5b0V5Lf" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.c2VpbE5" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Form\ArchivosOrigType" type="service" id="App\Form\ArchivosOrigType"/>
@@ -5814,11 +5844,11 @@
         <argument key="App\Form\DocumentosType" type="service" id="App\Form\DocumentosType"/>
         <argument key="App\Form\GraduadoPersonalesOrigType" type="service" id="App\Form\GraduadoPersonalesOrigType"/>
         <argument key="App\Form\GraduadoPersonalesType" type="service" id="App\Form\GraduadoPersonalesType"/>
-        <argument key="App\Form\GraduadoTitulacionesOrigType" type="service" id="App\Form\GraduadoTitulacionesOrigType"/>
         <argument key="App\Form\GraduadoTitulacionesType" type="service" id="App\Form\GraduadoTitulacionesType"/>
         <argument key="App\Form\ImagenGraduadoOrigType" type="service" id="App\Form\ImagenGraduadoOrigType"/>
         <argument key="App\Form\ImagenGraduadoType" type="service" id="App\Form\ImagenGraduadoType"/>
         <argument key="App\Form\TitulacionesGraduadoType" type="service" id="App\Form\TitulacionesGraduadoType"/>
+        <argument key="App\Form\TitulacionesModifType" type="service" id="App\Form\TitulacionesModifType"/>
         <argument key="App\Form\TitulosType" type="service" id="App\Form\TitulosType"/>
         <argument key="App\Form\UserBusquedaType" type="service" id="App\Form\UserBusquedaType"/>
         <argument key="Symfony\Bridge\Doctrine\Form\Type\EntityType" type="service" id="form.type.entity"/>
@@ -6281,12 +6311,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.stv1z3x"/>
+      <argument type="service" id=".service_locator.KnVKQ6m"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.stv1z3x"/>
+      <argument type="service" id=".service_locator.KnVKQ6m"/>
     </service>
     <service id=".debug.http_client.inner" class="Symfony\Contracts\HttpClient\HttpClientInterface">
       <argument type="collection"/>
@@ -6698,7 +6728,7 @@
     <service id="oauth2.registry" alias="knpu.oauth2.registry" public="true"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.Kbr2i2X" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.stv1z3x"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.KnVKQ6m"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
     <service id="Psr\Log\LoggerInterface $consoleLogger" alias="monolog.logger.console"/>

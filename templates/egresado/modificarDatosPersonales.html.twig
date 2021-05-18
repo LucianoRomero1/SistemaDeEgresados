@@ -12,8 +12,7 @@
         <div class = "row mt-3 justify-content-center">
             <div class = "col-sm-3">
                 <h6 class = "text-secondary  mt-2 ml-1 text-left" style = "font-size: 14px;">Nombre<h6>
-                {{ form_widget(formulario.nombre, {attr: {class: 'form-control camposEstandar'}})}}
-                
+                {{ form_widget(formulario.nombre, {attr: {class: 'form-control camposEstandar'}})}} 
             </div>
             <div class = "col-sm-2"></div>
             <div class = "col-sm-3">
@@ -29,6 +28,7 @@
             <div class ="col-sm-2"></div>
             <div class = "col-sm-3">
                 {{ form_widget(formulario.dni, {attr: {class: 'form-control camposEstandar', placeholder: 'Doc de identidad'}})}}
+                <h6 class = "text-secondary  mt-2 ml-1 text-left" style = "font-size: 14px;">*Sin puntos<h6>
             </div>
         </div>
         <div class = "row mt-3 justify-content-center">
@@ -40,15 +40,15 @@
             </div>
             <div class = "col-sm-2"></div>
         </div>
-        <div class = "row mt-3 justify-content-center">
+        <div class = "container row mt-4 justify-content-center">
             <div class = "col-sm-3">
-                <h6 class = "text-secondary mt-2 text-left ml-1" style = "font-size: 14px;">Anteponer código de área, sin 15 ni espacios<h6>
-                {{ form_widget(formulario.telefono, {attr: {class: 'form-control camposEstandar'}})}}
+                {{ form_widget(formulario.telefono, {attr: {class: 'form-control camposEstandar', placeholder: 'Teléfono'}})}}
+                <h6 class = "text-secondary ml-1 mt-2 text-left" style = "font-size: 14px;">Anteponer código de área, sin 15 ni espacios<h6>
             </div>
             <div class = "col-sm-1"></div>
-            <div class = "col-sm-4 mt-3">
+            <div class = "col-sm-4">
+                {{ form_widget(formulario.email, {attr: {class: 'form-control camposEstandar', placeholder: 'Email'}})}}
                 <h6 class = "text-secondary  mt-2 text-center" style = "font-size: 14px;">Email<h6>
-                {{ form_widget(formulario.email, {attr: {class: 'form-control camposEstandar'}})}}     
             </div>
         </div>
         <hr>
@@ -58,7 +58,6 @@
             <div class = "col-sm-3">
                 <h6 class = "text-secondary  mt-2 ml-1 text-left" style = "font-size: 14px;">Nacionalidad<h6>
                 {{ form_widget(formulario.nacionalidad, {attr: {class: 'form-control camposEstandar'}})}}
-                
             </div>
             <div class = "col-sm-2"></div>
         </div>
@@ -76,7 +75,7 @@
         <div class = "row mt-3 justify-content-center">
             <div class = "col-sm-3">
                 <h6 class = "text-secondary mt-2 ml-1 text-left" style = "font-size: 14px;">Calle<h6>
-                {{ form_widget(formulario.calle, {attr: {class: 'form-control camposEstandar', placeholder: 'Calle'}})}}
+                {{ form_widget(formulario.calle, {attr: {class: 'form-control camposEstandar'}})}}
             </div>
             <div class = "col-sm-1"></div>
             <div class = "col-sm-2">

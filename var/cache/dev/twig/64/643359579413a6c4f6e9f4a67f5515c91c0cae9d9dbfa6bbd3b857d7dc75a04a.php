@@ -91,7 +91,7 @@ class __TwigTemplate_8f77dfd7ee483541bcc5baeda4a762225896b8e6a6d25e7c2b0b218340a
 <div class =\"container \" id = \"divFormulario\">
     <a class = \"\"href = \"";
         // line 9
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("datosAcademicos");
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("verDocumentos");
         echo "\"><i class=\"fas fa-arrow-left grow\" title =\"Volver a ver todos los documentos\" style = \"font-size:30px;color: #0F9FA8;\"></i></a>
     
     ";
@@ -153,7 +153,7 @@ class __TwigTemplate_8f77dfd7ee483541bcc5baeda4a762225896b8e6a6d25e7c2b0b218340a
 {{parent()}}
 <h1 class = \"text-center\">Modificar Documento</h1> 
 <div class =\"container \" id = \"divFormulario\">
-    <a class = \"\"href = \"{{path('datosAcademicos')}}\"><i class=\"fas fa-arrow-left grow\" title =\"Volver a ver todos los documentos\" style = \"font-size:30px;color: #0F9FA8;\"></i></a>
+    <a class = \"\"href = \"{{path('verDocumentos')}}\"><i class=\"fas fa-arrow-left grow\" title =\"Volver a ver todos los documentos\" style = \"font-size:30px;color: #0F9FA8;\"></i></a>
     
     {{ form_start(formulario, {'enctype':'multipart/form-data'})}}
     <div class = \"row mt-4 justify-content-center\">

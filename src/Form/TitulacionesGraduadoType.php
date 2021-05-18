@@ -24,15 +24,21 @@ class TitulacionesGraduadoType extends AbstractType
                 'query_builder' => function(EntityRepository $er){
                     return $er->createQueryBuilder('nt')
                     ->orderBy('nt.nombreTitulo', "ASC");
-                }
+                },
+                
             ])
             ->add('nroResolucionMinisterial', TextType::class, [
-                'attr' => array('class' => 'form-control camposEstandar mt-3 nroGraduado', 'placeholder' => 'Nº Resolución Ministerial')])
+                'attr' => array('class' => 'form-control camposEstandar mt-3 nroGraduado', 'placeholder' => 'Nº Resolución Ministerial'),
+                
+                ])
             ->add('nroResolucionUnraf', TextType::class, [
-                'attr' => array('class' => 'form-control camposEstandar mt-3 nroGraduado', 'placeholder' => 'Nº Resolución UNRaf')])
+                'attr' => array('class' => 'form-control camposEstandar mt-3 nroGraduado', 'placeholder' => 'Nº Resolución UNRaf'),
+                
+                ])
             ->add('fechaEgreso', DateType::class,[
                 'widget' => 'single_text',
-                'attr' => array('class' => 'form-control camposEstandar mt-3 fechaGraduado')
+                'attr' => array('class' => 'form-control camposEstandar mt-3 fechaGraduado'),
+                
             ])
         ;
     }

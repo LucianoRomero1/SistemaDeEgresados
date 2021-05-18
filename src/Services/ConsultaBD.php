@@ -3,6 +3,7 @@
     
     use App\Entity\UserBusqueda;
     
+    
 
 class ConsultaBD{
     public function consultaTodos(UserBusqueda $busqueda, $manager){
@@ -89,7 +90,18 @@ class ConsultaBD{
 
         $query = $em->createQuery(
             "SELECT e FROM App\Entity\Egresado e ORDER BY e.id DESC"
-        )->setMaxResults(10);
+        )->setMaxResults(5);
+
+
+        return $query->getResult();
+    }
+
+    #################### Para el menu principal 
+    public function getUltimosGraduados($em){
+
+        $query = $em->createQuery(
+            "SELECT e FROM App\Entity\Graduado e ORDER BY e.id DESC"
+        )->setMaxResults(5);
 
 
         return $query->getResult();

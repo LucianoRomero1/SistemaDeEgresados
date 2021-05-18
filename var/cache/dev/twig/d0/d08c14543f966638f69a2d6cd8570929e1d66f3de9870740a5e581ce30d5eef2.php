@@ -120,7 +120,7 @@ class __TwigTemplate_0cec4b26db4941589cf6cf3bd535e98891664b2d6e7ef16dd33f5dde907
     </div>
     <hr>
     <div class = \"m-3\">
-        <b style = \"color: #0F9FA8;\">Cantidad de carreras creadas hasta el momento: ";
+        <b style = \"color: #0F9FA8;\">Cantidad de carreras encontrados: ";
         // line 26
         echo twig_escape_filter($this->env, twig_length_filter($this->env, (isset($context["carreras"]) || array_key_exists("carreras", $context) ? $context["carreras"] : (function () { throw new RuntimeError('Variable "carreras" does not exist.', 26, $this->source); })())), "html", null, true);
         echo " </b>
@@ -130,7 +130,7 @@ class __TwigTemplate_0cec4b26db4941589cf6cf3bd535e98891664b2d6e7ef16dd33f5dde907
         echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["formulario"]) || array_key_exists("formulario", $context) ? $context["formulario"] : (function () { throw new RuntimeError('Variable "formulario" does not exist.', 28, $this->source); })()), 'form_end');
         echo "
     <table class=\"table table-borderless\">
-        <thead>
+        <thead  class = \"text-white\">
             <tr style = \"background-color: #0F9FA8;\">
                 <th>Nro</th>
                 <th>Nombre Carrera</th>
@@ -248,11 +248,11 @@ class __TwigTemplate_0cec4b26db4941589cf6cf3bd535e98891664b2d6e7ef16dd33f5dde907
     </div>
     <hr>
     <div class = \"m-3\">
-        <b style = \"color: #0F9FA8;\">Cantidad de carreras creadas hasta el momento: {{carreras|length}} </b>
+        <b style = \"color: #0F9FA8;\">Cantidad de carreras encontrados: {{carreras|length}} </b>
     </div>
     {{ form_end(formulario) }}
     <table class=\"table table-borderless\">
-        <thead>
+        <thead  class = \"text-white\">
             <tr style = \"background-color: #0F9FA8;\">
                 <th>Nro</th>
                 <th>Nombre Carrera</th>

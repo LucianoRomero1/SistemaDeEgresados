@@ -13,12 +13,14 @@ use App\Entity\TitulacionesAlcanzadasOrig;
 use App\Form\GraduadoPersonalesType;
 use App\Form\GraduadoPersonalesOrigType;
 use App\Form\TitulacionesGraduadoType;
+use App\Form\TitulacionesModif;
 use App\Form\GraduadoTitulacionesType;
 use App\Services\ConsultaBD;
 use App\Services\FuncionesGraduado;
 use App\Entity\UserBusqueda;
 use App\Form\ImagenGraduadoOrigType;
 use App\Form\ImagenGraduadoType;
+use App\Form\TitulacionesModifType;
 use App\Form\UserBusquedaType;
 
 class GraduadoController extends AbstractController
@@ -84,10 +86,11 @@ class GraduadoController extends AbstractController
 
         $funcionesGraduado = new FuncionesGraduado();
         $titulaciones = new TitulacionesAlcanzadas();
+        $graduadoOriginal = new Graduado();
         $graduado = $em -> getRepository(GraduadoSoporte::class) -> find($id);
         
         
-        $formulario = $this->createForm(GraduadoTitulacionesType::class, $graduado);
+        $formulario = $this->createForm(GraduadoTitulacionesType::class, $graduadoOriginal);
         $formulario -> handleRequest($request);
 
         $formularioTitulacion = $this ->createForm(TitulacionesGraduadoType::class, $titulaciones);
@@ -95,15 +98,9 @@ class GraduadoController extends AbstractController
 
         
         if($formulario -> isSubmitted() && $formulario -> isValid()){
-
-            $em -> persist($graduado);
-
-            $graduadoOriginal = new Graduado();
-            $graduadoOriginal = $funcionesGraduado->copiarGraduado($graduadoOriginal,$graduado);
             
-            //Arriba copio todos los datos del egresado soporte en el original y las titulaciones las cargo
-            //directamente al original.
-            $graduadoOriginal -> addTitulacione($titulaciones);
+            $graduadoOriginal = $funcionesGraduado->copiarGraduado($graduadoOriginal,$graduado);
+            $graduadoOriginal -> addTitulacione($titulaciones);         
             $em -> persist($graduadoOriginal);
             $em -> remove($graduado);
             $em -> flush();
@@ -113,6 +110,36 @@ class GraduadoController extends AbstractController
 
         return $this -> render('graduado/titulacionesGraduado.html.twig', [
             'formulario' => $formulario -> createView(), 'formularioTitulacion' => $formularioTitulacion -> createView()
+        ]);
+    }
+
+
+     /**
+     * @Route("admin/agregarTitulacion/{id}", name="agregarTitulacion")
+     */
+    public function agregarTitulacion(Request $request, $id){
+        $em = $this -> getDoctrine() -> getManager();
+
+        
+        $graduado = $em -> getRepository(Graduado::class) -> find($id);
+        $titulaciones = new TitulacionesAlcanzadas();
+
+        $formulario = $this->createForm(GraduadoTitulacionesType::class, $graduado);
+        $formulario -> handleRequest($request);
+
+        $formularioTitulacion = $this ->createForm(TitulacionesGraduadoType::class, $titulaciones);
+        $formularioTitulacion -> handleRequest($request);
+
+        if($formulario -> isSubmitted() && $formulario -> isValid()){
+            $graduado -> addTitulacione($titulaciones);
+            $em -> persist($graduado);
+            $em -> flush();
+
+            return $this -> redirectToRoute('verTitulacionesGraduado', ['id' => $graduado->getId()]); //Lo redirijo a la solapa siguiente
+        }
+
+        return $this -> render('graduado/agregarTitulacion.html.twig', [
+            'formulario' => $formulario -> createView(), 'formularioTitulacion' => $formularioTitulacion -> createView(), 'graduado' => $graduado
         ]);
     }
 
@@ -163,9 +190,24 @@ class GraduadoController extends AbstractController
         }
         
         return $this -> render('graduado/modificarDatosPersonalesGraduado.html.twig', [
-            'formulario' => $formulario -> createView()
+            'formulario' => $formulario -> createView(), 'graduado' => $graduado
         ]);
         
+    }
+
+    /**
+     * @Route("admin/verTitulacionesGraduado/{id}", name="verTitulacionesGraduado")
+     */
+    public function verTitulacionesGraduado($id)
+    {
+        $em = $this -> getDoctrine() -> getManager();
+        $graduado = $em -> getRepository(Graduado::class) -> find($id);
+
+        $titulaciones = $graduado -> getTitulaciones();
+
+        return $this -> render('graduado/verTitulacionesGraduado.html.twig', [
+            'titulaciones' => $titulaciones, 'graduado' => $graduado
+        ]);
     }
 
 
@@ -182,6 +224,7 @@ class GraduadoController extends AbstractController
         $formulario = $this -> createForm(ImagenGraduadoOrigType::class, $graduado);
         $formulario -> handleRequest($request);
 
+        //ACA NO PONGO EL IS VALID PORQUE AL NO CERRAR EL FORM EN EL TWIG, SI PONGO EL ISVALID NO FUNCA
         if($formulario -> isSubmitted() && $funcionesGraduado -> modificarImagenGraduado($formulario, $urlImagen)){
             $em -> persist($graduado);
             $em -> flush();
@@ -195,6 +238,31 @@ class GraduadoController extends AbstractController
             'graduado' => $graduado
         ]);
     }
+
+     /**
+     * @Route("admin/modificarTitulacionesGraduado/{id}/{idGrad}", name="modificarTitulacionesGraduado")
+     */
+    public function modificarTitulacionesGraduado(Request $request, $id, $idGrad)
+    {
+        $em = $this -> getDoctrine() -> getManager();
+        $titulacion = $em -> getRepository(TitulacionesAlcanzadas::class) -> find($id);
+        $graduado = $em -> getRepository(Graduado::class) -> find($idGrad);
+
+        $formulario = $this -> createForm(TitulacionesModifType::class, $titulacion);
+        $formulario -> handleRequest($request);
+
+        if($formulario -> isSubmitted() && $formulario -> isValid()){
+            $em -> persist($titulacion);
+            $em -> flush();
+
+            return $this -> redirectToRoute('verTitulacionesGraduado', ['id' => $graduado->getId()]);
+        }
+
+        return $this -> render('graduado/modificarTitulacionesGraduado.html.twig', [
+            'formulario' => $formulario -> createView(), 'graduado' => $graduado
+        ]);
+    }
+
     
     /**
      * @Route("/admin/verImagenTED/{id}", name="verImagenTED")
@@ -206,6 +274,21 @@ class GraduadoController extends AbstractController
         $graduado= $entityManager->getRepository(Graduado::class)->find($id);
 
         return $this->redirect("https://intranet.unraf.edu.ar/RegistroDigital/uploads/imagenTED/" . $graduado->getImagenTED());
+    }
+
+     /**
+     * @Route("/admin/eliminarTitulacion/{id}/{idGrad}", name="eliminarTitulacion")
+     */
+    public function eliminarTitulacion($id, $idGrad){
+        $em = $this -> getDoctrine() -> getManager();
+
+        $titulacion = $em -> getRepository(TitulacionesAlcanzadas::class) -> find($id);
+        $graduado = $em -> getRepository(Graduado::class) -> find($idGrad);
+
+        $em -> remove($titulacion);
+        $em -> flush();
+
+        return $this -> redirectToRoute('verTitulacionesGraduado', ['id' => $graduado->getId()]);
     }
 
     /**
@@ -229,12 +312,19 @@ class GraduadoController extends AbstractController
 
 
 
-       /**
+    /**
      * @Route("admin/eliminarGraduado/{id}", name="eliminarGraduado")
      */
-    public function eliminarGraduado()
+    public function eliminarGraduado($id)
     {
-        
+        $em = $this -> getDoctrine() -> getManager();
+        $graduado = $em -> getRepository(Graduado::class) -> find($id);
+
+        $em -> remove($graduado);
+        $em -> flush();
+
+        return $this -> redirectToRoute('verGraduados');
+
     }
 
 

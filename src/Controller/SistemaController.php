@@ -42,7 +42,8 @@ class SistemaController extends AbstractController
         $em -> flush();
         return $this->render('sistema/menuPrincipal.html.twig',
             [
-                'egresados' => $consultaBD->getUltimosEgresados($em)
+                'egresados' => $consultaBD->getUltimosEgresados($em),
+                'graduados' => $consultaBD->getUltimosGraduados($em)
             ]
         );
 

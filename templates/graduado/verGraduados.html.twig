@@ -18,7 +18,7 @@
     </div>
     <hr>
     <div class = "m-3">
-        <b style = "color: #0F9FA8;">Cantidad de graduados/as cargadas: {{graduados|length}} </b>
+        <b style = "color: #0F9FA8;">Cantidad de graduados/as encontrados/as: {{graduados|length}} </b>
     </div>
     {{ form_end(form) }}
     <table class="table table-borderless mt-2">
@@ -38,21 +38,12 @@
                     <th class = "pl-3">{{loop.index}}</th>
                     <td>{{graduado.apellido}}</td>
                     <td>{{graduado.nombre}}</td>
-                    {% if  is_granted('ROLE_SUPERADMIN') or is_granted('ROLE_ADMIN') %}
                     <td style="text-align: center;">
                         <a class ="btn grow" href="{{path('modificarDatosPersonalesGraduado', {'id': graduado.id})}}"><i class="fas fa-user-edit mb-3" data-toggle="tooltip" data-placement="left" data-html="true" title="Modificar datos personales" style = "font-size: 20px;color: #0F9FA8;"></i></a>
-                        <a class ="btn grow" href="#"><i class="fas fa-user-graduate mb-3"  data-toggle="tooltip" data-placement="bottom" data-html="true" title="Modificar titulos obtenidos" style = "font-size: 20px;color: #0F9FA8;"></i></a>
+                        <a class ="btn grow" href="{{path('verTitulacionesGraduado', {'id': graduado.id})}}"><i class="fas fa-user-graduate mb-3"  data-toggle="tooltip" data-placement="bottom" data-html="true" title="Modificar titulos obtenidos" style = "font-size: 20px;color: #0F9FA8;"></i></a>
                     </td>
                     <td style="text-align: center;"><a class ="btn grow" href="{{path('modificarImagenGraduado', {'id': graduado.id})}}"><i class="fas fa-file-alt mb-3"  data-toggle="tooltip" data-placement="right" data-html="true" title="Modificar imagen TED" style = "font-size: 20px; color: #FEB413;"></i></a></td>
-                    <td style="text-align: center;"><a class ="btn grow" onclick="#"><i class=" fas fa-trash text-danger" style = "font-size: 20px;"></i></a></td> 
-                    {% else %} 
-                    <td style="text-align: center;">
-                        <a class ="btn grow" href="#"><i class="fas fa-user-edit mb-3" style = "font-size: 20px;color: grey;" data-toggle="tooltip" data-placement="left" data-html="true" title="No tiene el rol necesario para esta acción"></i></a>
-                        <a class ="btn grow" href="#"><i class="fas fa-user-graduate mb-3"   style = "font-size: 20px;color: grey;" data-toggle="tooltip" data-placement="left" data-html="true" title="No tiene el rol necesario para esta acción"></i></a>
-                    </td>
-                    <td style="text-align: center;"><a class ="btn grow" href="#"><i class="fas fa-file-alt mb-3" style = "font-size: 20px; color: grey" data-toggle="tooltip" data-placement="left" data-html="true" title="No tiene el rol necesario para esta acción"></i></a></td>
-                    <td style="text-align: center;"><a class ="btn grow" onclick="#"><i class=" fas fa-trash"   style = "font-size: 20px; color:grey;" data-toggle="tooltip" data-placement="left" data-html="true" title="No tiene el rol necesario para esta acción"></i></a></td>  
-                    {% endif %}   
+                    <td style="text-align: center;"><a class ="btn grow" onclick="DeleteGraduado({{graduado.id}})"><i class=" fas fa-trash text-danger" style = "font-size: 20px;"></i></a></td> 
                 </tr>
             {% endfor %}
         </tbody>
@@ -62,6 +53,6 @@
 {% endblock %}
 {% block  javascripts %}
 {{parent()}}
-<script src= "{{asset('js/deleteEgresado.js')}}"></script> 
+<script src= "{{asset('js/deleteGraduado.js')}}"></script> 
 <script src = "{{asset('js/popup.js')}}"></script>
 {% endblock %}

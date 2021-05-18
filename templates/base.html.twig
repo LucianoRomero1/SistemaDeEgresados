@@ -57,14 +57,13 @@
                         <a class="nav-link" href="{{path('menuPrincipal')}}"><button class="btn perfil-btn-light" ><i class="fas fa-home" style = "color: #0F9FA8;"></i></button>Inicio</a>
                     </li>
 
+
+                    {% if is_granted('ROLE_ADMIN') %}
                     {# Titulaciones de egresados #}
                     <li id="menuDocumento" class="nav-item perfil-p mt-2">
                         <a class="nav-link " href="{{path('verEgresados')}}"><button class="btn perfil-btn-light" ><i class="fas fa-graduation-cap" ></i></button>Titulaciones</a>
                     </li>
 
-                 
-
-                    {% if is_granted('ROLE_ADMIN') %}
                     {# Graduados #}
                     <li id="menuDocumento" class="nav-item perfil-p mt-2">
                         <a class="nav-link " href="{{path('verGraduados')}}"><button class="btn perfil-btn-light" ><i class="fas fa-graduation-cap" ></i></button>Graduados</a>

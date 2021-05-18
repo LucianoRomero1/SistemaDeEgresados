@@ -6,6 +6,7 @@
 {{parent()}}
 <h1 class ="text-center">Imagen TED 1c emitida por SIU GUARANI</h1>
 <div class = "container mt-4"  id = "divFormulario"> 
+    <a href = "{{path('verGraduados')}}"><i class="fas fa-arrow-left grow" style = "font-size:30px; color: #0F9FA8;"></i></a>
     {{ form_start(formulario, {'enctype':'multipart/form-data'})}}
     <div class = "container text-center">
         {% if imagen != null %}
@@ -26,6 +27,8 @@
         {{ form_widget(formulario.Aceptar, {attr: {class: 'btn btn-outline-info btn-lg'}})}}
     </div>
     {# {{ form_end(formulario)}} #}
+    {# NO CIERRO EL FORM PORQUE SINO TIRA ERROR Y NO SE ME OCULTA COMO YO QUIERO #}
 </div>
+
 <script src = "{{asset('js/deleteArchivos.js')}}"></script>
 {% endblock %}

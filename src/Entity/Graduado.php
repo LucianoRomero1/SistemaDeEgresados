@@ -121,14 +121,12 @@ class Graduado
      */
     private $titulaciones;
 
- 
-
-
     public function __construct()
     {
         $this->titulaciones = new ArrayCollection();
-        $this->titulacionesAlcanzadasOrigs = new ArrayCollection();
     }
+
+
 
     public function getId(): ?int
     {
@@ -394,6 +392,7 @@ class Graduado
 
         return $this;
     }
+
 
 
 

@@ -91,7 +91,7 @@ class __TwigTemplate_173c22a3198869eff13f83673c64da881a78b192a0e8f3292533026be3c
 <div class =\"container\" id = \"divFormulario\">
     <a class = \"\"href = \"";
         // line 9
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("datosAcademicos");
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("verCarreras");
         echo "\"><i class=\"fas fa-arrow-left grow\" title =\"Volver a ver todas las carreras\"  style = \"font-size:30px;color: #0F9FA8;\"></i></a>
     
     ";
@@ -153,7 +153,7 @@ class __TwigTemplate_173c22a3198869eff13f83673c64da881a78b192a0e8f3292533026be3c
 {{parent()}}
 <h1 class = \"text-center\">Modificar Carrera</h1> 
 <div class =\"container\" id = \"divFormulario\">
-    <a class = \"\"href = \"{{path('datosAcademicos')}}\"><i class=\"fas fa-arrow-left grow\" title =\"Volver a ver todas las carreras\"  style = \"font-size:30px;color: #0F9FA8;\"></i></a>
+    <a class = \"\"href = \"{{path('verCarreras')}}\"><i class=\"fas fa-arrow-left grow\" title =\"Volver a ver todas las carreras\"  style = \"font-size:30px;color: #0F9FA8;\"></i></a>
     
     {{ form_start(formulario, {'enctype':'multipart/form-data'})}}
     <div class = \"row mt-4 justify-content-center\">

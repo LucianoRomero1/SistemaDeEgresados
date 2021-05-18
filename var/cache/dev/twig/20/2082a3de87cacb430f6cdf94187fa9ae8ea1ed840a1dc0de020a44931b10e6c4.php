@@ -98,23 +98,22 @@ class __TwigTemplate_563289444322f5ca7dac0cb14f932b7daf9490031440cc3c78b124a2887
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("img/icon.png"), "html", null, true);
         echo "\" />
     </div>
-
     ";
-        // line 25
-        echo "    <div class=\"container info-div\" id = \"divFormulario\">
+        // line 24
+        echo "    <div class=\"container info-div\" id = \"\">
 
         <div class=\"info-title text-left\">
             <i class=\"color-unraf-light fas fa-graduation-cap i-width\"></i>
-            <h2 class=\"color-unraf-light d-inline\">Últimas titulaciones de egresados cargadas</h2>
+            <h2 class=\"color-unraf-light d-inline\">Últimos/as graduados/as cargadas</h2>
         </div>
         
         
         ";
-        // line 34
+        // line 33
         echo "        <table style=\"text-left\" class=\"table table-hover\">
 
             ";
-        // line 37
+        // line 36
         echo "            <thead class=\"table-head color-unraf-light\">
                 <tr>
                     <th scope=\"col\">Nombre y apellido</th>
@@ -124,44 +123,124 @@ class __TwigTemplate_563289444322f5ca7dac0cb14f932b7daf9490031440cc3c78b124a2887
             </thead>
 
             ";
-        // line 46
+        // line 45
         echo "            <tbody class=\"table-body color-unraf-yellow\">
 
                 ";
-        // line 48
+        // line 47
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["egresados"]) || array_key_exists("egresados", $context) ? $context["egresados"] : (function () { throw new RuntimeError('Variable "egresados" does not exist.', 48, $this->source); })()));
-        foreach ($context['_seq'] as $context["_key"] => $context["egresado"]) {
-            // line 49
+        $context['_seq'] = twig_ensure_traversable((isset($context["graduados"]) || array_key_exists("graduados", $context) ? $context["graduados"] : (function () { throw new RuntimeError('Variable "graduados" does not exist.', 47, $this->source); })()));
+        foreach ($context['_seq'] as $context["_key"] => $context["graduado"]) {
+            // line 48
             echo "                    <tr>
                         ";
+            // line 50
+            echo "                        <th>
+                            ";
             // line 51
-            echo "                        <th>
-                            ";
-            // line 52
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["egresado"], "nombre", [], "any", false, false, false, 52), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["graduado"], "nombre", [], "any", false, false, false, 51), "html", null, true);
             echo " ";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["egresado"], "apellido", [], "any", false, false, false, 52), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["graduado"], "apellido", [], "any", false, false, false, 51), "html", null, true);
             echo "
                         </th>
 
                         ";
+            // line 55
+            echo "                        <th>
+                            ";
             // line 56
-            echo "                        <th>
-                            ";
-            // line 57
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["egresado"], "dni", [], "any", false, false, false, 57), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["graduado"], "documentoIdentidad", [], "any", false, false, false, 56), "html", null, true);
             echo "
                         </th>
 
                         ";
-            // line 61
+            // line 60
             echo "                        <th>
                             ";
-            // line 62
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["egresado"], "ciudad", [], "any", false, false, false, 62), "html", null, true);
+            // line 61
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["graduado"], "ciudad", [], "any", false, false, false, 61), "html", null, true);
             echo " (";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["egresado"], "provincia", [], "any", false, false, false, 62), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["graduado"], "provincia", [], "any", false, false, false, 61), "html", null, true);
+            echo ")
+                        </th>
+                    </tr>
+
+                ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['graduado'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 66
+        echo "
+            </tbody>
+
+        </table>   
+        
+    </div>
+
+    ";
+        // line 74
+        echo "    <div class=\"container info-div\" id = \"\">
+
+        <div class=\"info-title text-left\">
+            <i class=\"color-unraf-light fas fa-book i-width\"></i>
+            <h2 class=\"color-unraf-light d-inline\">Últimas titulaciones de egresados/as cargadas</h2>
+        </div>
+        
+        
+        ";
+        // line 83
+        echo "        <table style=\"text-left\" class=\"table table-hover\">
+
+            ";
+        // line 86
+        echo "            <thead class=\"table-head color-unraf-light\">
+                <tr>
+                    <th scope=\"col\">Nombre y apellido</th>
+                    <th scope=\"col\">DNI</th>
+                    <th scope=\"col\">Nacimiento</th>
+                </tr>
+            </thead>
+
+            ";
+        // line 95
+        echo "            <tbody class=\"table-body color-unraf-yellow\">
+
+                ";
+        // line 97
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable((isset($context["egresados"]) || array_key_exists("egresados", $context) ? $context["egresados"] : (function () { throw new RuntimeError('Variable "egresados" does not exist.', 97, $this->source); })()));
+        foreach ($context['_seq'] as $context["_key"] => $context["egresado"]) {
+            // line 98
+            echo "                    <tr>
+                        ";
+            // line 100
+            echo "                        <th>
+                            ";
+            // line 101
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["egresado"], "nombre", [], "any", false, false, false, 101), "html", null, true);
+            echo " ";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["egresado"], "apellido", [], "any", false, false, false, 101), "html", null, true);
+            echo "
+                        </th>
+
+                        ";
+            // line 105
+            echo "                        <th>
+                            ";
+            // line 106
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["egresado"], "dni", [], "any", false, false, false, 106), "html", null, true);
+            echo "
+                        </th>
+
+                        ";
+            // line 110
+            echo "                        <th>
+                            ";
+            // line 111
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["egresado"], "ciudad", [], "any", false, false, false, 111), "html", null, true);
+            echo " (";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["egresado"], "provincia", [], "any", false, false, false, 111), "html", null, true);
             echo ")
                         </th>
                     </tr>
@@ -171,13 +250,14 @@ class __TwigTemplate_563289444322f5ca7dac0cb14f932b7daf9490031440cc3c78b124a2887
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['egresado'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 67
+        // line 116
         echo "
             </tbody>
 
         </table>   
         
     </div>
+    
 
 </div>
 <br>
@@ -204,7 +284,7 @@ class __TwigTemplate_563289444322f5ca7dac0cb14f932b7daf9490031440cc3c78b124a2887
 
     public function getDebugInfo()
     {
-        return array (  175 => 67,  162 => 62,  159 => 61,  153 => 57,  150 => 56,  142 => 52,  139 => 51,  136 => 49,  132 => 48,  128 => 46,  118 => 37,  114 => 34,  104 => 25,  98 => 21,  92 => 17,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  254 => 116,  241 => 111,  238 => 110,  232 => 106,  229 => 105,  221 => 101,  218 => 100,  215 => 98,  211 => 97,  207 => 95,  197 => 86,  193 => 83,  183 => 74,  174 => 66,  161 => 61,  158 => 60,  152 => 56,  149 => 55,  141 => 51,  138 => 50,  135 => 48,  131 => 47,  127 => 45,  117 => 36,  113 => 33,  103 => 24,  98 => 21,  92 => 17,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -231,13 +311,62 @@ class __TwigTemplate_563289444322f5ca7dac0cb14f932b7daf9490031440cc3c78b124a2887
         <h1 class=\"text-center d-inline \" style = \"color: gray; opacity: 0.5;\"> Home</h1>
         <img class=\"img-fluid iconoHome\" style=\"margin-bottom: 15px;\" width= \"45\" src=\"{{asset('img/icon.png')}}\" />
     </div>
-
     {# DIV Información #}
-    <div class=\"container info-div\" id = \"divFormulario\">
+    <div class=\"container info-div\" id = \"\">
 
         <div class=\"info-title text-left\">
             <i class=\"color-unraf-light fas fa-graduation-cap i-width\"></i>
-            <h2 class=\"color-unraf-light d-inline\">Últimas titulaciones de egresados cargadas</h2>
+            <h2 class=\"color-unraf-light d-inline\">Últimos/as graduados/as cargadas</h2>
+        </div>
+        
+        
+        {# EGRESADOS Tabla #}
+        <table style=\"text-left\" class=\"table table-hover\">
+
+            {# EGRESADO Head #}
+            <thead class=\"table-head color-unraf-light\">
+                <tr>
+                    <th scope=\"col\">Nombre y apellido</th>
+                    <th scope=\"col\">DNI</th>
+                    <th scope=\"col\">Nacimiento</th>
+                </tr>
+            </thead>
+
+            {# EGRESADO Body #}
+            <tbody class=\"table-body color-unraf-yellow\">
+
+                {% for graduado in graduados %}
+                    <tr>
+                        {# EGRESADO Nombre #}
+                        <th>
+                            {{graduado.nombre}} {{graduado.apellido}}
+                        </th>
+
+                        {# EGRESADO Dni #}
+                        <th>
+                            {{graduado.documentoIdentidad}}
+                        </th>
+
+                        {# EGRESADO Lugar de nacimiento #}
+                        <th>
+                            {{graduado.ciudad}} ({{graduado.provincia}})
+                        </th>
+                    </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>   
+        
+    </div>
+
+    {# DIV Información #}
+    <div class=\"container info-div\" id = \"\">
+
+        <div class=\"info-title text-left\">
+            <i class=\"color-unraf-light fas fa-book i-width\"></i>
+            <h2 class=\"color-unraf-light d-inline\">Últimas titulaciones de egresados/as cargadas</h2>
         </div>
         
         
@@ -281,6 +410,7 @@ class __TwigTemplate_563289444322f5ca7dac0cb14f932b7daf9490031440cc3c78b124a2887
         </table>   
         
     </div>
+    
 
 </div>
 <br>

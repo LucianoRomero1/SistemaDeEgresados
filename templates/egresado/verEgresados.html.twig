@@ -19,7 +19,7 @@
     </div>
     <hr>
     <div class = "m-3">
-        <b style = "color: #0F9FA8;">Cantidad de titulaciones cargadas: {{egresados|length}} </b>
+        <b style = "color: #0F9FA8;">Cantidad de titulaciones encontradas: {{egresados|length}} </b>
     </div>
     {{ form_end(formulario) }}
     
@@ -69,7 +69,7 @@
                 <td>{{egresado.apellido}}</td>
                 <td>{{egresado.nombre}}</td>
                 <td>{{egresado.dni}}</td>
-            {% if  is_granted('ROLE_SUPERADMIN') or is_granted('ROLE_ADMIN') %}
+            
                 <td style="text-align: center;">
                     <a class ="btn grow" href="{{path('modificarDatosPersonales', {'id': egresado.id})}}"><i class="fas fa-user-edit mb-3" data-toggle="tooltip" data-placement="left" data-html="true" title="Modificar datos personales" style = "font-size: 20px;color: #0F9FA8;"></i></a>
                     <a class ="btn grow" href="{{path('modificarDatosAcademicos', {'id': egresado.id})}}"><i class="fas fa-user-graduate mb-3"  data-toggle="tooltip" data-placement="bottom" data-html="true" title="Modificar datos academicos" style = "font-size: 20px;color: #0F9FA8;"></i></a>
@@ -78,7 +78,8 @@
                 <td style="text-align: center;"><a class ="btn grow" href="{{path('modificarArchivos', {'id': egresado.id})}}"><i class="fas fa-file-alt mb-3"  data-toggle="tooltip" data-placement="right" data-html="true" title="Modificar archivos" style = "font-size: 20px; color: #FEB413;"></i></a></td>
                 <td style="text-align: center;"><a class ="btn grow" href="{{path('generatePdf', {'id': egresado.id})}}"><i class="fas fa-file-pdf mb-3"  data-toggle="tooltip" data-placement="right" data-html="true" title="Generar PDF" style = "font-size: 20px; color: #306086;"></i></a></td>
                 <td style="text-align: center;"><a class ="btn grow" onclick="DeleteFunction({{egresado.id}})"><i class=" fas fa-trash text-danger" style = "font-size: 20px;"></i></a></td>   
-            {% else %}
+            {# {% else %}
+                
                 <td style="text-align: center;">
                     <a class ="btn grow" href="#"><i class="fas fa-user-edit mb-3" style = "font-size: 20px;color: grey;" data-toggle="tooltip" data-placement="left" data-html="true" title="No tiene el rol necesario para esta acción"></i></a>
                     <a class ="btn grow" href="#"><i class="fas fa-user-graduate mb-3"   style = "font-size: 20px;color: grey;" data-toggle="tooltip" data-placement="left" data-html="true" title="No tiene el rol necesario para esta acción"></i></a>
@@ -87,7 +88,7 @@
                 <td style="text-align: center;"><a class ="btn grow" href="#"><i class="fas fa-file-alt mb-3" style = "font-size: 20px; color: grey" data-toggle="tooltip" data-placement="left" data-html="true" title="No tiene el rol necesario para esta acción"></i></a></td>
                 <td style="text-align: center;"><a class ="btn grow" href="#"><i class="fas fa-file-pdf mb-3" style = "font-size: 20px; color: grey" data-toggle="tooltip" data-placement="left" data-html="true" title="No tiene el rol necesario para esta acción"></i></a></td>
                 <td style="text-align: center;"><a class ="btn grow" onclick="#"><i class=" fas fa-trash"   style = "font-size: 20px; color:grey;" data-toggle="tooltip" data-placement="left" data-html="true" title="No tiene el rol necesario para esta acción"></i></a></td>    
-            {% endif %}
+            {% endif %} #}
                 
             </tr>
         

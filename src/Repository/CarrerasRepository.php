@@ -19,6 +19,14 @@ class CarrerasRepository extends ServiceEntityRepository
         parent::__construct($registry, Carreras::class);
     }
 
+    public function validarCarrera($carrera){
+        if(is_numeric($carrera -> getNombreCarrera())){
+            return false;
+        }
+        return true;
+    }
+
+
     // /**
     //  * @return Carreras[] Returns an array of Carreras objects
     //  */

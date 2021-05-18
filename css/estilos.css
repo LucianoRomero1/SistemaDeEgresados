@@ -69,7 +69,7 @@ ul{
 .nueva{
     background-color: #FEB413;
     color: white;
-    width: 170px;
+    width: 190px;
     border-radius: 80px 80px 80px 80px;
 }
 
@@ -81,7 +81,9 @@ ul{
     border-radius: 80px 80px 80px 80px;
 }
 
-
+#graduado_titulaciones_titulaciones{
+    display: none;
+}
 
 #idCarreras, #idTitulos, #idDocumentos{
     background-color: #e9ecef;
@@ -159,6 +161,7 @@ ul{
 /* *********** Containers ************** */
 
 .info-div{
+    background-color: white;
     margin-top: 10px;
     border-radius: 20px;
     padding: 10px 15px;
