@@ -65,7 +65,7 @@ class __TwigTemplate_4d092979eb686573951bfaa4824aaccb421fd25e7f5e816e27e56b27342
         // line 147
         echo "        ";
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 158
+        // line 159
         echo "        
     </body>
 </html>
@@ -173,7 +173,7 @@ class __TwigTemplate_4d092979eb686573951bfaa4824aaccb421fd25e7f5e816e27e56b27342
             ";
             // line 38
             echo "            <div class=\"collapse navbar-collapse\" id=\"navbarText\">
-                <ul class=\"navbar-nav animate side-nav \" style = \"\">
+                <ul class=\"navbar-nav animate side-nav \" style = \"background: white;\">
 
                     ";
             // line 42
@@ -383,16 +383,17 @@ class __TwigTemplate_4d092979eb686573951bfaa4824aaccb421fd25e7f5e816e27e56b27342
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
         echo " 
+            <script src=\"https://intranet.unraf.edu.ar/RegistroDigital/public/pdfThumbnails/pdfThumbnails.js\" data-pdfjs-src=\"https://intranet.unraf.edu.ar/RegistroDigital/public/pdfThumbnails/pdf.js/build/pdf.js\"></script>
             <script
                 src=\"https://code.jquery.com/jquery-3.5.1.min.js\"
                 integrity=\"sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=\"
                 crossorigin=\"anonymous\"></script> 
             <script src=\"";
-        // line 152
+        // line 153
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/accionesDinamicas.js"), "html", null, true);
         echo "\"></script>
             <script src= \"";
-        // line 153
+        // line 154
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/accionesQuery.js"), "html", null, true);
         echo "\"></script>
             <script type=\"text/javascript\" src=\"//cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js\"></script>
@@ -414,7 +415,7 @@ class __TwigTemplate_4d092979eb686573951bfaa4824aaccb421fd25e7f5e816e27e56b27342
 
     public function getDebugInfo()
     {
-        return array (  396 => 153,  392 => 152,  376 => 147,  365 => 145,  360 => 143,  351 => 140,  347 => 138,  342 => 137,  333 => 134,  329 => 132,  324 => 131,  315 => 128,  311 => 126,  307 => 125,  302 => 122,  291 => 110,  285 => 107,  279 => 105,  274 => 103,  269 => 99,  260 => 91,  258 => 88,  256 => 87,  252 => 84,  246 => 81,  243 => 80,  241 => 79,  239 => 78,  236 => 77,  230 => 74,  227 => 73,  221 => 69,  218 => 68,  212 => 64,  209 => 63,  207 => 62,  205 => 61,  198 => 57,  195 => 56,  192 => 54,  190 => 50,  187 => 48,  185 => 47,  182 => 45,  180 => 42,  175 => 38,  169 => 34,  166 => 33,  159 => 27,  155 => 24,  148 => 18,  145 => 17,  135 => 16,  123 => 12,  118 => 10,  114 => 9,  111 => 8,  101 => 7,  82 => 6,  69 => 158,  66 => 147,  64 => 16,  60 => 14,  58 => 7,  54 => 6,  47 => 1,);
+        return array (  397 => 154,  393 => 153,  376 => 147,  365 => 145,  360 => 143,  351 => 140,  347 => 138,  342 => 137,  333 => 134,  329 => 132,  324 => 131,  315 => 128,  311 => 126,  307 => 125,  302 => 122,  291 => 110,  285 => 107,  279 => 105,  274 => 103,  269 => 99,  260 => 91,  258 => 88,  256 => 87,  252 => 84,  246 => 81,  243 => 80,  241 => 79,  239 => 78,  236 => 77,  230 => 74,  227 => 73,  221 => 69,  218 => 68,  212 => 64,  209 => 63,  207 => 62,  205 => 61,  198 => 57,  195 => 56,  192 => 54,  190 => 50,  187 => 48,  185 => 47,  182 => 45,  180 => 42,  175 => 38,  169 => 34,  166 => 33,  159 => 27,  155 => 24,  148 => 18,  145 => 17,  135 => 16,  123 => 12,  118 => 10,  114 => 9,  111 => 8,  101 => 7,  82 => 6,  69 => 159,  66 => 147,  64 => 16,  60 => 14,  58 => 7,  54 => 6,  47 => 1,);
     }
 
     public function getSourceContext()
@@ -457,7 +458,7 @@ class __TwigTemplate_4d092979eb686573951bfaa4824aaccb421fd25e7f5e816e27e56b27342
      
             {# Div oculto #}
             <div class=\"collapse navbar-collapse\" id=\"navbarText\">
-                <ul class=\"navbar-nav animate side-nav \" style = \"\">
+                <ul class=\"navbar-nav animate side-nav \" style = \"background: white;\">
 
                     {# Parte del perfil #}
                     {# <div class=\"container-fluid perfil\">
@@ -566,6 +567,7 @@ class __TwigTemplate_4d092979eb686573951bfaa4824aaccb421fd25e7f5e816e27e56b27342
     {% endif %}   
     {% endblock %}
         {% block javascripts %} 
+            <script src=\"https://intranet.unraf.edu.ar/RegistroDigital/public/pdfThumbnails/pdfThumbnails.js\" data-pdfjs-src=\"https://intranet.unraf.edu.ar/RegistroDigital/public/pdfThumbnails/pdf.js/build/pdf.js\"></script>
             <script
                 src=\"https://code.jquery.com/jquery-3.5.1.min.js\"
                 integrity=\"sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=\"

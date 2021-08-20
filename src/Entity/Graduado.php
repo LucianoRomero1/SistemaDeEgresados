@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\GraduadoRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -121,9 +122,15 @@ class Graduado
      */
     private $titulaciones;
 
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $fechaCreacion;
+
     public function __construct()
     {
         $this->titulaciones = new ArrayCollection();
+        $this->fechaCreacion = new DateTime();
     }
 
 
@@ -389,6 +396,18 @@ class Graduado
                 $titulacione->setGraduado(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFechaCreacion(): ?\DateTimeInterface
+    {
+        return $this->fechaCreacion;
+    }
+
+    public function setFechaCreacion(?\DateTimeInterface $fechaCreacion): self
+    {
+        $this->fechaCreacion = $fechaCreacion;
 
         return $this;
     }

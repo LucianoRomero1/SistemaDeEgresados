@@ -104,7 +104,8 @@ class GraduadoController extends AbstractController
             $em -> persist($graduadoOriginal);
             $em -> remove($graduado);
             $em -> flush();
-
+            
+            $this -> addFlash('correcto', '!El graduado/a se cargó correctamente!');
             return $this -> redirectToRoute('verGraduados');
         }
 
@@ -134,7 +135,8 @@ class GraduadoController extends AbstractController
             $graduado -> addTitulacione($titulaciones);
             $em -> persist($graduado);
             $em -> flush();
-
+            
+            $this -> addFlash('correcto', '¡Se agregó un título nuevo a: '. $graduado->getNombre(). ' '. $graduado->getApellido().' DNI Nº: '. $graduado->getDocumentoIdentidad() .'correctamente!');
             return $this -> redirectToRoute('verTitulacionesGraduado', ['id' => $graduado->getId()]); //Lo redirijo a la solapa siguiente
         }
 
@@ -157,7 +159,7 @@ class GraduadoController extends AbstractController
 
         $consultaBD = new ConsultaBD();
 
-        $graduados = $em -> getRepository(Graduado::class)->findBy(array(), array('apellido' => 'DESC'));
+        $graduados = $em -> getRepository(Graduado::class)->findBy(array(), array('id' => 'DESC'));
 
         if ($form->isSubmitted()){
             return $this->render('graduado/verGraduados.html.twig', [
@@ -186,6 +188,7 @@ class GraduadoController extends AbstractController
 
         if($formulario -> isSubmitted() && $formulario -> isValid()){
             $em -> flush();
+            $this -> addFlash('correcto', '¡Los datos personales de '. $graduado->getNombre(). ' '. $graduado->getApellido().' DNI Nº: '. $graduado->getDocumentoIdentidad() .' se han modificado correctamente!');
             return $this -> redirectToRoute('verGraduados');
         }
         
@@ -229,6 +232,7 @@ class GraduadoController extends AbstractController
             $em -> persist($graduado);
             $em -> flush();
 
+            $this -> addFlash('correcto', '¡La imagen TED de '. $graduado->getNombre(). ' '. $graduado->getApellido().' DNI Nº: '. $graduado->getDocumentoIdentidad() .' se modificó correctamente!');
             return $this -> redirectToRoute('verGraduados');
         }
 
@@ -255,6 +259,7 @@ class GraduadoController extends AbstractController
             $em -> persist($titulacion);
             $em -> flush();
 
+            $this -> addFlash('correcto', '¡Los titulación de: '. $graduado->getNombre(). ' '. $graduado->getApellido().' DNI Nº: '. $graduado->getDocumentoIdentidad() .' se modificó correctamente!');
             return $this -> redirectToRoute('verTitulacionesGraduado', ['id' => $graduado->getId()]);
         }
 
@@ -288,6 +293,8 @@ class GraduadoController extends AbstractController
         $em -> remove($titulacion);
         $em -> flush();
 
+
+        $this -> addFlash('correcto', '¡La titulación de '. $graduado->getNombre(). ' '. $graduado->getApellido().' DNI Nº: '. $graduado->getDocumentoIdentidad() .' se eliminó correctamente!');
         return $this -> redirectToRoute('verTitulacionesGraduado', ['id' => $graduado->getId()]);
     }
 
@@ -305,7 +312,7 @@ class GraduadoController extends AbstractController
         //la entidad o para borrar un objeto
         $entityManager->flush();
 
-        
+        $this -> addFlash('correcto', '¡Los imagen TED de '. $graduado->getNombre(). ' '. $graduado->getApellido().' DNI Nº: '. $graduado->getDocumentoIdentidad() .' se eliminó correctamente!');
         return $this -> redirectToRoute('modificarImagenGraduado', ['id' => $id]);
 
     }
@@ -323,6 +330,7 @@ class GraduadoController extends AbstractController
         $em -> remove($graduado);
         $em -> flush();
 
+        $this -> addFlash('correcto', '¡El graduado/a: '. $graduado->getNombre(). ' '. $graduado->getApellido().' DNI Nº: '. $graduado->getDocumentoIdentidad() .' se eliminó correctamente!');
         return $this -> redirectToRoute('verGraduados');
 
     }

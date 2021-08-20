@@ -203,6 +203,11 @@ class Egresado
      */
     private $originalDuplicado;
 
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $fechaCreacion;
+
     public function __construct()
     {
         $this->archivos = new ArrayCollection();
@@ -665,6 +670,18 @@ class Egresado
     public function setOriginalDuplicado(string $originalDuplicado): self
     {
         $this->originalDuplicado = $originalDuplicado;
+
+        return $this;
+    }
+
+    public function getFechaCreacion(): ?\DateTimeInterface
+    {
+        return $this->fechaCreacion;
+    }
+
+    public function setFechaCreacion(?\DateTimeInterface $fechaCreacion): self
+    {
+        $this->fechaCreacion = $fechaCreacion;
 
         return $this;
     }

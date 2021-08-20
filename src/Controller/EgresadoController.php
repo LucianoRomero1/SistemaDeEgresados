@@ -166,19 +166,23 @@ class EgresadoController extends AbstractController
         $form->handleRequest($request);
         $busqueda=$form->getData();
 
-        $egresados = $em -> getRepository(Egresado::class)->findBy(array(), array('apellido' => 'DESC'));
+        $egresados = $em -> getRepository(Egresado::class)->findBy(array(), array('id' => 'DESC'));
 
         //Esto es para el buscador
         if ($form->isSubmitted()){
-            return $this->render('egresado/verEgresados.html.twig', [
-            'egresados' => $this->consultaTodos($busqueda),'formulario' => $form->createView()
-        ]);
+            return $this->render('egresado/verEgresados.html.twig', ['egresados' => $this->consultaTodos($busqueda),'formulario' => $form->createView()]);
         }
         else{
             return $this -> render('egresado/verEgresados.html.twig', [
                 'egresados' => $egresados, 'formulario' => $form->createView()
             ]);
         }
+        
+
+
+        ############# ESTE ES CON EL DATA TABLE #####################
+        //return $this -> render('egresado/verEgresadosTest.html.twig', ['egresados' => $egresados, 'formulario' => $form->createView()]);
+        
         
     }
     
@@ -319,7 +323,7 @@ class EgresadoController extends AbstractController
                         $em -> persist($documento);
                     }
                     else{
-                        $this -> addFlash('error', 'Extension inválida en las imágenes, sólo se permiten .jpg, .png, .pdf, .docx, .doc, .jpeg');
+                        $this -> addFlash('error', 'Extension inválida en las imágenes, sólo se permiten .jpg, .png, .pdf, .jpeg');
                         return $this -> render('egresado/modificarArchivos.html.twig', [
                             'formulario' => $formulario -> createView(),
                             'pdf' => $egresado -> getPdfAnalitico(),
@@ -638,12 +642,12 @@ class EgresadoController extends AbstractController
         }
 
         //Validar Calle
-        $calle = $egresado -> getCalle();
-        $validarCalle = '/^[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙÑñ .]{3,149}$/';
-        if(!preg_match($validarCalle, $calle)){
-            $this -> addFlash('error', 'Ingrese un domicilio válido ');
-            return false;
-        }
+        // $calle = $egresado -> getCalle();
+        // $validarCalle = '/^[A-Za-zäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙÑñ .]{3,149}$/';
+        // if(!preg_match($validarCalle, $calle)){
+        //     $this -> addFlash('error', 'Ingrese un domicilio válido ');
+        //     return false;
+        // }
 
         //Validar Nro Domicilio
         $nroDomicilio = $egresado -> getNroDomicilio();

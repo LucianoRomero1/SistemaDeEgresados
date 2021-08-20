@@ -35,12 +35,12 @@ class GraduadoPersonalesOrigType extends AbstractType
             ->add('email', EmailType::class)
             ->add('nacionalidad', ChoiceType::class, [
                 'choices'  => [
-                    'Argentino/a' => 'Argentino/a',
-                    'Brasilero/a' => 'Brasilero/a',
-                    'Chileno/a' => 'Chileno/a',
-                    'Colombiano/a' => 'Colombiano/a',
-                    'Ecuatoriano/a' => 'Ecuatoriano/a',
-                    'Uruguayo/a' => 'Uruguayo/a',
+                    'Argentina/o' => 'Argentina/o',
+                    'Brasilera/o' => 'Brasilera/o',
+                    'Chilena/o' => 'Chilena/o',
+                    'Colombiana/o' => 'Colombiana/o',
+                    'Ecuatoriana/o' => 'Ecuatoriana/o',
+                    'Uruguaya/o' => 'Uruguaya/o',
                 ],
             ])
             ->add('ciudad', null,['required' => true])

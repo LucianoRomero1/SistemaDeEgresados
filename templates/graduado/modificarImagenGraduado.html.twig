@@ -8,20 +8,27 @@
 <div class = "container mt-4"  id = "divFormulario"> 
     <a href = "{{path('verGraduados')}}"><i class="fas fa-arrow-left grow" style = "font-size:30px; color: #0F9FA8;"></i></a>
     {{ form_start(formulario, {'enctype':'multipart/form-data'})}}
-    <div class = "container text-center">
-        {% if imagen != null %}
-            <ul class = "mt-5">
-                <li>
-                    <img src="{{asset('svg/pdf2.png')}}" width="40" alt="PDF">
-                    <a class="btn btn-primary ml-4 grow" href="{{ path('verImagenTED', {'id': graduado.id}) }}"><i class="fas fa-search"></i></a>
-                    <a class = "btn btn-danger text-white ml-4 grow" onclick="DeleteImagenTED({{graduado.id}})" ><i class="fas fa-ban"></i></a>
-                </li>
-            </ul>
-            
-        {% else %}
-            <h6 class = "text-center" style = "font-size: 15px;">*No hay imagen cargada</h6>
-            {{form_widget ( formulario.imagenTED , { attr : {accept : 'application / .jpg, .png, .pdf, .docx, .doc, .jpeg'}})}}
-        {% endif %}
+    <div class="row">
+        <div class = "col-sm-4"></div>
+        <div class = "col-sm-4" id="divFormulario">
+            {% if imagen != null %}
+                <ul class = "text-center">
+                    <li >
+                        <div class="row justify-content-center m-3">
+                            <img src="{{asset('svg/pdf2.png')}}"  width="60%" alt="PDF">
+                        </div>
+                        <div class="btn-group">
+                            <a class="btn btn-secondary grow" href="{{ path('verImagenTED', {'id': graduado.id}) }}"><i class="fas fa-search"></i></a>
+                            <a class = "btn btn-secondary text-white grow" onclick="DeleteImagenTED({{graduado.id}})" ><i class="fas fa-ban"></i></a>
+                        </div>
+                    </li>
+                </ul>
+                
+            {% else %}
+                <h6 class = "text-center" style = "font-size: 15px;">*No hay imagen cargada</h6>
+                {{form_widget ( formulario.imagenTED , { attr : {accept : 'application / .jpg, .png, .pdf, .docx, .doc, .jpeg'}})}}
+            {% endif %}
+        </div>
     </div>
     <div class = "container mt-5 text-center">
         {{ form_widget(formulario.Aceptar, {attr: {class: 'btn btn-outline-info btn-lg'}})}}

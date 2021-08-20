@@ -88,46 +88,48 @@ class __TwigTemplate_7f47c423d27c7eb3f40304c255a3ed86cbf56b86a15e82f8ef2d5cb81f1
         $this->displayParentBlock("body", $context, $blocks);
         echo "
 <div class = \"container-fluid\">
-    ";
-        // line 9
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["formulario"]) || array_key_exists("formulario", $context) ? $context["formulario"] : (function () { throw new RuntimeError('Variable "formulario" does not exist.', 9, $this->source); })()), 'form_start', ["enctype" => "multipart/form-data"]);
+    <div class=\"bordeSombreado  divBuscar\">
+        ";
+        // line 10
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["formulario"]) || array_key_exists("formulario", $context) ? $context["formulario"] : (function () { throw new RuntimeError('Variable "formulario" does not exist.', 10, $this->source); })()), 'form_start', ["enctype" => "multipart/form-data"]);
         echo "
-    <div class = \"container row \">
-        <div class = \"col-sm-1\">
-            <a class = \"\" href = \"";
-        // line 12
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("datosAcademicos");
-        echo "\"><i class=\"fas fa-arrow-left grow\" title = \"Volver a ver secciones\" style = \"font-size:30px;color: #0F9FA8; margin-top: 5px;\"></i></a>
-        </div>
-        <div class = \"col-sm-6 media\">
-            ";
+        <div class=\"row\">
+            <div class=\"col-sm-6\">
+                <h6 class = \"text-center\" style=\"color:#306086\">Búsqueda</h6>
+                <div class = \"media\">
+                    ";
         // line 15
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formulario"]) || array_key_exists("formulario", $context) ? $context["formulario"] : (function () { throw new RuntimeError('Variable "formulario" does not exist.', 15, $this->source); })()), "buscar", [], "any", false, false, false, 15), 'widget', ["attr" => ["class" => "form-control campoForm", "placeholder" => "Buscar por título.."]]);
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formulario"]) || array_key_exists("formulario", $context) ? $context["formulario"] : (function () { throw new RuntimeError('Variable "formulario" does not exist.', 15, $this->source); })()), "buscar", [], "any", false, false, false, 15), 'widget', ["attr" => ["class" => "form-control", "placeholder" => "Buscar por nombre..."]]);
         echo "  
-            ";
+                    ";
         // line 16
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formulario"]) || array_key_exists("formulario", $context) ? $context["formulario"] : (function () { throw new RuntimeError('Variable "formulario" does not exist.', 16, $this->source); })()), "Buscar", [], "any", false, false, false, 16), 'widget', ["attr" => ["class" => "btn btn-buscar d-inline"]]);
-        echo "  
-        </div>
-        <div class = \"col-sm-3\"></div>
-        <div class = \"col-sm-2\">
-            <a class = \"btn form-control campoForm nueva\" style = \"background-color: #; color: white;\" href = \"";
-        // line 20
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formulario"]) || array_key_exists("formulario", $context) ? $context["formulario"] : (function () { throw new RuntimeError('Variable "formulario" does not exist.', 16, $this->source); })()), "Buscar", [], "any", false, false, false, 16), 'widget', ["attr" => ["class" => "btn btn-buscar"]]);
+        echo " 
+                </div>
+            </div>
+            <div class=\"col-sm-6\">
+                <h6 style=\"color:#306086\" class = \"text-center\">Cargar título </h6>
+                <div class = \"text-center\">
+                    <a class = \"btn botonCeleste ancho text-white grow text-center\" style = \"\" href = \"";
+        // line 22
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("altaTitulos");
-        echo "\">Nuevo título</a>
+        echo "\">Nuevo título.</a>
+                </div>
+            </div>
         </div>
-    </div>
-    <hr>
-    <div class = \"m-3\">
-        <b style = \"color: #0F9FA8;\">Cantidad de títulos creados hasta el momento: ";
-        // line 25
-        echo twig_escape_filter($this->env, twig_length_filter($this->env, (isset($context["titulos"]) || array_key_exists("titulos", $context) ? $context["titulos"] : (function () { throw new RuntimeError('Variable "titulos" does not exist.', 25, $this->source); })())), "html", null, true);
-        echo " </b>
-    </div>
-    ";
+        <br>
+        ";
         // line 27
         echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["formulario"]) || array_key_exists("formulario", $context) ? $context["formulario"] : (function () { throw new RuntimeError('Variable "formulario" does not exist.', 27, $this->source); })()), 'form_end');
         echo "
+        <div class = \"m-2\">
+            <b style = \"color: #0F9FA8;\">Cantidad de títulos encontrados: ";
+        // line 29
+        echo twig_escape_filter($this->env, twig_length_filter($this->env, (isset($context["titulos"]) || array_key_exists("titulos", $context) ? $context["titulos"] : (function () { throw new RuntimeError('Variable "titulos" does not exist.', 29, $this->source); })())), "html", null, true);
+        echo " </b>
+        </div>
+    </div> 
+    <br>
     <table class=\"table table-borderless\">
         <thead  class = \"text-white\">
                 <tr style = \"background-color: #0F9FA8;\">
@@ -139,9 +141,9 @@ class __TwigTemplate_7f47c423d27c7eb3f40304c255a3ed86cbf56b86a15e82f8ef2d5cb81f1
         </thead>
         <tbody>
             ";
-        // line 38
+        // line 43
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["titulos"]) || array_key_exists("titulos", $context) ? $context["titulos"] : (function () { throw new RuntimeError('Variable "titulos" does not exist.', 38, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["titulos"]) || array_key_exists("titulos", $context) ? $context["titulos"] : (function () { throw new RuntimeError('Variable "titulos" does not exist.', 43, $this->source); })()));
         $context['loop'] = [
           'parent' => $context['_parent'],
           'index0' => 0,
@@ -156,23 +158,23 @@ class __TwigTemplate_7f47c423d27c7eb3f40304c255a3ed86cbf56b86a15e82f8ef2d5cb81f1
             $context['loop']['last'] = 1 === $length;
         }
         foreach ($context['_seq'] as $context["_key"] => $context["titulo"]) {
-            // line 39
+            // line 44
             echo "            <tr>
                 <th>";
-            // line 40
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["loop"], "index", [], "any", false, false, false, 40), "html", null, true);
+            // line 45
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["loop"], "index", [], "any", false, false, false, 45), "html", null, true);
             echo "</th>
                 <td>";
-            // line 41
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["titulo"], "nombreTitulo", [], "any", false, false, false, 41), "html", null, true);
+            // line 46
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["titulo"], "nombreTitulo", [], "any", false, false, false, 46), "html", null, true);
             echo "</td>
                 <td style=\"text-align: center;\"><a class =\"btn grow\" href=\"";
-            // line 42
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("modificarTitulos", ["id" => twig_get_attribute($this->env, $this->source, $context["titulo"], "id", [], "any", false, false, false, 42)]), "html", null, true);
+            // line 47
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("modificarTitulos", ["id" => twig_get_attribute($this->env, $this->source, $context["titulo"], "id", [], "any", false, false, false, 47)]), "html", null, true);
             echo "\" ><i class=\"far fa-edit text-success\" style = \"font-size: 20px;\"></i></a></td>
                 <td style=\"text-align: center;\"><a class = \"btn grow\" onclick=\"DeleteFunction(";
-            // line 43
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["titulo"], "id", [], "any", false, false, false, 43), "html", null, true);
+            // line 48
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["titulo"], "id", [], "any", false, false, false, 48), "html", null, true);
             echo ")\"><i class=\" fas fa-trash text-danger\"   style = \"font-size: 20px\"></i></a></td>
             </tr>
             ";
@@ -188,12 +190,12 @@ class __TwigTemplate_7f47c423d27c7eb3f40304c255a3ed86cbf56b86a15e82f8ef2d5cb81f1
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['titulo'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 46
+        // line 51
         echo "        </tbody>
     </table> 
 </div>
 <script src = \"";
-        // line 49
+        // line 54
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/deleteTitulos.js"), "html", null, true);
         echo "\"></script>
 ";
@@ -217,7 +219,7 @@ class __TwigTemplate_7f47c423d27c7eb3f40304c255a3ed86cbf56b86a15e82f8ef2d5cb81f1
 
     public function getDebugInfo()
     {
-        return array (  197 => 49,  192 => 46,  175 => 43,  171 => 42,  167 => 41,  163 => 40,  160 => 39,  143 => 38,  129 => 27,  124 => 25,  116 => 20,  109 => 16,  105 => 15,  99 => 12,  93 => 9,  88 => 7,  78 => 6,  59 => 4,  36 => 2,);
+        return array (  199 => 54,  194 => 51,  177 => 48,  173 => 47,  169 => 46,  165 => 45,  162 => 44,  145 => 43,  128 => 29,  123 => 27,  115 => 22,  106 => 16,  102 => 15,  94 => 10,  88 => 7,  78 => 6,  59 => 4,  36 => 2,);
     }
 
     public function getSourceContext()
@@ -230,25 +232,30 @@ class __TwigTemplate_7f47c423d27c7eb3f40304c255a3ed86cbf56b86a15e82f8ef2d5cb81f1
 {% block body %}
 {{parent()}}
 <div class = \"container-fluid\">
-    {{ form_start(formulario, {'enctype':'multipart/form-data'})}}
-    <div class = \"container row \">
-        <div class = \"col-sm-1\">
-            <a class = \"\" href = \"{{path('datosAcademicos')}}\"><i class=\"fas fa-arrow-left grow\" title = \"Volver a ver secciones\" style = \"font-size:30px;color: #0F9FA8; margin-top: 5px;\"></i></a>
+    <div class=\"bordeSombreado  divBuscar\">
+        {{ form_start(formulario, {'enctype':'multipart/form-data'})}}
+        <div class=\"row\">
+            <div class=\"col-sm-6\">
+                <h6 class = \"text-center\" style=\"color:#306086\">Búsqueda</h6>
+                <div class = \"media\">
+                    {{ form_widget(formulario.buscar, {attr: {class: 'form-control',placeholder: 'Buscar por nombre...'} }) }}  
+                    {{ form_widget(formulario.Buscar, {attr: {class: 'btn btn-buscar'} }) }} 
+                </div>
+            </div>
+            <div class=\"col-sm-6\">
+                <h6 style=\"color:#306086\" class = \"text-center\">Cargar título </h6>
+                <div class = \"text-center\">
+                    <a class = \"btn botonCeleste ancho text-white grow text-center\" style = \"\" href = \"{{path('altaTitulos')}}\">Nuevo título.</a>
+                </div>
+            </div>
         </div>
-        <div class = \"col-sm-6 media\">
-            {{ form_widget(formulario.buscar, {attr: {class: 'form-control campoForm' , placeholder: 'Buscar por título..'} }) }}  
-            {{ form_widget(formulario.Buscar, {attr: {class: 'btn btn-buscar d-inline'} }) }}  
+        <br>
+        {{ form_end(formulario) }}
+        <div class = \"m-2\">
+            <b style = \"color: #0F9FA8;\">Cantidad de títulos encontrados: {{titulos|length}} </b>
         </div>
-        <div class = \"col-sm-3\"></div>
-        <div class = \"col-sm-2\">
-            <a class = \"btn form-control campoForm nueva\" style = \"background-color: #; color: white;\" href = \"{{path('altaTitulos')}}\">Nuevo título</a>
-        </div>
-    </div>
-    <hr>
-    <div class = \"m-3\">
-        <b style = \"color: #0F9FA8;\">Cantidad de títulos creados hasta el momento: {{titulos|length}} </b>
-    </div>
-    {{ form_end(formulario) }}
+    </div> 
+    <br>
     <table class=\"table table-borderless\">
         <thead  class = \"text-white\">
                 <tr style = \"background-color: #0F9FA8;\">

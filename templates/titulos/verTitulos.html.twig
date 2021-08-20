@@ -6,25 +6,30 @@
 {% block body %}
 {{parent()}}
 <div class = "container-fluid">
-    {{ form_start(formulario, {'enctype':'multipart/form-data'})}}
-    <div class = "container row ">
-        <div class = "col-sm-1">
-            <a class = "" href = "{{path('datosAcademicos')}}"><i class="fas fa-arrow-left grow" title = "Volver a ver secciones" style = "font-size:30px;color: #0F9FA8; margin-top: 5px;"></i></a>
+    <div class="bordeSombreado  divBuscar">
+        {{ form_start(formulario, {'enctype':'multipart/form-data'})}}
+        <div class="row">
+            <div class="col-sm-6">
+                <h6 class = "text-center" style="color:#306086">Búsqueda</h6>
+                <div class = "media">
+                    {{ form_widget(formulario.buscar, {attr: {class: 'form-control',placeholder: 'Buscar por nombre...'} }) }}  
+                    {{ form_widget(formulario.Buscar, {attr: {class: 'btn btn-buscar'} }) }} 
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <h6 style="color:#306086" class = "text-center">Cargar título </h6>
+                <div class = "text-center">
+                    <a class = "btn botonCeleste ancho text-white grow text-center" style = "" href = "{{path('altaTitulos')}}">Nuevo título.</a>
+                </div>
+            </div>
         </div>
-        <div class = "col-sm-6 media">
-            {{ form_widget(formulario.buscar, {attr: {class: 'form-control campoForm' , placeholder: 'Buscar por título..'} }) }}  
-            {{ form_widget(formulario.Buscar, {attr: {class: 'btn btn-buscar d-inline'} }) }}  
+        <br>
+        {{ form_end(formulario) }}
+        <div class = "m-2">
+            <b style = "color: #0F9FA8;">Cantidad de títulos encontrados: {{titulos|length}} </b>
         </div>
-        <div class = "col-sm-3"></div>
-        <div class = "col-sm-2">
-            <a class = "btn form-control campoForm nueva" style = "background-color: #; color: white;" href = "{{path('altaTitulos')}}">Nuevo título</a>
-        </div>
-    </div>
-    <hr>
-    <div class = "m-3">
-        <b style = "color: #0F9FA8;">Cantidad de títulos encontrados: {{titulos|length}} </b>
-    </div>
-    {{ form_end(formulario) }}
+    </div> 
+    <br>
     <table class="table table-borderless">
         <thead  class = "text-white">
                 <tr style = "background-color: #0F9FA8;">

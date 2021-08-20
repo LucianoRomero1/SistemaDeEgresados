@@ -154,27 +154,27 @@ class __TwigTemplate_c7f04ba2ba18643fbb2694fd2b47962a4a05d10cb4fb24b2cd85c43e91d
         echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formulario"]) || array_key_exists("formulario", $context) ? $context["formulario"] : (function () { throw new RuntimeError('Variable "formulario" does not exist.', 45, $this->source); })()), "nroResolucionRectoral", [], "any", false, false, false, 45), 'widget', ["attr" => ["class" => "form-control camposEstandar", "placeholder" => "Nº rectoral"]]);
         echo "
         </div>
-        <div class = \"col-sm-3\">
-            ";
-        // line 48
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formulario"]) || array_key_exists("formulario", $context) ? $context["formulario"] : (function () { throw new RuntimeError('Variable "formulario" does not exist.', 48, $this->source); })()), "nroDiploma", [], "any", false, false, false, 48), 'widget', ["attr" => ["class" => "form-control camposEstandar", "placeholder" => "Nº diploma"]]);
-        echo " 
-        </div>   
+        <div class = \"col-sm-3\"></div>   
     </div>
     <div class = \"row mt-4 justify-content-center\">
         <div class = \"col-sm-3\">
             ";
-        // line 53
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formulario"]) || array_key_exists("formulario", $context) ? $context["formulario"] : (function () { throw new RuntimeError('Variable "formulario" does not exist.', 53, $this->source); })()), "nroAnalitico", [], "any", false, false, false, 53), 'widget', ["attr" => ["class" => "form-control camposEstandar", "placeholder" => "Nº analítico"]]);
+        // line 51
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formulario"]) || array_key_exists("formulario", $context) ? $context["formulario"] : (function () { throw new RuntimeError('Variable "formulario" does not exist.', 51, $this->source); })()), "nroDiploma", [], "any", false, false, false, 51), 'widget', ["attr" => ["class" => "form-control camposEstandar", "placeholder" => "Nº diploma"]]);
+        echo " 
+        </div>
+        <div class = \"col-sm-3\">
+            ";
+        // line 54
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formulario"]) || array_key_exists("formulario", $context) ? $context["formulario"] : (function () { throw new RuntimeError('Variable "formulario" does not exist.', 54, $this->source); })()), "nroAnalitico", [], "any", false, false, false, 54), 'widget', ["attr" => ["class" => "form-control camposEstandar", "placeholder" => "Nº analítico"]]);
         echo "
         </div>
         <div class = \"col-sm-3\">
             ";
-        // line 56
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formulario"]) || array_key_exists("formulario", $context) ? $context["formulario"] : (function () { throw new RuntimeError('Variable "formulario" does not exist.', 56, $this->source); })()), "nroRevalida", [], "any", false, false, false, 56), 'widget', ["attr" => ["class" => "form-control camposEstandar", "placeholder" => "Nº reválida"]]);
+        // line 57
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formulario"]) || array_key_exists("formulario", $context) ? $context["formulario"] : (function () { throw new RuntimeError('Variable "formulario" does not exist.', 57, $this->source); })()), "nroRevalida", [], "any", false, false, false, 57), 'widget', ["attr" => ["class" => "form-control camposEstandar", "placeholder" => "Nº reválida"]]);
         echo "
         </div>
-        <div class = \"col-sm-3\"></div>
     </div>
     <br>
     <div class = \"row mt-4 justify-content-center\">
@@ -223,7 +223,7 @@ class __TwigTemplate_c7f04ba2ba18643fbb2694fd2b47962a4a05d10cb4fb24b2cd85c43e91d
 
     public function getDebugInfo()
     {
-        return array (  200 => 73,  195 => 71,  186 => 65,  174 => 56,  168 => 53,  160 => 48,  154 => 45,  148 => 42,  139 => 36,  133 => 33,  125 => 28,  117 => 23,  108 => 17,  101 => 13,  95 => 10,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  200 => 73,  195 => 71,  186 => 65,  175 => 57,  169 => 54,  163 => 51,  154 => 45,  148 => 42,  139 => 36,  133 => 33,  125 => 28,  117 => 23,  108 => 17,  101 => 13,  95 => 10,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -274,18 +274,18 @@ class __TwigTemplate_c7f04ba2ba18643fbb2694fd2b47962a4a05d10cb4fb24b2cd85c43e91d
         <div class = \"col-sm-3\">
             {{ form_widget(formulario.nroResolucionRectoral, {attr: {class: 'form-control camposEstandar', placeholder: 'Nº rectoral'}})}}
         </div>
-        <div class = \"col-sm-3\">
-            {{ form_widget(formulario.nroDiploma, {attr: {class: 'form-control camposEstandar', placeholder: 'Nº diploma'}})}} 
-        </div>   
+        <div class = \"col-sm-3\"></div>   
     </div>
     <div class = \"row mt-4 justify-content-center\">
+        <div class = \"col-sm-3\">
+            {{ form_widget(formulario.nroDiploma, {attr: {class: 'form-control camposEstandar', placeholder: 'Nº diploma'}})}} 
+        </div>
         <div class = \"col-sm-3\">
             {{ form_widget(formulario.nroAnalitico, {attr: {class: 'form-control camposEstandar', placeholder: 'Nº analítico'}})}}
         </div>
         <div class = \"col-sm-3\">
             {{ form_widget(formulario.nroRevalida, {attr: {class: 'form-control camposEstandar', placeholder: 'Nº reválida'}})}}
         </div>
-        <div class = \"col-sm-3\"></div>
     </div>
     <br>
     <div class = \"row mt-4 justify-content-center\">

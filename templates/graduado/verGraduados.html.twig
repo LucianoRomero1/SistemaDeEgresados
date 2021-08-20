@@ -5,22 +5,30 @@
 {% block body %}
 {{parent()}}
 <div class = "container-fluid">
-    {{ form_start(form, {'enctype':'multipart/form-data'})}}
-    <div class = "container row mt-3">
-        <div class = "col-sm-7 media">
-            {{ form_widget(form.buscar, {attr: {class: 'form-control campoForm' , placeholder: 'Buscar por apellido o por DNI'} }) }}  
-            {{ form_widget(form.Buscar, {attr: {class: 'btn btn-buscar d-inline'} }) }}  
+    <div class="bordeSombreado  divBuscar">
+        {{ form_start(form, {'enctype':'multipart/form-data'})}}
+        <div class="row">
+            <div class="col-sm-6">
+                <h6 class = "text-center" style="color:#306086">Búsqueda</h6>
+                <div class = "media">
+                    {{ form_widget(form.buscar, {attr: {class: 'form-control',placeholder: 'Buscar por apellido...'} }) }}  
+                    {{ form_widget(form.Buscar, {attr: {class: 'btn btn-buscar'} }) }} 
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <h6 style="color:#306086" class = "text-center">Cargar graduado/a </h6>
+                <div class = "text-center">
+                    <a class = "btn botonCeleste ancho text-white grow text-center" style = "" href = "{{path('datosPersonalesGraduado')}}">Nuevo graduado/a</a>
+                </div>
+            </div>
         </div>
-        <div class = "col-sm-3"></div>
-        <div class = "col-sm-2">
-            <a class = "btn form-control campoForm nueva" style = "background-color: #; color: white;" href = "{{path('datosPersonalesGraduado')}}">Nuevo graduado/a</a>
+        <br>
+        {{ form_end(form) }}
+        <div class = "m-2">
+            <b style = "color: #0F9FA8;"> Cantidad de graduados/as cargadas: {{graduados|length}} </b>
         </div>
-    </div>
-    <hr>
-    <div class = "m-3">
-        <b style = "color: #0F9FA8;">Cantidad de graduados/as encontrados/as: {{graduados|length}} </b>
-    </div>
-    {{ form_end(form) }}
+    </div> 
+    <br>
     <table class="table table-borderless mt-2">
             <thead class = "text-white" style = "background-color: #0F9FA8;">
                     <th>Nº</th>
@@ -35,7 +43,7 @@
         <tbody id="myTable">
             {% for graduado in graduados %}
                 <tr>
-                    <th class = "pl-3">{{loop.index}}</th>
+                    <th class = "pl-3">{{graduado.id}}</th>
                     <td>{{graduado.apellido}}</td>
                     <td>{{graduado.nombre}}</td>
                     <td style="text-align: center;">

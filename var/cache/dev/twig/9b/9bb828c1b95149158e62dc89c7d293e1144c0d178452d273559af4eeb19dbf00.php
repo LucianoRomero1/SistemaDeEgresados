@@ -213,9 +213,7 @@ class __TwigTemplate_8d2eebc253654fc7f210809dd91a8a571a70c1f6733a4d8a05732a4037a
             <b style = \"font-size: 14px; \">
                 En el día de la fecha recibí en conformidad la documentación que acredita el título de <span style = \"text-decoration: underline;\">";
         // line 72
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["egresado"]) || array_key_exists("egresado", $context) ? $context["egresado"] : (function () { throw new RuntimeError('Variable "egresado" does not exist.', 72, $this->source); })()), "nombre", [], "any", false, false, false, 72), "html", null, true);
-        echo " ";
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["egresado"]) || array_key_exists("egresado", $context) ? $context["egresado"] : (function () { throw new RuntimeError('Variable "egresado" does not exist.', 72, $this->source); })()), "apellido", [], "any", false, false, false, 72), "html", null, true);
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["egresado"]) || array_key_exists("egresado", $context) ? $context["egresado"] : (function () { throw new RuntimeError('Variable "egresado" does not exist.', 72, $this->source); })()), "tituloOtorgado", [], "any", false, false, false, 72), "nombreTitulo", [], "any", false, false, false, 72), "html", null, true);
         echo "</span> 
                 expedido por la Universidad Nacional de Rafaela.
             </b>
@@ -341,7 +339,7 @@ class __TwigTemplate_8d2eebc253654fc7f210809dd91a8a571a70c1f6733a4d8a05732a4037a
         <br>
         <div style = \"margin-top: 50px; margin-left: 80px;\">  
             <b style = \"font-size: 14px; \">
-                En el día de la fecha recibí en conformidad la documentación que acredita el título de <span style = \"text-decoration: underline;\">{{egresado.nombre}} {{egresado.apellido}}</span> 
+                En el día de la fecha recibí en conformidad la documentación que acredita el título de <span style = \"text-decoration: underline;\">{{egresado.tituloOtorgado.nombreTitulo}}</span> 
                 expedido por la Universidad Nacional de Rafaela.
             </b>
         </div>

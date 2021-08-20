@@ -66,10 +66,10 @@ class Graduado extends \App\Entity\Graduado implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'apellido', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'nombre', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'documentoIdentidad', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'nacionalidad', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'ciudad', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'provincia', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'calle', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'numeroCalle', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'piso', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'depto', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'telefono', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'email', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'tipoDocumentoIdentidad', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'fechaNacimiento', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'titulo', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'nroME', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'nroUnraf', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'fechaEgreso', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'imagenTED', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'titulaciones'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'apellido', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'nombre', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'documentoIdentidad', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'nacionalidad', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'ciudad', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'provincia', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'calle', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'numeroCalle', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'piso', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'depto', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'telefono', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'email', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'tipoDocumentoIdentidad', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'fechaNacimiento', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'titulo', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'nroME', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'nroUnraf', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'fechaEgreso', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'imagenTED', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'titulaciones', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'fechaCreacion'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'apellido', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'nombre', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'documentoIdentidad', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'nacionalidad', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'ciudad', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'provincia', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'calle', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'numeroCalle', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'piso', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'depto', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'telefono', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'email', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'tipoDocumentoIdentidad', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'fechaNacimiento', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'titulo', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'nroME', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'nroUnraf', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'fechaEgreso', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'imagenTED', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'titulaciones'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'apellido', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'nombre', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'documentoIdentidad', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'nacionalidad', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'ciudad', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'provincia', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'calle', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'numeroCalle', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'piso', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'depto', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'telefono', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'email', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'tipoDocumentoIdentidad', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'fechaNacimiento', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'titulo', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'nroME', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'nroUnraf', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'fechaEgreso', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'imagenTED', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'titulaciones', '' . "\0" . 'App\\Entity\\Graduado' . "\0" . 'fechaCreacion'];
     }
 
     /**
@@ -640,6 +640,28 @@ class Graduado extends \App\Entity\Graduado implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeTitulacione', [$titulacione]);
 
         return parent::removeTitulacione($titulacione);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getFechaCreacion(): ?\DateTimeInterface
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getFechaCreacion', []);
+
+        return parent::getFechaCreacion();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setFechaCreacion(?\DateTimeInterface $fechaCreacion): \App\Entity\Graduado
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setFechaCreacion', [$fechaCreacion]);
+
+        return parent::setFechaCreacion($fechaCreacion);
     }
 
 }

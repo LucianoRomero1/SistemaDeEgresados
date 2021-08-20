@@ -164,7 +164,7 @@ class __TwigTemplate_cc6f2a2e9652b85a1c5762756546b0b1e3d2deee761e5b8270f0ce79dd8
             </div>
         </div>
         <hr>
-        <h6 class = \"text-info ml-5\" style = \"font-size: 14px;\">*Apartado domicilio egresado/a<h6>
+        <h6 class = \"text-info ml-5\" style = \"font-size: 14px;\">*Apartado domicilio graduado/a<h6>
         <div class = \"container row mt-4 justify-content-center\">
             <div class = \"col-sm-2\"></div>
             <div class = \"col-sm-3\">
@@ -319,7 +319,7 @@ class __TwigTemplate_cc6f2a2e9652b85a1c5762756546b0b1e3d2deee761e5b8270f0ce79dd8
             </div>
         </div>
         <hr>
-        <h6 class = \"text-info ml-5\" style = \"font-size: 14px;\">*Apartado domicilio egresado/a<h6>
+        <h6 class = \"text-info ml-5\" style = \"font-size: 14px;\">*Apartado domicilio graduado/a<h6>
         <div class = \"container row mt-4 justify-content-center\">
             <div class = \"col-sm-2\"></div>
             <div class = \"col-sm-3\">

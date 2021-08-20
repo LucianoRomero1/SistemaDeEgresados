@@ -105,7 +105,7 @@ class __TwigTemplate_b7600370576ef33be29a2416209ca7a73e0ba6a5794dd1a51933a1aa67a
         </div>
         <div class = \"col-sm-2\"></div>
         <div class = \"col-sm-4\">
-           <h6 class = \"text-info\"> Imagenes digitales</h6>
+           <h6 class = \"text-info\"> Imagenes digitales (seleccionar todas juntas)</h6>
             ";
         // line 20
         echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["formulario"]) || array_key_exists("formulario", $context) ? $context["formulario"] : (function () { throw new RuntimeError('Variable "formulario" does not exist.', 20, $this->source); })()), "archivosArray", [], "any", false, false, false, 20), 'widget', ["attr" => ["accept" => "application / .jpg, .png, .pdf, .jpeg", "title" => "Seleccionar todas juntas, máximo 5 imágenes"]]);
@@ -167,7 +167,7 @@ class __TwigTemplate_b7600370576ef33be29a2416209ca7a73e0ba6a5794dd1a51933a1aa67a
         </div>
         <div class = \"col-sm-2\"></div>
         <div class = \"col-sm-4\">
-           <h6 class = \"text-info\"> Imagenes digitales</h6>
+           <h6 class = \"text-info\"> Imagenes digitales (seleccionar todas juntas)</h6>
             {{form_widget ( formulario.archivosArray , { attr : { accept : 'application / .jpg, .png, .pdf, .jpeg', title: 'Seleccionar todas juntas, máximo 5 imágenes'}})}}
         </div>
     </div>

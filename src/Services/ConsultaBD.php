@@ -90,7 +90,7 @@ class ConsultaBD{
 
         $query = $em->createQuery(
             "SELECT e FROM App\Entity\Egresado e ORDER BY e.id DESC"
-        )->setMaxResults(5);
+        )->setMaxResults(6);
 
 
         return $query->getResult();
@@ -101,7 +101,7 @@ class ConsultaBD{
 
         $query = $em->createQuery(
             "SELECT e FROM App\Entity\Graduado e ORDER BY e.id DESC"
-        )->setMaxResults(5);
+        )->setMaxResults(6);
 
 
         return $query->getResult();
